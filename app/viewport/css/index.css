@@ -1,0 +1,21 @@
+html, body {
+	font-family: Courier New, monospace;
+}
+
+.viewport {
+	border: 1px solid #aaa;
+	margin: 0 auto;
+	width: 760px;
+	cursor: pointer;
+	-webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.viewport-cell {
+	white-space: pre;
+}
+
+.viewport-cell:hover {
+	background-color: #AEA;
+}

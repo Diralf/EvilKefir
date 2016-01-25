@@ -4,24 +4,30 @@
         <title>INDIECASE</title>
         <meta charset="UTF-8">
 
-        <link rel="stylesheet" type="text/css" href="app/css/index.css" />
+        <link rel="stylesheet" type="text/css" href="app/viewport/css/index.css" />
+
+    </head>
+    <body ng-app="app"  ng-controller="init">
+        <div ng-controller="viewport" class="viewport">
+            <div ng-repeat="(linekey, line) in gameview">
+                <span viewport-cell 
+                    cell-y="{{::linekey}}"
+                    cell-x="{{::itemkey}}"
+                    ng-repeat="(itemkey, item) in line track by $index"
+                    class="viewport-cell"
+                    ng-bind="item"></span>
+            </div>
+        </div>
 
         <script type="text/javascript" src="components/angular/angular.min.js"></script>
         <script type="text/javascript" src="app.js"></script>
-        <script type="text/javascript" src="app/character/src/character.js"></script>
-        <script type="text/javascript" src="app/js/viewport.js"></script>
+        <script type="text/javascript" src="app/character/src/characterData.js"></script>
+        <script type="text/javascript" src="app/character/src/characterLogic.js"></script>
+        <script type="text/javascript" src="app/character/src/characterControl.js"></script>
+        <script type="text/javascript" src="app/viewport/src/viewport.js"></script>
+        <script type="text/javascript" src="app/viewport/src/directive/viewportCell.js"></script>
         <script type="text/javascript" src="app/keyboard/src/keyboardService.js"></script>
         <script type="text/javascript" src="app/keyboard/src/keysConstant.js"></script>
-    </head>
-    <body ng-app="app">
-        <div ng-controller="first">
-            <div ng-controller="viewport" class="viewport">
-                <div ng-repeat="line in gameview">
-                    <span ng-repeat="item in line track by $index">
-                        {{item}}
-                    </span>
-                </div>
-            </div>
-        </div>
+        <script type="text/javascript" src="app/mouse/src/mouseService.js"></script>
     </body>
 </html>

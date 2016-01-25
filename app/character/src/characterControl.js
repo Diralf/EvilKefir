@@ -1,8 +1,5 @@
-app.service("character", function (keyboardService) {
+app.service("characterControl", function (keyboardService) {
 	var moveCharacterOn;
-
-	this.x = 15;
-    this.y = 10;
 
     keyboardService.addHandler("W", function (key, evt) {
         moveCharacterOn(0, -1);
@@ -23,4 +20,4 @@ app.service("character", function (keyboardService) {
     this.moveHandler = function (handler) {
 		moveCharacterOn = handler;
     }
-})
+});
