@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>INDIECASE</title>
+        <meta charset="UTF-8">
+
+        <link rel="stylesheet" type="text/css" href="app/css/index.css" />
+
+        <script type="text/javascript" src="components/angular/angular.min.js"></script>
+        <script type="text/javascript" src="app.js"></script>
+        <script type="text/javascript" src="app/character/src/character.js"></script>
+        <script type="text/javascript" src="app/js/viewport.js"></script>
+        <script type="text/javascript" src="app/keyboard/src/keyboardService.js"></script>
+        <script type="text/javascript" src="app/keyboard/src/keysConstant.js"></script>
+    </head>
+    <body ng-app="app">
+        <div ng-controller="first">
+            <div ng-controller="viewport" class="viewport">
+                <div ng-repeat="line in gameview">
+                    <span ng-repeat="item in line track by $index">
+                        {{item}}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

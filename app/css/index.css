@@ -1,0 +1,12 @@
+html, body {
+	font-family: Courier New, monospace;
+}
+
+.viewport {
+	background-color: black;
+	border: 1px solid #aaa;
+	color: lime;
+	white-space: nowrap;
+	margin: 0 auto;
+	width: 760px;
+}
