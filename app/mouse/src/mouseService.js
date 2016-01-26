@@ -17,4 +17,4 @@ app.service("mouseService", function () {
         }
         mouseHandlers[event].push(handler);
     }
-})
+});

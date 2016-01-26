@@ -18,5 +18,5 @@ app.service("keyboardService", function ($document, KEYS) {
 
     this.addHandler = function (key, listener) {
         _handleKeyEvent[key] = listener;
-    }   
+    }
 });

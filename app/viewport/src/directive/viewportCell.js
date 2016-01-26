@@ -7,4 +7,4 @@ app.directive("viewportCell", function (mouseService) {
             });
         }
     }
-})
+});
