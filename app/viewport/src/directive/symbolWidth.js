@@ -1,4 +1,7 @@
-app.directive("symbolWidth", function (viewportService) {
+/**
+ * for correctly work: place that directive in element with size equal viewport.
+ */
+app.directive("symbolWidth", function (symbolWidthService) {
     return {
         restrict: "AE",
         template: "<div class='symbol-width'>S</div>",
@@ -19,13 +22,13 @@ app.directive("symbolWidth", function (viewportService) {
             });
 
             function checkSymbolSize() {
-                viewportService._setSizeOneSymbol(
+                symbolWidthService._setSizeOneSymbol(
                     $element[0].getBoundingClientRect().width,
                     $element[0].getBoundingClientRect().height,
-                    $("div.viewport").width(),
-                    $("div.viewport").height()
+                    $element.parent()[0].getBoundingClientRect().width,
+                    $element.parent()[0].getBoundingClientRect().height
                 );
             }
         }
-    }
+    };
 });

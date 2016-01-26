@@ -1,34 +1,19 @@
-app.service("viewportService", function () {
+app.service("viewportService", function (symbolWidthService) {
     var self = this;
-
-    var widthOneSymbol = 0;
-    var heightOneSymbol = 0;
 
     this.wcells = 80;
     this.hcells = 30;
 
     this.viewport = [];
 
-    this._setSizeOneSymbol = function (width, height, viewWidth, viewHeight) {
-        if (width) widthOneSymbol = width;
-        if (height) heightOneSymbol = height;
-
-        if (viewWidth) self.wcells = parseInt(viewWidth / widthOneSymbol);
-        if (viewHeight) self.hcells = parseInt(viewHeight / heightOneSymbol);
-
-        self.init("+");
-    }
-
-    this.xToSymbolNumber = function (x) {
-        return parseInt(x/widthOneSymbol);
-    }
-
-    this.xToCellX = function (x) {
-        return parseInt(self.xToSymbolNumber(x) * widthOneSymbol);
-    }
-
     this.init = function (symbol) {
-        console.log(self.wcells + " " + self.hcells);
+        self.update(symbol);
+    }
+
+    this.update = function (symbol) {
+        var gridSize = symbolWidthService.getGridSize();
+        self.wcells = gridSize.wcells ? gridSize.wcells : self.wcells;
+        self.hcells = gridSize.hcells ? gridSize.hcells : self.hcells;
 
         for (var i=0; i < self.hcells; i++) {
             self.viewport[i] = [];
@@ -36,6 +21,6 @@ app.service("viewportService", function () {
                 self.viewport[i][j] = symbol;
             }
         }
-    }
+    };
 
 });
