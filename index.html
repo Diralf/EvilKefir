@@ -4,30 +4,35 @@
         <title>INDIECASE</title>
         <meta charset="UTF-8">
 
-        <link rel="stylesheet" type="text/css" href="app/viewport/css/index.css" />
+        <link rel="stylesheet" type="text/css" href="index.css" />
+        <link rel="stylesheet" type="text/css" href="app/viewport/css/viewport.css" />
+        <link rel="stylesheet" type="text/css" href="app/viewport/css/symbolWidth.css" />
 
     </head>
     <body ng-app="app"  ng-controller="init">
         <div ng-controller="viewport" class="viewport">
-            <div ng-repeat="(linekey, line) in gameview">
-                <span viewport-cell 
+            <div symbol-width></div>
+            <div viewport-line ng-repeat="(linekey, line) in gameviewLine track by $index"
+                    class="viewport-line"
                     cell-y="{{::linekey}}"
-                    cell-x="{{::itemkey}}"
-                    ng-repeat="(itemkey, item) in line track by $index"
-                    class="viewport-cell"
-                    ng-bind="item"></span>
-            </div>
+                    ><div> </div><span ng-bind="line"></span></div>
         </div>
 
         <script type="text/javascript" src="components/angular/angular.min.js"></script>
+        <script type="text/javascript" src="components/jquery/jquery-1.12.0.min.js"></script>
+
         <script type="text/javascript" src="app.js"></script>
         <script type="text/javascript" src="app/character/src/characterData.js"></script>
         <script type="text/javascript" src="app/character/src/characterLogic.js"></script>
         <script type="text/javascript" src="app/character/src/characterControl.js"></script>
         <script type="text/javascript" src="app/viewport/src/viewport.js"></script>
         <script type="text/javascript" src="app/viewport/src/directive/viewportCell.js"></script>
+        <script type="text/javascript" src="app/viewport/src/directive/viewportLine.js"></script>
+        <script type="text/javascript" src="app/viewport/src/directive/symbolWidth.js"></script>
+        <script type="text/javascript" src="app/viewport/src/service/viewportService.js"></script>
         <script type="text/javascript" src="app/keyboard/src/keyboardService.js"></script>
         <script type="text/javascript" src="app/keyboard/src/keysConstant.js"></script>
         <script type="text/javascript" src="app/mouse/src/mouseService.js"></script>
+        <script type="text/javascript" src="app/map/src/mapService.js"></script>
     </body>
 </html>

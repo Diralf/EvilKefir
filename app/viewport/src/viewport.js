@@ -1,30 +1,36 @@
-app.controller("viewport", function ($scope, characterData, characterControl, mouseService) {
-    var width = 60;
-    var height = 20;
-
-    $scope.gameview = [];
-
-    for (var i=0; i<height; i++) {
-        $scope.gameview[i] = [];
-        for (var j=0; j<width; j++) {
-            $scope.gameview[i][j] = " ";
-        }
-    }
-
-    $scope.gameview[characterData.y][characterData.x] = '0';
+app.controller("viewport", function ($scope, characterData, characterControl, mouseService, mapService, viewportService) {
 
     characterControl.moveHandler( function (relX, relY) {
-        $scope.gameview[characterData.y][characterData.x] = '.';
+        viewportService.viewport[characterData.y][characterData.x] = '.';
         characterData.x += relX;
         characterData.y += relY;
-        $scope.gameview[characterData.y][characterData.x] = '0';
-        console.log(characterData.x + " " + characterData.y);
+        viewportService.viewport[characterData.y][characterData.x] = '0';
+
+        update();
         $scope.$apply();
     });
 
     mouseService.addMouseHandler("mousedown", function (evt, cellX, cellY) {
-        $scope.gameview[cellY][cellX] = "X";
+        viewportService.viewport[cellY][cellX] = "X";
+
+        update();
         $scope.$apply();
     })
-    
+
+    function update() {
+        for (var i = 0; i < viewportService.hcells; i++) {
+            $scope.gameviewLine[i] = "";
+            for (var j = 0; j < viewportService.wcells; j++) {
+                $scope.gameviewLine[i] += viewportService.viewport[i][j];
+            }
+        }
+    }
+
+    $scope.gameviewLine = [];
+
+    viewportService.init("=");
+
+    viewportService.viewport[characterData.y][characterData.x] = '0';
+    update();
+
 });

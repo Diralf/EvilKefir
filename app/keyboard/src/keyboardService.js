@@ -9,7 +9,6 @@ app.service("keyboardService", function ($document, KEYS) {
             if (key) {
                 // Нажата нужная клавиша
                 evt.preventDefault();
-                console.log(key);
                 if (_handleKeyEvent[key]) {
                     _handleKeyEvent[key](evt);
                 }

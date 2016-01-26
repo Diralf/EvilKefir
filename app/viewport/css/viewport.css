@@ -1,0 +1,38 @@
+
+.viewport {
+    border: 1px solid #aaa;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 960px;
+    height: 100%;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    box-sizing: border-box;
+}
+
+.viewport-cell {
+    white-space: pre;
+}
+
+.viewport-cell:hover {
+    background-color: #AEA;
+}
+
+.viewport-line {
+    white-space: pre;
+    position: relative;
+}
+
+.viewport-line > div {
+    position: absolute;
+    display: none;
+    top: 0;
+}
+
+.viewport-line > div.show {
+    display: block;
+    background-color: #AEA;
+    z-index: -1;
+}
