@@ -5,7 +5,7 @@ app.service("mapService", ["mapData", function (mapData) {
         for (var i = 0; i < mapData.height; i++) {
             mapData.mapLines[i] = "";
             for (var j = 0; j < mapData.width; j++) {
-                mapData.mapLines[i] += "-";
+                mapData.mapLines[i] += "*";
             }
         }
     };
