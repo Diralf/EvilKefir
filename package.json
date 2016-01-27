@@ -1,12 +1,25 @@
 {
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "karma start",
+    "postinstall": "bower i"
   },
   "main": "server.js",
-  "devDependencies": {
-    "socket.io" : "0.9.16",
-    "ws" : "0.4.31",
+  "repository": "https://github.com/Diralf/Evil_Kefir.git",
+  "dependencies": {
+    "socket.io": "0.9.16",
+    "ws": "0.4.31",
     "mongodb": "1.4.30",
     "express": "3.19.2"
+  },
+  "devDependencies": {
+    "jasmine": "^2.2.1",
+    "karma": "*",
+    "karma-chrome-launcher": "*",
+    "karma-cli": "*",
+    "karma-firefox-launcher": "*",
+    "karma-ie-launcher": "^0.2.0",
+    "karma-iebrowsers-launcher": "0.0.1",
+    "karma-jasmine": "*"
   }
 }
