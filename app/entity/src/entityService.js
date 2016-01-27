@@ -1,24 +1,20 @@
-app.service("entityService", ["entityCollection", function (entityCollection) {
+app.service("entityService", ["collection", function (collection) {
+    var self = this;
+    var validID = 0;
+    var entityCollection = collection.create();
 
-    console.log(entityCollection.set("obj1", {a: 4, b: 5}));
-    entityCollection.set("obj2", {a: 2, b: 3}, true);
-    entityCollection.set("obj3", {a: 6, b: 6});
-    entityCollection.set("obj4", {a: 8, b: 1}, true);
+    this.Entity = function (name) {
+        this.name = name;
+    };
 
-    var obj = entityCollection.get("obj3");
+    this.createEntity = function (name) {
+        entityCollection.add(validID, new self.Entity(name), true);
+        validID++;
+    };
 
-    console.log("object before deletion");
-    console.log(obj);
+    self.createEntity("bla");
+    self.createEntity("bla");
 
-    console.log("collection before deletion");
-    console.log(entityCollection.getCollection());
-
-    entityCollection.clear();
-
-    console.log("object after deletion");
-    console.log(obj);
-
-    console.log("collection after deletion");
     console.log(entityCollection.getCollection());
 
 }]);
