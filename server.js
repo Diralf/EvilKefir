@@ -19,7 +19,7 @@ app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 //app.use(app.router);
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(process.env.OPENSHIFT_REPO_DIR || path.join(__dirname)));
 app.use(express.bodyParser());
 
 app.get('/', function (req, res) {
