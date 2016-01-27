@@ -1,13 +1,23 @@
-app.service("mapService", function () {
+app.service("mapService", ["mapData", function (mapData) {
     var self = this;
-    this.mapLines = [];
-    this.width = 500;
-    this.height = 500;
 
-    for (var i=0; i<self.height; i++) {
-        self.mapLines[i] = "";
-        for (var j=0; j<self.width; j++) {
-            self.mapLines[i] += ".";
+    this.init = function () {
+        for (var i = 0; i < mapData.height; i++) {
+            mapData.mapLines[i] = "";
+            for (var j = 0; j < mapData.width; j++) {
+                mapData.mapLines[i] += ".";
+            }
         }
-    }
-});
+    };
+
+    this.getRect = function (x, y, w, h) {
+        var result = [];
+
+        for (var i = 0; i < h; i++) {
+            result[i] = mapData.mapLines[i].substr(x, w);
+        }
+
+        return result;
+    };
+
+}]);
