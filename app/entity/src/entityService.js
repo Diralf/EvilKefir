@@ -3,18 +3,15 @@ app.service("entityService", ["collection", function (collection) {
     var validID = 0;
     var entityCollection = collection.create();
 
-    this.Entity = function (name) {
+    this.Entity = function (name, x, y) {
         this.name = name;
+        this.x = x;
+        this.y = y;
     };
 
     this.createEntity = function (name) {
         entityCollection.add(validID, new self.Entity(name), true);
         validID++;
     };
-
-    self.createEntity("bla");
-    self.createEntity("bla");
-
-    console.log(entityCollection.getCollection());
 
 }]);
