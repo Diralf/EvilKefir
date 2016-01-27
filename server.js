@@ -22,7 +22,9 @@ app.use(express.urlencoded());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.bodyParser());
 
-//app.get('/test', routes.supplies);
+app.get('/', function (req, res) {
+    res.end();
+});
 
 var server = http.createServer(app);
 
