@@ -17,7 +17,11 @@ app.service("layer", ["collection", function (collection) {
                 line = layerData.add(y, collection.create(), true);
             }
 
-            var cell = line.get(x);
+            if (line.get(x)) {
+                return null;
+            }
+
+            return line.add(x, entity);
         }
 
         this.get = function (x, y) {
@@ -26,8 +30,39 @@ app.service("layer", ["collection", function (collection) {
             return line ? line.get(x) : null;
         }
 
+        this.getLayer = function () {
+            return layerData;
+        };
+
     };
 
     var s = self.create();
+
+    console.log("layer");
+    console.log(s.getLayer().getCollection());
+
+    console.log("add");
+    console.log(s.add(4, 5, {name: "fff"}));
+
+    console.log("get added entity");
     console.log(s.get(4, 5));
+
+    console.log("get with wrong x");
+    console.log(s.get(1, 5));
+
+    console.log("get with wrong y");
+    console.log(s.get(4, 2));
+
+    console.log("layer");
+    console.log(s.getLayer().getCollection());
+
+    console.log("add other");
+    console.log(s.add(4, 5, {name: "www"}));
+
+    console.log("get old entity");
+    console.log(s.get(4, 5));
+
+    console.log("layer");
+    console.log(s.getLayer().getCollection());
+
 }]);
