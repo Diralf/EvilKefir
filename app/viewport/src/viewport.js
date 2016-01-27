@@ -20,12 +20,13 @@ app.controller("viewport", function ($scope, characterData, characterControl, mo
     function update() {
         viewportService.update("/");
         $scope.gameviewLine.length = 0;
-        for (var i = 0; i < viewportService.hcells; i++) {
+        $scope.gameviewLine = viewportService.viewport;
+        /*for (var i = 0; i < viewportService.hcells; i++) {
             $scope.gameviewLine[i] = "";
             for (var j = 0; j < viewportService.wcells; j++) {
                 $scope.gameviewLine[i] += viewportService.viewport[i][j];
             }
-        }
+        }*/
     }
 
     $scope.gameviewLine = [];

@@ -9,7 +9,7 @@
         <link rel="stylesheet" type="text/css" href="app/viewport/css/symbolWidth.css" />
 
     </head>
-    <body ng-app="app"  ng-controller="init">
+    <body ng-app="app">
         <div ng-controller="viewport" class="viewport">
             <div symbol-width></div>
             <div viewport-line ng-repeat="(linekey, line) in gameviewLine track by $index"
@@ -35,5 +35,8 @@
         <script type="text/javascript" src="app/keyboard/src/keysConstant.js"></script>
         <script type="text/javascript" src="app/mouse/src/mouseService.js"></script>
         <script type="text/javascript" src="app/map/src/mapService.js"></script>
+        <script type="text/javascript" src="app/map/src/mapData.js"></script>
+        <script type="text/javascript" src="app/map/src/mapLoader.js"></script>
+
     </body>
 </html>
