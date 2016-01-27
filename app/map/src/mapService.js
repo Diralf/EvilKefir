@@ -3,10 +3,8 @@ app.service("mapService", ["mapData", function (mapData) {
 
     this.init = function () {
         for (var i = 0; i < mapData.height; i++) {
-            mapData.mapLines[i] = "";
-            for (var j = 0; j < mapData.width; j++) {
-                mapData.mapLines[i] += ".";
-            }
+            // that will return {string}
+            mapData.mapLines[i] = new Array(mapData.width + 1).join(" ");
         }
     };
 
