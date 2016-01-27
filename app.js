@@ -7,5 +7,5 @@ app.run(function ($document, $rootScope, keyboardService, mapService, viewportSe
     mapService.init();
     viewportService.init();
 
-    mapLoader.load();
+    //mapLoader.load();
 });
