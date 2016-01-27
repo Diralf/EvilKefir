@@ -10,13 +10,13 @@ app.directive("symbolWidth", function (symbolWidthService) {
             checkSymbolSize();
 
             $scope.$watch(function () {
-                return $("div.viewport").width();
+                return $element.parent()[0].getBoundingClientRect().width;
             }, function () {
                 checkSymbolSize();
             });
 
             $scope.$watch(function () {
-                return $("div.viewport").height();
+                return $element.parent()[0].getBoundingClientRect().height;
             }, function () {
                 checkSymbolSize();
             });
