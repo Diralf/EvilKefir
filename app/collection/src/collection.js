@@ -17,7 +17,17 @@ app.service("collection", [function () {
          * return {object} предыдущий объект или undefined если объектов с таким ключом не было.
          */
         this.set = function (key, entity, rememberKey) {
-            var prev = entities[key];
+            var prev;
+
+            if (typeof key === 'undefined' && key == null) {
+                throw new Error("Param 'key' is not defined!");
+            }
+
+            if (typeof entity === 'undefined' && entity == null) {
+                throw new Error("Param 'entity' is not defined!");
+            }
+
+            prev = entities[key];
 
             entities[key] = entity;
 
