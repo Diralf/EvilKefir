@@ -1,5 +1,17 @@
 describe('answersServiceTest', function () {
 
+    var unique;
+    var injector;
+
+    beforeEach(function () {
+        module('app');
+
+        inject(function (_unique_) {
+            unique = _unique_;
+        });
+    });
+
+
     /*var answersService;
     var httpBackend, injector;
 
@@ -133,7 +145,7 @@ describe('answersServiceTest', function () {
 
         httpBackend.flush();*/
 
-        expect(false).toEqual(false);
+        expect(unique.value).toEqual(100);
     });
 
 });
