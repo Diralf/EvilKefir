@@ -2,7 +2,7 @@
   "scripts": {
     "start": "node server.js",
     "test": "karma start",
-    "postinstall": "bower i"
+    "postinstall": "bower i --allow-root"
   },
   "main": "server.js",
   "repository": "https://github.com/Diralf/Evil_Kefir.git",
