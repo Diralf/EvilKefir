@@ -10,7 +10,7 @@ app.service("entityService", ["collection", function (collection) {
     };
 
     this.createEntity = function (name) {
-        entityCollection.add(validID, new self.Entity(name), true);
+        entityCollection.add(validID, new self.Entity(name));
         validID++;
     };
 
