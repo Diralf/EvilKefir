@@ -9,14 +9,15 @@ app.service("collection", [function () {
         var self = this;
         var entities = {};
 
+        this._data = entities;
+
         /**
          * Метод для замены или добавления нового элемента в коллекцию.
          * param {string} key          - идентификатор объекта в колекции
          * param {object} entity       - новый объект
-         * param {boolean} rememberKey - если true, то записывает в добавляемый объект его ключ (идентификатор)
          * return {object} предыдущий объект или undefined если объектов с таким ключом не было.
          */
-        this.set = function (key, entity, rememberKey) {
+        this.set = function (key, entity) {
             var prev;
 
             if (typeof key === 'undefined' && key == null) {
@@ -31,10 +32,6 @@ app.service("collection", [function () {
 
             entities[key] = entity;
 
-            if (rememberKey) {
-                entities[key]["_key"] = key;
-            }
-
             return prev;
         };
 
@@ -42,10 +39,13 @@ app.service("collection", [function () {
          * Добавляет новый элемент. Если ключ занят - выведет ошибку
          * return {object} только что добавленный элемент
          */
-        this.add = function (key, entity, rememberKey) {
-            if (self.set(key, entity, rememberKey)) {
-                console.error("Entity with key '" + key + "' already exists!");
+        this.add = function (key, entity) {
+            if (self.get(key)) {
+                throw new Error("Entity with key '" + key + "' already exists!");
             }
+
+            self.set(key, entity);
+
             return entity;
         };
 
@@ -80,10 +80,15 @@ app.service("collection", [function () {
          * return {boolean} true - элемент удален. Если удаляемого элемента уже не было в коллекции то false
          */
         this.remove = function (key) {
+            if (typeof key === 'undefined' && key == null) {
+                throw new Error("Param 'key' is not defined!");
+            }
+
             if (entities[key]) {
                 delete entities[key];
                 return true;
             }
+
             return false;
         };
 
@@ -111,9 +116,11 @@ app.service("collection", [function () {
          * Очистка коллекции
          */
         this.clear = function () {
-            delete entities;
-            entities = {};
+            self.each(function (key) {
+                self.remove(key);
+            });
         };
+
     };
 
 }]);
