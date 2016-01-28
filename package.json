@@ -13,6 +13,7 @@
     "express": "3.19.2"
   },
   "devDependencies": {
+    "bower": "^1.7.7",
     "jasmine": "^2.2.1",
     "karma": "*",
     "karma-chrome-launcher": "*",
