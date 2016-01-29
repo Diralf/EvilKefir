@@ -20,11 +20,11 @@ app.service("collection", [function () {
         this.set = function (key, entity) {
             var prev;
 
-            if (typeof key === 'undefined' && key == null) {
+            if (typeof key === 'undefined' || key == null) {
                 throw new Error("Param 'key' is not defined!");
             }
 
-            if (typeof entity === 'undefined' && entity == null) {
+            if (typeof entity === 'undefined' || entity == null) {
                 throw new Error("Param 'entity' is not defined!");
             }
 
