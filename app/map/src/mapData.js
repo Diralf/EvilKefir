@@ -1,5 +1,8 @@
-app.service("mapData", ["symbolGrid", function (symbolGrid) {
-    this.grid = symbolGrid.create();
-    this.width = 500;
-    this.height = 500;
+app.service("mapData", ["symbolGrid", "layer", function (symbolGrid, layer) {
+    this.tile = symbolGrid.create();
+    this.layers = {
+        low: layer.create(),
+        middle: layer.create(),
+        high: layer.create()
+    };
 }]);

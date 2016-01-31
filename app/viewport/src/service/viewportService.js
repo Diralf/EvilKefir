@@ -1,5 +1,5 @@
-app.service("viewportService", ["symbolWidthService", "mapService",
-    function (symbolWidthService, mapService) {
+app.service("viewportService", ["symbolWidthService", "mapService", "mapData",
+    function (symbolWidthService, mapService, mapData) {
 
     var self = this;
 
@@ -20,7 +20,16 @@ app.service("viewportService", ["symbolWidthService", "mapService",
         self.wcells = gridSize.wcells ? gridSize.wcells : self.wcells;
         self.hcells = gridSize.hcells ? gridSize.hcells : self.hcells;
 
-        self.viewport = mapService.getRect(self.xcells, self.ycells, self.wcells, self.hcells);
+        var back = mapService.getRect(self.xcells, self.ycells, self.wcells, self.hcells);
+        var line
+        for (var i = 0; i < this.hcells; i++) {
+            line = "";
+            for (var j = 0; j < this.wcells; j++) {
+                var obj = mapData.layers.low.get(j, i);
+                line += obj ? obj : back[i][j];
+            }
+            this.viewport[i] = line;
+        }
 
         /*self.viewport.length = self.hcells;
 

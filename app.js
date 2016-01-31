@@ -1,7 +1,7 @@
 app = angular.module("app", []);
 
-app.run(function ($document, $rootScope, keyboardService, mapService, viewportService, mapLoader, entityService, layer) {
-    console.log($rootScope);
+app.run(function ($document, $rootScope, keyboardService, mapService, viewportService, mapLoader, entityService, layer, collection) {
+    //console.log($rootScope);
 
     keyboardService.init();
     mapService.init();
