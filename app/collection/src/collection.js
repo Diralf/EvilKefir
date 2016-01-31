@@ -1,8 +1,7 @@
 app.service("collection", [function () {
-    var selfService = this;
 
     this.create = function () {
-        return new selfService.Collection();
+        return new this.Collection();
     };
 
     this.Collection = function () {
