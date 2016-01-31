@@ -1,104 +1,101 @@
 app.service("layer", ["collection", function (collection) {
-    var self = this;
 
     this.create = function () {
-        return new self.Layer();
+        return new this.Layer();
     };
 
     this.Layer = function () {
-        var selfLayer = this;
+        this._data = collection.create();
 
-        var layerData = collection.create();
+    };
 
-        this._data = layerData;
+    this.Layer.prototype.add = function (entity, x, y) {
+        if (typeof x === "undefined") {
+            if (typeof entity.x === "undefined")
+                throw new Error("Param 'x' is not defined!");
+            else x = entity.x;
+        }
 
-        this.add = function (entity, x, y) {
-            if (typeof x === "undefined") {
-                if (typeof entity.x === "undefined")
-                    throw new Error("Param 'x' is not defined!");
-                else x = entity.x;
-            }
+        if (typeof y === "undefined") {
+            if (typeof entity.y === "undefined")
+                throw new Error("Param 'y' is not defined!");
+            else y = entity.y;
+        }
 
-            if (typeof y === "undefined") {
-                if (typeof entity.y === "undefined")
-                    throw new Error("Param 'y' is not defined!");
-                else y = entity.y;
-            }
+        var line = this._data.get(y) || this._data.add(y, collection.create());
 
-            var line = layerData.get(y) || layerData.add(y, collection.create());
+        return line.get(x) ? null : line.add(x, entity);
+    };
 
-            return line.get(x) ? null : line.add(x, entity);
-        };
+    this.Layer.prototype.get = function (x, y) {
+        var line = this._data.get(y);
 
-        this.get = function (x, y) {
-            var line = layerData.get(y);
+        return line ? line.get(x) : null;
+    };
 
-            return line ? line.get(x) : null;
-        };
+    this.Layer.prototype.remove = function (x, y) {
+        var line = this._data.get(y);
 
-        this.remove = function (x, y) {
-            var line = layerData.get(y);
+        return !!(line && line.remove(x));
+    };
 
-            return !!(line && line.remove(x));
-        };
-
-        this.layerEach = function (callback) {
-            var index = 0;
-            layerData.each(function (y, line) {
-                line.each(function (x, entity) {
-                    callback(+x, +y, entity, index, layerData);
-                    index++;
-                });
+    this.Layer.prototype.layerEach = function (callback) {
+        var self = this;
+        var index = 0;
+        self._data.each(function (y, line) {
+            line.each(function (x, entity) {
+                callback(+x, +y, entity, index, self._data);
+                index++;
             });
-        };
+        });
+    };
 
-        this.moveIn = function (fromX, fromY, toX, toY) {
-            var entity = selfLayer.get(fromX, fromY);
+    this.Layer.prototype.moveIn = function (fromX, fromY, toX, toY) {
+        var entity = this.get(fromX, fromY);
 
-            if (!entity) return 2;
+        if (!entity) return 2;
 
-            if (selfLayer.add(entity, toX, toY)) {
-                selfLayer.remove(fromX, fromY);
-                return 0;
-            }
+        if (this.add(entity, toX, toY)) {
+            this.remove(fromX, fromY);
+            return 0;
+        }
 
-            return 1;
-        };
+        return 1;
+    };
 
-        this.moveOn = function (fromX, fromY, onX, onY) {
-            return selfLayer.moveIn(fromX, fromY, fromX + onX, fromY + onY);
-        };
+    this.Layer.prototype.moveOn = function (fromX, fromY, onX, onY) {
+        return this.moveIn(fromX, fromY, fromX + onX, fromY + onY);
+    };
 
-        this.clear = function () {
-            selfLayer.layerEach(function (x, y) {
-                selfLayer.remove(x, y);
-            });
+    this.Layer.prototype.clear = function () {
+        var self = this;
+        self.layerEach(function (x, y) {
+            self.remove(x, y);
+        });
 
-            layerData.clear();
-        };
+        this._data.clear();
+    };
 
-        this.size = function (y) {
-            if (typeof y === 'undefined') {
-                return layerData.length();
-            }
+    this.Layer.prototype.size = function (y) {
+        if (typeof y === 'undefined') {
+            return this._data.length();
+        }
 
-            var line = layerData.get(y);
+        var line = this._data.get(y);
 
-            return line ? line.length() : null;
-        };
+        return line ? line.length() : null;
+    };
 
-        this.count = function () {
-            var count = 0;
-            selfLayer.layerEach(function () {
-                count++;
-            });
-            return count;
-        };
+    this.Layer.prototype.count = function () {
+        var count = 0;
+        this.layerEach(function () {
+            count++;
+        });
+        return count;
+    };
 
-        this.getLayer = function () {
-            return layerData;
-        };
-
+    this.Layer.prototype.getLayer = function () {
+        return this._data;
     };
 
 }]);
