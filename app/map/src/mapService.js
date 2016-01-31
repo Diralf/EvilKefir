@@ -1,23 +1,17 @@
-app.service("mapService", ["mapData", "collection", function (mapData) {
+app.service("mapService", ["mapData", function (mapData) {
     var self = this;
 
     this.init = function () {
+        var startArray = [];
         for (var i = 0; i < mapData.height; i++) {
             // that will return {string}
-            //mapData.mapLines[i] = new Array(mapData.width + 1).join(" ");
-            mapData.mapData.set(i, new Array(mapData.width + 1).join(" "));
+            startArray[i] = new Array(mapData.width + 1).join(".");
         }
+        mapData.grid.init(startArray);
     };
 
     this.getRect = function (x, y, w, h) {
-        var result = [];
-
-        for (var i = 0; i < h; i++) {
-            //result[i] = mapData.mapLines[y + i].substr(x, w);
-            result[i] = mapData.mapData.get(y + i).substr(x, w);
-        }
-
-        return result;
+        return mapData.grid.getRect(x, y, w, h);
     };
 
 }]);

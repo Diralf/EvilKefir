@@ -1,6 +1,5 @@
-app.service("mapData", ["collection", function (collection) {
-    this.mapLines = [];
-    this.mapData = collection.create();
+app.service("mapData", ["symbolGrid", function (symbolGrid) {
+    this.grid = symbolGrid.create();
     this.width = 500;
     this.height = 500;
 }]);
