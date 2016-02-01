@@ -5,5 +5,5 @@ app.service("characterLogic", ['characterData', 'mapService', function (characte
 }]);
 
 app.run(['characterLogic', function (characterLogic) {
-    characterLogic.init();
+    //characterLogic.init();
 }]);

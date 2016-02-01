@@ -1,5 +1,5 @@
-app.service("viewportService", ["symbolWidthService", "mapService", "mapData",
-    function (symbolWidthService, mapService, mapData) {
+app.service("viewportService", ["symbolWidthService", "mapService", "entityVisible",
+    function (symbolWidthService, mapService, entityVisible) {
 
     var self = this;
 
@@ -12,10 +12,14 @@ app.service("viewportService", ["symbolWidthService", "mapService", "mapData",
     this.viewport = [];
 
     this.init = function (symbol) {
+        mapService.getLayers().low.add(entityVisible.create(10, 10));
+
         self.update(symbol);
     }
 
     this.update = function (symbol) {
+        this.viewport.length = 0;
+
         var gridSize = symbolWidthService.getGridSize();
         self.wcells = gridSize.wcells ? gridSize.wcells : self.wcells;
         self.hcells = gridSize.hcells ? gridSize.hcells : self.hcells;
@@ -25,25 +29,12 @@ app.service("viewportService", ["symbolWidthService", "mapService", "mapData",
         for (var i = 0; i < this.hcells; i++) {
             line = "";
             for (var j = 0; j < this.wcells; j++) {
-                var obj = mapData.layers.low.get(j, i);
-                line += obj ? obj : back[i][j];
+                var obj = mapService.getLayers().low.get(j, i);
+                if(obj) console.log(obj);
+                line += obj ? obj.sprite.image() : back[i][j];
             }
             this.viewport[i] = line;
         }
-
-        /*self.viewport.length = self.hcells;
-
-        for (var i=0; i < self.hcells; i++) {
-            if (!self.viewport[i]) {
-                self.viewport[i] = [];
-            } else {
-                self.viewport[i].lenght = self.wcells;
-            }
-
-            for (var j=0; j < self.wcells; j++) {
-                self.viewport[i][j] = symbol;
-            }
-        }*/
     };
 
     this.resize = function () {
