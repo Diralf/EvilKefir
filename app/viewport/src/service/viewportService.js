@@ -12,8 +12,6 @@ app.service("viewportService", ["symbolWidthService", "mapService", "entityVisib
     this.viewport = [];
 
     this.init = function (symbol) {
-        mapService.getLayers().low.add(entityVisible.create(10, 10));
-
         self.update(symbol);
     }
 
@@ -24,21 +22,23 @@ app.service("viewportService", ["symbolWidthService", "mapService", "entityVisib
         self.wcells = gridSize.wcells ? gridSize.wcells : self.wcells;
         self.hcells = gridSize.hcells ? gridSize.hcells : self.hcells;
 
-        var back = mapService.getRect(self.xcells, self.ycells, self.wcells, self.hcells);
+        /*var back = mapService.getRect(self.xcells, self.ycells, self.wcells, self.hcells);
         var line
         for (var i = 0; i < this.hcells; i++) {
             line = "";
             for (var j = 0; j < this.wcells; j++) {
                 var obj = mapService.getLayers().low.get(j, i);
-                if(obj) console.log(obj);
                 line += obj ? obj.sprite.image() : back[i][j];
             }
             this.viewport[i] = line;
-        }
+        }*/
     };
 
     this.resize = function () {
-
+        var gridSize = symbolWidthService.getGridSize();
+        console.log(gridSize);
+        self.wcells = gridSize.wcells ? gridSize.wcells : self.wcells;
+        self.hcells = gridSize.hcells ? gridSize.hcells : self.hcells;
     };
 
 }]);

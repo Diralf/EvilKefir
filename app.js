@@ -1,6 +1,6 @@
 app = angular.module("app", []);
 
-app.run(function ($document, $rootScope, keyboardService, mapService, viewportService, mapLoader, layer, collection) {
+app.run(function ($rootScope, keyboardService, mapService, viewportService) {
     //console.log($rootScope);
 
     keyboardService.init();
@@ -8,4 +8,8 @@ app.run(function ($document, $rootScope, keyboardService, mapService, viewportSe
     viewportService.init();
 
     //mapLoader.load();
+});
+
+app.config(function ($logProvider) {
+    $logProvider.debugEnabled(true);
 });
