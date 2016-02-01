@@ -12,4 +12,8 @@ app.service('sprite', ['spriteImage', function (spriteImage) {
     Sprite.prototype.image = function () {
         return this.spriteImage.image;
     }
+
+    Sprite.prototype.draw = function (context) {
+
+    }
 }]);
