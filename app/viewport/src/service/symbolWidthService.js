@@ -7,12 +7,26 @@ app.service("symbolWidthService", function () {
     var wcells = 0;
     var hcells = 0;
 
+    var listeners = {
+        resize: []
+    }
+
+    /*window.onresize = function () {
+        listeners.resize.forEach(function (item) {
+            item();
+        });
+    }*/
+
     this._setSizeOneSymbol = function (width, height, viewWidth, viewHeight) {
         if (width) widthOneSymbol = width;
         if (height) heightOneSymbol = height;
 
         if (viewWidth) wcells = self.xToSymbolNumber(viewWidth);
         if (viewHeight) hcells = self.yToSymbolNumber(viewHeight);
+
+        listeners.resize.forEach(function (item) {
+            item();
+        });
     };
 
     this.xToSymbolNumber = function (x) {
@@ -36,5 +50,9 @@ app.service("symbolWidthService", function () {
             wcells: wcells,
             hcells: hcells
         }
+    };
+
+    this.addListener = function (name, callback) {
+        listeners[name].push(callback);
     };
 });
