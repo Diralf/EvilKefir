@@ -52,6 +52,12 @@ describe('collection', function () {
             this.hardCollection._data["obj4"] = this.entity4;
             this.hardCollection._data["obj5"] = this.entity5;
 
+            this.coordCollection = collection.create();
+            this.coordCollection._data["0"] = this.entity1;
+            this.coordCollection._data["2"] = this.entity2;
+            this.coordCollection._data["5"] = this.entity3;
+            this.coordCollection._data["6"] = this.entity4;
+            this.coordCollection._data["9"] = this.entity5;
         });
 
         describe('.set()', function () {
@@ -152,6 +158,43 @@ describe('collection', function () {
                 });
 
                 expect(result.length).toEqual(5);
+            });
+
+            it('should handle all elements of collection', function () {
+                var result = [];
+
+                this.hardCollection.each(function (key, entity, index, collection) {
+                    result.push(entity);
+                }, ['5', '6']);
+
+                expect(result.length).toEqual(2);
+            });
+        });
+
+        describe('.eachPart()', function () {
+
+            beforeEach(function () {
+                var self = this;
+
+                this.resultArr = [];
+
+                this.actionCallback = function (key, item) {
+                    self.resultArr.push(key);
+                }
+            })
+
+            it('should handled current part', function () {
+                this.coordCollection.eachPart(3, 4, this.actionCallback);
+
+                expect(this.resultArr)
+                    .toEqual(['5', '6']);
+            });
+
+            it('should handled current reverse part', function () {
+                this.coordCollection.eachPart(6, -5, this.actionCallback);
+
+                expect(this.resultArr)
+                    .toEqual(['2', '5', '6']);
             });
         });
 

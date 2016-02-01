@@ -22,21 +22,31 @@ app.service('symbolGrid', ['collection', function (collection) {
         fixedParamsRect(yInfo);
 
         for (var i = 0; i < yInfo.length; i++) {
-            result[i] = this.data[yInfo.coord + i].substr(xInfo.coord, xInfo.length);
+            result[i] = this.data[yInfo.coord + i].slice(xInfo.coord, xInfo.coord + xInfo.length);
         }
 
         return result;
     };
 
     this.SymbolGrid.prototype.initFromText = function (text) {
-        return text.split('\n');
+        return this.initFromStringArray(text.split('\n'));
+    };
+
+    this.SymbolGrid.prototype.initFromStringArray = function (strings) {
+        var grid = [];
+
+        strings.forEach(function (line, index) {
+            grid[index] = line.split('');
+        });
+
+        return grid;
     };
 
     this.SymbolGrid.prototype.init = function (startData) {
         if (typeof startData === 'string') {
             this.data = this.initFromText(startData);
         } else if (typeof startData.length !== 'undefined') {
-            this.data = startData;
+            this.data = this.initFromStringArray(startData);
         } else {
             throw new Error("Start data is not correct type (" + typeof startData + ")!");
         }

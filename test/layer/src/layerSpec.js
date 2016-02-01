@@ -179,6 +179,52 @@ describe('layer', function () {
             });
         });
 
+        describe('.eachRect', function () {
+
+            beforeEach(function () {
+                var self = this;
+                this.resultArray = [];
+                this.someActions = function (x, y, entity, index) {
+                    self.resultArray.push({x: x, y: y});
+                };
+            });
+
+            it('should be handle current rect', function () {
+                this.hardLayer.eachRect(3, 3, 3, 3, this.someActions);
+
+                expect(this.resultArray)
+                    .toEqual([
+                        {x: 3, y: 3},
+                        {x: 5, y: 5}
+                    ]);
+            });
+
+            it('should be handle current revert rect', function () {
+                this.hardLayer.eachRect(5, 5, -3, -3, this.someActions);
+
+                expect(this.resultArray)
+                    .toEqual([
+                        {x: 3, y: 3},
+                        {x: 5, y: 5}
+                    ]);
+            });
+
+            it('should be give correct params in callback for currect rect', function () {
+                var self = this;
+                var countCall = 0;
+                this.thirdLayer.eachRect(4, 7, 1, 1, function (x, y, entity, index, layer) {
+                    expect(x).toEqual(4);
+                    expect(y).toEqual(7);
+                    expect(entity).toEqual(self.entity7);
+                    expect(index).toEqual(0);
+                    expect(layer).toEqual(self.thirdLayer._data);
+                    countCall++;
+                });
+                expect(countCall)
+                    .toEqual(1);
+            });
+        });
+
         describe('.moveIn()', function () {
 
             it('should be moved current object, return 0', function () {
@@ -278,6 +324,7 @@ describe('layer', function () {
                     .toEqual(5);
             });
         });
+
 
     });
 });
