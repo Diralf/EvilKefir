@@ -63,12 +63,28 @@ app.service("collection", [function () {
      *      param {number} index    - индекс итерации
      *      param {object} entities - собственно сама коллекция
      */
-    this.Collection.prototype.each = function (callback) {
-        var index = 0;
-        for (var prop in this._data) {
-            callback(prop, this._data[prop], index, this._data);
-            index++;
+    this.Collection.prototype.each = function (callback, keys) {
+        keys = keys || Object.keys(this._data);
+
+        for (var i = 0; i < keys.length; i++) {
+            callback(keys[i], this._data[keys[i]], i, this._data);
         }
+    };
+
+    this.Collection.prototype.eachPart = function (begin, count, callback) {
+        var keys;
+
+        if (count < 0) {
+            begin += count + 1;
+            count = -count;
+        }
+
+        keys = Object.keys(this._data)
+            .filter(function (item) {
+                return item >= begin && item < begin + count;
+            });
+
+        this.each(callback, keys);
     };
 
     /**

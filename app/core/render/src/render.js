@@ -8,7 +8,7 @@ app.service('render', ['mapService', 'viewportService', function (mapService, vi
     this.draw = function () {
         var rect = viewportService;
         var context = mapService.currentLevel.tile.getRect(rect.xcells, rect.ycells, rect.wcells, rect.hcells);
-        /*var context = [];*/
+
         var line;
 
         for (var i = 0; i < rect.hcells; i++) {

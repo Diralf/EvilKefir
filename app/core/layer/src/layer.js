@@ -50,6 +50,17 @@ app.service("layer", ["collection", function (collection) {
         });
     };
 
+    this.Layer.prototype.eachRect = function (x, y, w, h, callback) {
+        var self = this;
+        var index = 0;
+        this._data.eachPart(y, h, function (eY, line) {
+            line.eachPart(x, w, function (eX, entity) {
+                callback(+eX, +eY, entity, index, self._data);
+                index++;
+            });
+        });
+    };
+
     this.Layer.prototype.moveIn = function (fromX, fromY, toX, toY) {
         var entity = this.get(fromX, fromY);
 

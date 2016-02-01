@@ -40,66 +40,57 @@ describe('symbolGrid', function () {
             beforeEach(function () {
                 this.middleGrid = this.symbolGrid.create();
 
-                this.middleGrid.data.push("1234567");
-                this.middleGrid.data.push("!@#$%^&");
-                this.middleGrid.data.push("qwertyu");
-                this.middleGrid.data.push("asdfghj");
-                this.middleGrid.data.push("zxcvbnm");
-                this.middleGrid.data.push("QWERTYU");
-                this.middleGrid.data.push("ASDFGHJ");
-                this.middleGrid.width = 7;
-                this.middleGrid.height = 7;
-
+                this.middleGrid.init(this.text);
             });
 
             it('should be return full rect', function () {
                 expect(this.middleGrid.getRect(1, 2, 3, 4))
                     .toEqual([
-                        'wer',
-                        'sdf',
-                        'xcv',
-                        'WER'
-                        ]);
+                        ['w','e','r'],
+                        ['s','d','f'],
+                        ['x','c','v'],
+                        ['W','E','R']
+                    ]);
             });
 
             it('should be return correct of rigth-bottom part', function () {
                 expect(this.middleGrid.getRect(-1, -2, 4, 5))
                     .toEqual([
-                        '123',
-                        '!@#',
-                        'qwe'
-                        ]);
+                        ['1','2','3'],
+                        ['!','@','#'],
+                        ['q','w','e']
+                    ]);
             });
 
             it('should be return correct of left-top part', function () {
                 expect(this.middleGrid.getRect(4, 5, 10, 12))
                     .toEqual([
-                        'TYU',
-                        'GHJ'
-                        ]);
+                        ['T','Y','U'],
+                        ['G','H','J']
+                    ]);
             });
 
             it('should be return correct of center part', function () {
                 expect(this.middleGrid.getRect(-3, -5, 30, 52))
                     .toEqual([
-                        '1234567',
-                        '!@#$%^&',
-                        'qwertyu',
-                        'asdfghj',
-                        'zxcvbnm',
-                        'QWERTYU',
-                        'ASDFGHJ',
+                        ['1','2','3','4','5','6','7'],
+                        ['!','@','#','$','%','^','&'],
+                        ['q','w','e','r','t','y','u'],
+                        ['a','s','d','f','g','h','j'],
+                        ['z','x','c','v','b','n','m'],
+                        ['Q','W','E','R','T','Y','U'],
+                        ['A','S','D','F','G','H','J']
                         ]);
             });
 
             it('should be return full revert rect', function () {
                 expect(this.middleGrid.getRect(4, 6, -2, -4))
                     .toEqual([
-                        'fg',
-                        'vb',
-                        'RT',
-                        'FG'
-                        ]);
+                        ['f','g'],
+                        ['v','b'],
+                        ['R','T'],
+                        ['F','G']
+                    ]);
             });
 
             it('should be return empty array', function () {
@@ -115,30 +106,30 @@ describe('symbolGrid', function () {
             it('should be return correct revert of rigth-bottom part', function () {
                 expect(this.middleGrid.getRect(2, 2, -4, -5))
                     .toEqual([
-                        '123',
-                        '!@#',
-                        'qwe'
-                        ]);
+                        ['1','2','3'],
+                        ['!','@','#'],
+                        ['q','w','e']
+                    ]);
             });
 
             it('should be return correct revert of left-top part', function () {
                 expect(this.middleGrid.getRect(13, 16, -10, -12))
                     .toEqual([
-                        'TYU',
-                        'GHJ'
-                        ]);
+                        ['T','Y','U'],
+                        ['G','H','J']
+                    ]);
             });
 
             it('should be return correct revert of center part', function () {
                 expect(this.middleGrid.getRect(12, 15, -17, -20))
                     .toEqual([
-                        '1234567',
-                        '!@#$%^&',
-                        'qwertyu',
-                        'asdfghj',
-                        'zxcvbnm',
-                        'QWERTYU',
-                        'ASDFGHJ',
+                        ['1','2','3','4','5','6','7'],
+                        ['!','@','#','$','%','^','&'],
+                        ['q','w','e','r','t','y','u'],
+                        ['a','s','d','f','g','h','j'],
+                        ['z','x','c','v','b','n','m'],
+                        ['Q','W','E','R','T','Y','U'],
+                        ['A','S','D','F','G','H','J']
                         ]);
             });
         });
@@ -149,30 +140,30 @@ describe('symbolGrid', function () {
 
                 expect(this.emptyGrid.initFromText(this.text))
                     .toEqual([
-                        '1234567',
-                        '!@#$%^&',
-                        'qwertyu',
-                        'asdfghj',
-                        'zxcvbnm',
-                        'QWERTYU',
-                        'ASDFGHJ'
+                        ['1','2','3','4','5','6','7'],
+                        ['!','@','#','$','%','^','&'],
+                        ['q','w','e','r','t','y','u'],
+                        ['a','s','d','f','g','h','j'],
+                        ['z','x','c','v','b','n','m'],
+                        ['Q','W','E','R','T','Y','U'],
+                        ['A','S','D','F','G','H','J']
                     ])
             });
         });
 
-        describe('init', function () {
+        describe('.init()', function () {
 
             it('should be inited as StringArray', function () {
                 this.emptyGrid.init(this.stringArray);
                 expect(this.emptyGrid.data)
                     .toEqual([
-                        '1234567',
-                        '!@#$%^&',
-                        'qwertyu',
-                        'asdfghj',
-                        'zxcvbnm',
-                        'QWERTYU',
-                        'ASDFGHJ'
+                        ['1','2','3','4','5','6','7'],
+                        ['!','@','#','$','%','^','&'],
+                        ['q','w','e','r','t','y','u'],
+                        ['a','s','d','f','g','h','j'],
+                        ['z','x','c','v','b','n','m'],
+                        ['Q','W','E','R','T','Y','U'],
+                        ['A','S','D','F','G','H','J']
                     ]);
             });
 
@@ -180,13 +171,13 @@ describe('symbolGrid', function () {
                 this.emptyGrid.init(this.text);
                 expect(this.emptyGrid.data)
                     .toEqual([
-                        '1234567',
-                        '!@#$%^&',
-                        'qwertyu',
-                        'asdfghj',
-                        'zxcvbnm',
-                        'QWERTYU',
-                        'ASDFGHJ'
+                        ['1','2','3','4','5','6','7'],
+                        ['!','@','#','$','%','^','&'],
+                        ['q','w','e','r','t','y','u'],
+                        ['a','s','d','f','g','h','j'],
+                        ['z','x','c','v','b','n','m'],
+                        ['Q','W','E','R','T','Y','U'],
+                        ['A','S','D','F','G','H','J']
                     ]);
             });
 
