@@ -4,8 +4,7 @@ app.service("mapService", ["mapData", function (mapData) {
     this.init = function () {
         var startArray = [];
         for (var i = 0; i < 500; i++) {
-            // that will return {string}
-            startArray[i] = new Array(500 + 1).join(".");
+            startArray[i] = new Array(500 + 1).join("."); // that will return {string}
         }
         mapData.tile.init(startArray);
     };

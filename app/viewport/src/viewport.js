@@ -1,14 +1,11 @@
 app.controller("viewport", function ($scope, characterData, characterControl, mouseService, mapService, viewportService) {
 
     characterControl.moveHandler( function (relX, relY) {
-        /*viewportService.viewport[characterData.y][characterData.x] = '.';
-        characterData.x += relX;
-        characterData.y += relY;
-        viewportService.viewport[characterData.y][characterData.x] = '0';*/
 
-        mapService.getLayers().low.moveOn(characterData.x, characterData.y, relX, relY);
-        characterData.x += relX;
-        characterData.y += relY;
+        if (!mapService.getLayers().low.moveOn(characterData.x, characterData.y, relX, relY)) {
+            characterData.x += relX;
+            characterData.y += relY;
+        }
 
         update();
         $scope.$apply();
