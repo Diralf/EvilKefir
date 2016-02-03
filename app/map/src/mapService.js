@@ -1,4 +1,4 @@
-app.service("mapService", ['level', 'entityVisible', function (level, entityVisible) {
+app.service("mapService", ['level', 'entityVisible', 'spriteImage', function (level, entityVisible, spriteImage) {
     var self = this;
 
     this.levels = [];
@@ -15,7 +15,9 @@ app.service("mapService", ['level', 'entityVisible', function (level, entityVisi
 
         this.currentLevel.tile.init(startArray);
 
-        this.currentLevel.layers[0].add(entityVisible.create(10, 10));
+
+        var imageSquare = spriteImage.create('╔═╗║ ║║ ║╚═╝', 3, 4, 1, 3);
+        this.currentLevel.layers[0].add(entityVisible.create(10, 10, imageSquare));
     };
 
     this.getRect = function (x, y, w, h) {

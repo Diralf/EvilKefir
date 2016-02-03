@@ -1,5 +1,5 @@
-app.service("viewportService", ["symbolWidthService", "mapService", "entityVisible",
-    function (symbolWidthService, mapService, entityVisible) {
+app.service("viewportService", ["symbolWidthService", "mapService", "entityVisible", "characterControl",
+    function (symbolWidthService, mapService, entityVisible, characterControl) {
 
     var self = this;
 
@@ -40,5 +40,14 @@ app.service("viewportService", ["symbolWidthService", "mapService", "entityVisib
         self.wcells = gridSize.wcells ? gridSize.wcells : self.wcells;
         self.hcells = gridSize.hcells ? gridSize.hcells : self.hcells;
     };
+
+    characterControl.moveHandler(function (rX, rY) {
+        self.xcells += rX;
+        self.ycells += rY;
+
+        console.log(arguments)
+        console.log(arguments)
+        console.log(arguments)
+    });
 
 }]);

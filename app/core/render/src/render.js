@@ -4,22 +4,28 @@
     вызвать методы отрисовки всех объектов.
     выдать в результате массив с готовыми для отабражения строками.
 */
-app.service('render', ['mapService', 'viewportService', function (mapService, viewportService) {
+app.service('render', ['$log','mapService', 'viewportService', function ($log, mapService, viewportService) {
     this.draw = function () {
         var rect = viewportService;
         var context = mapService.currentLevel.tile.getRect(rect.xcells, rect.ycells, rect.wcells, rect.hcells);
+        var layers = mapService.currentLevel.layers;
 
-        var line;
-
-        for (var i = 0; i < rect.hcells; i++) {
-            line = "";
-            for (var j = 0; j < rect.wcells; j++) {
-                var obj = mapService.currentLevel.layers[0].get(j, i);
-                line += obj ? obj.sprite.image() : context[i][j];
-            }
-            context[i] = line;
+        for (var i = 0; i < layers.length; i++) {
+            layers[i].eachRect(rect.xcells, rect.ycells, rect.wcells, rect.hcells, function (keyX, keyY, entity) {
+                //context[keyY][keyX] = entity.sprite.image();
+                entity.draw({
+                    grid: context,
+                    x: rect.xcells,
+                    y: rect.ycells,
+                    w: rect.wcells,
+                    h: rect.hcells
+                });
+            });
         }
 
+        context = context.map(function (line) {
+            return line.join('');
+        });
 
         return context;
     };
