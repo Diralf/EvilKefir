@@ -1,6 +1,6 @@
-app.controller("viewport", function ($scope, $log, characterData, characterControl, mouseService, mapService, viewportService, render, symbolWidthService, entityVisible) {
+app.controller("viewport", function ($scope, $log, characterData, characterControl, mouseService, mapService, viewportService, render, symbolWidthService, entityVisible, spriteImage) {
 
-    characterControl.moveHandler( function (relX, relY) {
+    /*characterControl.moveHandler( function (relX, relY) {
 
         if (!mapService.getLayers()[0].moveOn(characterData.x, characterData.y, relX, relY)) {
             characterData.x += relX;
@@ -9,12 +9,13 @@ app.controller("viewport", function ($scope, $log, characterData, characterContr
 
         $scope.$apply();
         update();
-    });
+    });*/
 
     mouseService.addMouseHandler("mousedown", function (evt, cellX, cellY) {
         //viewportService.viewport[cellY][cellX] = "X";
         //mapService.getLayers().low.add("X", cellX, cellY);
-        mapService.getLayers()[0].add(entityVisible.create(cellX, cellY));
+        var imageSquare = spriteImage.create('╔══╗║  ║║  ║╚══╝', 4, 4, 1, 3);
+        mapService.getLayers()[0].add(entityVisible.create(cellX, cellY, imageSquare));
 
 
         $scope.$apply();
