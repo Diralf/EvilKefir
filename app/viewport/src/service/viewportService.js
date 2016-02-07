@@ -1,5 +1,5 @@
-app.service("viewportService", ["symbolWidthService", "mapService", "characterControl",
-    function (symbolWidthService, mapService, characterControl) {
+app.service("viewportService", ["symbolWidthService", "mapService", "characterControl", "point",
+    function (symbolWidthService, mapService, characterControl, point) {
 
     var self = this;
 
@@ -26,25 +26,29 @@ app.service("viewportService", ["symbolWidthService", "mapService", "characterCo
     };
 
     this.moveIn = function (x, y) {
-        actionMove({x: x, y: y});
+        var p = point.create(x, y);
+        actionMove(p);
     };
 
     this.moveOn = function (x, y) {
-        var point = decoratorRelativeMove({x: x, y: y});
-        actionMove(point);
+        var p = point.create(x, y);
+        p = decoratorRelativeMove(p);
+        actionMove(p);
     };
 
     this.safeMoveIn = function (x, y) {
-        var point = decoratorSafePoint({x: x, y: y});
-        point = decoratorSafeBounds(point);
-        actionMove(point);
+        var p = point.create(x, y);
+        p = decoratorSafePoint(p);
+        p = decoratorSafeBounds(p);
+        actionMove(p);
     };
 
     this.safeMoveOn = function (x, y) {
-        var point = decoratorRelativeMove({x: x, y: y});
-        point = decoratorSafePoint(point);
-        point = decoratorSafeBounds(point);
-        actionMove(point);
+        var p = point.create(x, y);
+        p = decoratorRelativeMove(p);
+        p = decoratorSafePoint(p);
+        p = decoratorSafeBounds(p);
+        actionMove(p);
     }
 
     /**
