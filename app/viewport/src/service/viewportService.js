@@ -32,22 +32,22 @@ app.service("viewportService", ["symbolWidthService", "mapService", "characterCo
 
     this.moveOn = function (x, y) {
         var p = point.create(x, y);
-        p = decoratorRelativeMove(p);
+        decoratorRelativeMove(p);
         actionMove(p);
     };
 
     this.safeMoveIn = function (x, y) {
         var p = point.create(x, y);
-        p = decoratorSafePoint(p);
-        p = decoratorSafeBounds(p);
+        decoratorSafePoint(p);
+        decoratorSafeBounds(p);
         actionMove(p);
     };
 
     this.safeMoveOn = function (x, y) {
         var p = point.create(x, y);
-        p = decoratorRelativeMove(p);
-        p = decoratorSafePoint(p);
-        p = decoratorSafeBounds(p);
+        decoratorRelativeMove(p);
+        decoratorSafePoint(p);
+        decoratorSafeBounds(p);
         actionMove(p);
     }
 
