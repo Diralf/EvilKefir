@@ -4,6 +4,7 @@ app.directive("viewportLine", function ($log, mouseService, symbolWidthService) 
         link: function ($scope, $element, $attr) {
 
             $element.bind("mousedown", function (evt) {
+                $log.debug('eventMouse');
                 mouseService.emitMouseEvent("mousedown", evt, symbolWidthService.xToSymbolNumber(evt.offsetX), $attr.cellY);
             });
 

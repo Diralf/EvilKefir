@@ -9,22 +9,46 @@ app.service('render', ['$log','mapService', 'viewportService', function ($log, m
         var rect = viewportService;
         var context = mapService.currentLevel.tile.getRect(rect.xcells, rect.ycells, rect.wcells, rect.hcells);
         var layers = mapService.currentLevel.layers;
+        var areaExtra = 5;
+
 
         for (var i = 0; i < layers.length; i++) {
-            layers[i].eachRect(rect.xcells, rect.ycells, rect.wcells, rect.hcells, function (keyX, keyY, entity) {
-                //context[keyY][keyX] = entity.sprite.image();
-                entity.draw({
-                    grid: context,
-                    x: rect.xcells,
-                    y: rect.ycells,
-                    w: rect.wcells,
-                    h: rect.hcells
-                });
+            layers[i].eachRect(
+                rect.xcells - areaExtra,
+                rect.ycells - areaExtra,
+                rect.wcells + (areaExtra*2),
+                rect.hcells + (areaExtra*2),
+                function (keyX, keyY, entity) {
+                    entity.draw({
+                        grid: context,
+                        x: rect.xcells,
+                        y: rect.ycells,
+                        w: rect.wcells,
+                        h: rect.hcells
+                    });
             });
         }
+        var spaceAreaX = '';
+
+        /*if (rect.ycells < 0) {
+            var rY = -rect.ycells;
+            var spaceArea = [];
+            for (var i = 0; i < rY; i++) {
+                spaceArea.push(new Array(rect.wcells).join(" "));
+            }
+            context.unshift(spaceArea);
+        }
+
+
+
+        if (rect.xcells < 0) {
+            var rX = -rect.xcells;
+            spaceAreaX = new Array(rX).join(" ");
+        }
+        */
 
         context = context.map(function (line) {
-            return line.join('');
+            return spaceAreaX + line.join('');
         });
 
         return context;

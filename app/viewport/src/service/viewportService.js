@@ -9,45 +9,80 @@ app.service("viewportService", ["symbolWidthService", "mapService", "entityVisib
     this.wcells = 80;
     this.hcells = 30;
 
-    this.viewport = [];
-
-    this.init = function (symbol) {
-        self.update(symbol);
+    this.init = function () {
+        characterControl.moveHandler(function (rX, rY) {
+            self.safeMoveOn(rX, rY);
+        });
     }
 
     this.update = function (symbol) {
-        this.viewport.length = 0;
 
-        var gridSize = symbolWidthService.getGridSize();
-        self.wcells = gridSize.wcells ? gridSize.wcells : self.wcells;
-        self.hcells = gridSize.hcells ? gridSize.hcells : self.hcells;
-
-        /*var back = mapService.getRect(self.xcells, self.ycells, self.wcells, self.hcells);
-        var line
-        for (var i = 0; i < this.hcells; i++) {
-            line = "";
-            for (var j = 0; j < this.wcells; j++) {
-                var obj = mapService.getLayers().low.get(j, i);
-                line += obj ? obj.sprite.image() : back[i][j];
-            }
-            this.viewport[i] = line;
-        }*/
     };
 
     this.resize = function () {
         var gridSize = symbolWidthService.getGridSize();
-        console.log(gridSize);
         self.wcells = gridSize.wcells ? gridSize.wcells : self.wcells;
         self.hcells = gridSize.hcells ? gridSize.hcells : self.hcells;
     };
 
-    characterControl.moveHandler(function (rX, rY) {
-        self.xcells += rX;
-        self.ycells += rY;
+    this.moveIn = function (x, y) {
+        actionMove({x: x, y: y});
+    };
 
-        console.log(arguments)
-        console.log(arguments)
-        console.log(arguments)
-    });
+    this.moveOn = function (x, y) {
+        var point = decoratorRelativeMove({x: x, y: y});
+        actionMove(point);
+    };
+
+    this.safeMoveIn = function (x, y) {
+        var point = decoratorSafePoint({x: x, y: y});
+        point = decoratorSafeBounds(point);
+        actionMove(point);
+    };
+
+    this.safeMoveOn = function (x, y) {
+        var point = decoratorRelativeMove({x: x, y: y});
+        point = decoratorSafePoint(point);
+        point = decoratorSafeBounds(point);
+        actionMove(point);
+    }
+
+    /**
+     * decorator for relative coordinates
+     */
+    function decoratorRelativeMove (point) {
+        point.x = self.xcells + point.x;
+        point.y = self.ycells + point.y;
+        return point;
+    }
+
+    /**
+     * decorator для остановки вьюпорта если он выходит за top-left края
+     */
+    function decoratorSafePoint (point) {
+        if (point.x < 0) point.x = 0;
+        if (point.y < 0) point.y = 0;
+        return point;
+    }
+
+    /**
+     * decorator для остановки вьюпорта если он выходит за bottom-rigth края
+     */
+    function decoratorSafeBounds (point) {
+        var xBound = mapService.currentLevel.tile.width - self.wcells;
+        var yBound = mapService.currentLevel.tile.height - self.hcells;
+
+
+        if (point.x > xBound) point.x = xBound;
+        if (point.y > yBound) point.y = yBound;
+
+        return point;
+    }
+
+    function actionMove (point) {
+        self.xcells = point.x;
+        self.ycells = point.y;
+        return point;
+    }
 
 }]);

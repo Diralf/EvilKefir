@@ -21,8 +21,8 @@ app.service("symbolWidthService", function () {
         if (width) widthOneSymbol = width;
         if (height) heightOneSymbol = height;
 
-        if (viewWidth) wcells = self.xToSymbolNumber(viewWidth);
-        if (viewHeight) hcells = self.yToSymbolNumber(viewHeight);
+        if (viewWidth) wcells = self.xToSymbolNumber(viewWidth) + 1;
+        if (viewHeight) hcells = self.yToSymbolNumber(viewHeight) + 1;
 
         listeners.resize.forEach(function (item) {
             item();

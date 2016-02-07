@@ -23,10 +23,10 @@ app.directive("symbolWidth", function (symbolWidthService) {
 
             function checkSymbolSize() {
                 symbolWidthService._setSizeOneSymbol(
-                    $element[0].getBoundingClientRect().width,
-                    $element[0].getBoundingClientRect().height,
-                    $element.parent()[0].getBoundingClientRect().width,
-                    $element.parent()[0].getBoundingClientRect().height
+                    +$element[0].getBoundingClientRect().width,
+                    +$element[0].getBoundingClientRect().height,
+                    +$element.parent()[0].getBoundingClientRect().width,
+                    +$element.parent()[0].getBoundingClientRect().height
                 );
             }
         }
