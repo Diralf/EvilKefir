@@ -26,3 +26,4 @@ app.service('entityVisible', ['$log', 'entity', 'sprite', function ($log, entity
         }
     };
 }]);
+

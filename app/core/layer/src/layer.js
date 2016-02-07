@@ -22,6 +22,9 @@ app.service("layer", ["collection", function (collection) {
             else y = entity.y;
         }
 
+        x = +x;
+        y = +y;
+
         var line = this._data.get(y) || this._data.add(y, collection.create());
 
         return line.get(x) ? null : line.add(x, entity);

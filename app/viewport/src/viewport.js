@@ -12,23 +12,20 @@ app.controller("viewport", function ($scope, $log, characterData, characterContr
     });*/
 
     mouseService.addMouseHandler("mousedown", function (evt, cellX, cellY) {
-        //viewportService.viewport[cellY][cellX] = "X";
-        //mapService.getLayers().low.add("X", cellX, cellY);
         var imageSquare = spriteImage.create('╔══╗║  ║║  ║╚══╝', 4, 4, 1, 3);
-        mapService.getLayers()[0].add(entityVisible.create(cellX, cellY, imageSquare));
-
-
-        $scope.$apply();
-        update();
+        console.log(cellY);
+        console.log(viewportService.ycells);
+        console.log(viewportService.xcells + (+cellX));
+        mapService.getLayers()[0].add(entityVisible.create(viewportService.xcells + cellX, viewportService.ycells + cellY, imageSquare));
     })
 
     function update() {
-        $scope.gameviewLine = render.draw();
+        //$scope.gameviewLine = render.draw();
     }
 
     symbolWidthService.addListener('resize', function () {
         viewportService.resize();
-        $scope.gameviewLine = render.draw();
+        //$scope.gameviewLine = render.draw();
     });
 
     $scope.gameviewLine = [];
@@ -39,10 +36,16 @@ app.controller("viewport", function ($scope, $log, characterData, characterContr
     viewportService.resize();
     update();
 
-    $log.debug("debug");
-    $log.info("info");
-    $log.warn("warn");
-    $log.error("error");
-    $log.log("log");
+    var timerId = setInterval(function() {
+        //$log.debug('tick');
+        $scope.gameviewLine = render.draw();
+        $scope.$apply();
+    }, 17);
+
+    /*setTimeout(function run() {
+        $scope.gameviewLine = render.draw();
+        $scope.$apply();
+        setTimeout(run, 17);
+    }, 17);*/
 
 });
