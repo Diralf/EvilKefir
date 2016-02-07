@@ -1,5 +1,5 @@
-app.service("viewportService", ["symbolWidthService", "mapService", "entityVisible", "characterControl",
-    function (symbolWidthService, mapService, entityVisible, characterControl) {
+app.service("viewportService", ["symbolWidthService", "mapService", "characterControl",
+    function (symbolWidthService, mapService, characterControl) {
 
     var self = this;
 
