@@ -28,27 +28,9 @@ app.service('render', ['$log','mapService', 'viewportService', function ($log, m
                     });
             });
         }
-        var spaceAreaX = '';
-
-        /*if (rect.ycells < 0) {
-            var rY = -rect.ycells;
-            var spaceArea = [];
-            for (var i = 0; i < rY; i++) {
-                spaceArea.push(new Array(rect.wcells).join(" "));
-            }
-            context.unshift(spaceArea);
-        }
-
-
-
-        if (rect.xcells < 0) {
-            var rX = -rect.xcells;
-            spaceAreaX = new Array(rX).join(" ");
-        }
-        */
 
         context = context.map(function (line) {
-            return spaceAreaX + line.join('');
+            return line.join('');
         });
 
         return context;

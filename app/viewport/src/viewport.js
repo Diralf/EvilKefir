@@ -1,4 +1,4 @@
-app.controller("viewport", function ($scope, $log, characterData, characterControl, mouseService, mapService, viewportService, render, symbolWidthService, entityVisible, spriteImage) {
+app.controller("viewport", function ($scope, $log, character, characterData, characterControl, mouseService, mapService, viewportService, render, symbolWidthService, entityVisible, spriteImage) {
 
     /*characterControl.moveHandler( function (relX, relY) {
 
@@ -13,10 +13,14 @@ app.controller("viewport", function ($scope, $log, characterData, characterContr
 
     mouseService.addMouseHandler("mousedown", function (evt, cellX, cellY) {
         var imageSquare = spriteImage.create('╔══╗║  ║║  ║╚══╝', 4, 4, 1, 3);
-        console.log(cellY);
-        console.log(viewportService.ycells);
-        console.log(viewportService.xcells + (+cellX));
-        mapService.getLayers()[0].add(entityVisible.create(viewportService.xcells + cellX, viewportService.ycells + cellY, imageSquare));
+
+        mapService.getLayers()[0].add(
+            entityVisible.create(
+                viewportService.xcells + cellX,
+                viewportService.ycells + cellY,
+                imageSquare
+            )
+        );
     })
 
     function update() {
@@ -41,6 +45,11 @@ app.controller("viewport", function ($scope, $log, characterData, characterContr
         $scope.gameviewLine = render.draw();
         $scope.$apply();
     }, 17);
+
+    mapService.currentLevel.layers[0].add(
+        character.create(20, 20, mapService.currentLevel.layers[0]),
+        20, 20
+    );
 
     /*setTimeout(function run() {
         $scope.gameviewLine = render.draw();

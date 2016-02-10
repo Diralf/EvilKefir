@@ -10,9 +10,9 @@ app.service("viewportService", ["symbolWidthService", "mapService", "characterCo
     this.hcells = 30;
 
     this.init = function () {
-        characterControl.moveHandler(function (rX, rY) {
+        /*characterControl.moveHandler(function (rX, rY) {
             self.safeMoveOn(rX, rY);
-        });
+        });*/
     }
 
     this.update = function (symbol) {
