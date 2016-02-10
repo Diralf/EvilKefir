@@ -18,6 +18,8 @@ app.service("mapService", ['level', 'entityVisible', 'spriteImage', function (le
 
         var imageSquare = spriteImage.create('╔═╗║ ║║ ║╚═╝', 3, 4, 1, 3);
         this.currentLevel.layers[0].add(entityVisible.create(10, 10, imageSquare));
+
+        //this.currentLevel.layers[0].add(character.create(20, 20), 20, 20);
     };
 
     this.getRect = function (x, y, w, h) {
