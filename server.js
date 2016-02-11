@@ -42,8 +42,14 @@ app.get('/game/1', function (req, res) {
     res.end();
 });
 
-app.listen(port, function () {
+/*app.listen(port, function () {
     console.log('Express server listening on port ' + port);
+});*/
+
+var server = http.createServer(app);
+
+server.listen( port, ipaddress, function() {
+    console.log((new Date()) + ' Server is listening on port 8080');
 });
 
 console.log("Listening to " + ipaddress + ":" + port + "...");
