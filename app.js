@@ -11,6 +11,7 @@ app.run(function ($rootScope, $window, $http, keyboardService, mapService, viewp
     var onEnter = function () {
         console.log('start game send request');
         $http.get('/game/0').then(function (data) {
+            console.log(data);
             alert(data.data);
             console.log('start game response recived');
         });
@@ -19,6 +20,7 @@ app.run(function ($rootScope, $window, $http, keyboardService, mapService, viewp
     var onExit = function () {
         console.log('end game send request');
         $http.get('/game/1').then(function (data) {
+            console.log(data);
             alert(data.data);
             console.log('end game response recived');
         });
