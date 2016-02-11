@@ -16,12 +16,12 @@ app.controller("viewport", function ($scope, $log, character, characterData, cha
 
         mapService.getLayers()[0].add(
             entityVisible.create(
-                viewportService.xcells + cellX,
-                viewportService.ycells + cellY,
+                viewportService.pos.x + cellX,
+                viewportService.pos.y + cellY,
                 imageSquare
             )
         );
-    })
+    });
 
     function update() {
         //$scope.gameviewLine = render.draw();
