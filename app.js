@@ -10,14 +10,16 @@ app.run(function ($rootScope, $window, $http, keyboardService, mapService, viewp
     //mapLoader.load();
     var onEnter = function () {
         console.log('start game send request');
-        $http.get('/game/0').then(function () {
+        $http.get('/game/0').then(function (data) {
+            alert(data.data);
             console.log('start game response recived');
         });
     };
 
     var onExit = function () {
         console.log('end game send request');
-        $http.get('/game/1').then(function () {
+        $http.get('/game/1').then(function (data) {
+            alert(data.data);
             console.log('end game response recived');
         });
         //return ('bye bye');
