@@ -1,13 +1,15 @@
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
 var port      = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 
-var WebSocketServer = require('ws').Server
+var http = require("http");
+var url = require("url");
+var path = require("path");
+var fs = require("fs");
+var express = require('express');
 
-var http = require("http"),
-    url = require("url"),
-    path = require("path"),
-    fs = require("fs"),
-    express = require('express');
+var methodOverride = require('method-override');
+var bodyParser = require('body-parser');
+var multer = require('multer');
 
 /*var router = require("./router"),
     routes = require("./routesHandler")
@@ -15,58 +17,33 @@ var http = require("http"),
 var app = express();
 
 app.set('port', port );
-app.use(express.logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded());
-//app.use(app.router);
 app.use(express.static(process.env.OPENSHIFT_REPO_DIR || path.join(__dirname)));
-app.use(express.bodyParser());
+
+app.use(methodOverride());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(multer());
+//app.use('/', router);
 
 app.get('/', function (req, res) {
     res.end();
 });
 
-var server = http.createServer(app);
-
-server.listen( port, ipaddress, function() {
-    console.log((new Date()) + ' Server is listening on port 8080');
+app.get('/game/0', function (req, res) {
+    console.log(new Date());
+    console.log(req.header('x-forwarded-for') || req.connection.remoteAddress);
+    console.log(req.headers['user-agent']);
+    res.end();
 });
 
-wss = new WebSocketServer({
-    server: server,
-    autoAcceptConnections: false
+app.get('/game/1', function (req, res) {
+    console.log(new Date());
+    console.log(req.header('x-forwarded-for') || req.connection.remoteAddress);
+    res.end();
 });
-wss.on('connection', function(ws) {
-  console.log("New connection");
-  ws.on('message', function(message) {
-    ws.send("Received: " + message);
-  });
-  ws.send('Welcome!');
+
+app.listen(port, function () {
+    console.log('Express server listening on port ' + port);
 });
 
 console.log("Listening to " + ipaddress + ":" + port + "...");
-
-// var express = require('express')
-
-// // Config
-// var DEV_PORT = 3000
-// var PROD_PORT = 80
-//
-// var app = express()
-//
-// // Actually, it should be a build directory, e.g. .tmp
-// app.use('/', express.static(__dirname + '/public'))
-//
-// // Environment-dependent configuration
-// var env = process.env.NODE_ENV || 'development'
-// if (env == 'production') {
-//   var PORT = PROD_PORT
-// } else {
-//   var PORT = DEV_PORT
-// }
-//
-// // Run server
-// app.listen(PORT, function() {
-//   console.info('Server is listening on port ' + PORT)
-// })
-
