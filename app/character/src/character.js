@@ -22,7 +22,7 @@ app.service("character", ['entityVisible', 'spriteImage', 'characterControl', fu
         });
 
         this.layer = layer;
-    };
+    }
 
     Character.prototype = Object.create(entityVisible.EntityVisible.prototype);
 
