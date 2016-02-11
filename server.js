@@ -33,13 +33,13 @@ app.get('/game/0', function (req, res) {
     console.log(new Date());
     console.log(req.header('x-forwarded-for') || req.connection.remoteAddress);
     console.log(req.headers['user-agent']);
-    res.end();
+    res.end(req.header('x-forwarded-for') || req.connection.remoteAddress);
 });
 
 app.get('/game/1', function (req, res) {
     console.log(new Date());
     console.log(req.header('x-forwarded-for') || req.connection.remoteAddress);
-    res.end();
+    res.end(req.header('x-forwarded-for') || req.connection.remoteAddress);
 });
 
 /*app.listen(port, function () {
