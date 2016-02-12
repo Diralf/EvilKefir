@@ -20,6 +20,7 @@ app.run(function ($rootScope, $window, $http, keyboardService, mapService, viewp
         $http.post('/game/1', {checkpoint: "cehck exit"}).then(function (response) {
             console.log('end game response recived');
         });
+        return "";
     };
 
     onEnter();
