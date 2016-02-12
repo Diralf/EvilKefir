@@ -13,9 +13,6 @@ var router = require('./server/router');
 
 var express = require('express');
 
-/*var router = require("./router"),
-    routes = require("./routesHandler")
-*/
 var app = express();
 
 app.set('port', port );
@@ -26,29 +23,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer());
 app.use('/', router);
-
-/*app.get('/', function (req, res) {
-    res.end();
-});
-
-app.post('/game/0', function (req, res) {
-    console.log(req.body.checkpoint);
-    console.log(new Date());
-    console.log(req.header('x-forwarded-for') || req.connection.remoteAddress);
-    console.log(req.headers['user-agent']);
-    res.end(req.header('x-forwarded-for') || req.connection.remoteAddress);
-});
-
-app.post('/game/1', function (req, res) {
-    console.log(req.body.checkpoint);
-    console.log(new Date());
-    console.log(req.header('x-forwarded-for') || req.connection.remoteAddress);
-    res.end(req.header('x-forwarded-for') || req.connection.remoteAddress);
-});*/
-
-/*app.listen(port, function () {
-    console.log('Express server listening on port ' + port);
-});*/
 
 var server = http.createServer(app);
 
