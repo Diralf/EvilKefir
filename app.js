@@ -9,18 +9,17 @@ app.run(function ($rootScope, $window, $http, keyboardService, mapService, viewp
 
     //mapLoader.load();
     var onEnter = function () {
-        console.log('start game send request');
+        //console.log('start game send request');
         $http.post('/game/0', {checkpoint: "cehck enter"}).then(function (response) {
-            console.log('start game response recived');
+            //console.log('start game response recived');
         });
     };
 
     var onExit = function () {
-        console.log('end game send request');
+        //console.log('end game send request');
         $http.post('/game/1', {checkpoint: "cehck exit"}).then(function (response) {
-            console.log('end game response recived');
+            //console.log('end game response recived');
         });
-        return "";
     };
 
     onEnter();
