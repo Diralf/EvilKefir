@@ -5,11 +5,13 @@ var http = require("http");
 var url = require("url");
 var path = require("path");
 var fs = require("fs");
-var express = require('express');
 
 var methodOverride = require('method-override');
 var bodyParser = require('body-parser');
 var multer = require('multer');
+var router = require('./server/router');
+
+var express = require('express');
 
 /*var router = require("./router"),
     routes = require("./routesHandler")
@@ -23,24 +25,26 @@ app.use(methodOverride());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer());
-//app.use('/', router);
+app.use('/', router);
 
-app.get('/', function (req, res) {
+/*app.get('/', function (req, res) {
     res.end();
 });
 
-app.get('/game/0', function (req, res) {
+app.post('/game/0', function (req, res) {
+    console.log(req.body.checkpoint);
     console.log(new Date());
     console.log(req.header('x-forwarded-for') || req.connection.remoteAddress);
     console.log(req.headers['user-agent']);
     res.end(req.header('x-forwarded-for') || req.connection.remoteAddress);
 });
 
-app.get('/game/1', function (req, res) {
+app.post('/game/1', function (req, res) {
+    console.log(req.body.checkpoint);
     console.log(new Date());
     console.log(req.header('x-forwarded-for') || req.connection.remoteAddress);
     res.end(req.header('x-forwarded-for') || req.connection.remoteAddress);
-});
+});*/
 
 /*app.listen(port, function () {
     console.log('Express server listening on port ' + port);
