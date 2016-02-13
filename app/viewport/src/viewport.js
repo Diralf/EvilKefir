@@ -46,6 +46,9 @@ app.controller("viewport", function (
             }
         });
 
+
+        player.handleMessage('move', _x, _y);
+
         /*var entity = mapService.getLayers()[0].get(viewportService.pos.x + cellX, viewportService.pos.y + cellY);
 
         if (entity) {
@@ -70,14 +73,17 @@ app.controller("viewport", function (
     viewportService.resize();
     update();
 
+    var player = character.create(20, 20, mapService.currentLevel.layers[0]);
+
     var timerId = setInterval(function() {
         //$log.debug('tick');
         $scope.gameviewLine = render.draw();
         $scope.$apply();
-    }, 17);
+        player.handleMessage('step');
+    }, 60);
 
     mapService.currentLevel.layers[0].add(
-        character.create(20, 20, mapService.currentLevel.layers[0]),
+        player,
         20, 20
     );
 
