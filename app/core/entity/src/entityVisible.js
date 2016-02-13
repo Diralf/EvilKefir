@@ -1,4 +1,4 @@
-app.service('entityVisible', ['$log', 'entity', 'sprite', function ($log, entity, sprite) {
+app.service('entityVisible', ['$log', 'entity', 'sprite', 'collision', function ($log, entity, sprite, collision) {
     this.create = function (x, y, image) {
         return new this.EntityVisible(x, y, image);
     };
@@ -27,5 +27,17 @@ app.service('entityVisible', ['$log', 'entity', 'sprite', function ($log, entity
             }
         }
     };
+
+    this.EntityVisible.prototype.isPointMeet = function (x, y) {
+        var image = this.sprite.spriteImage;
+        var rect = {
+            x: this.x - image.centerX,
+            y: this.y - image.centerY,
+            w: image.width,
+            h: image.height
+        };
+        console.log(rect);
+        return collision.pointToRect({x: x, y: y}, rect);
+    }
 }]);
 

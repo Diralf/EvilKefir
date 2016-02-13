@@ -37,11 +37,20 @@ app.controller("viewport", function (
     });*/
 
     mouseService.addMouseHandler("mousedown", function (evt, cellX, cellY, callback) {
-        var entity = mapService.getLayers()[0].get(viewportService.pos.x + cellX, viewportService.pos.y + cellY);
+        var _x = viewportService.pos.x + cellX;
+        var _y = viewportService.pos.y + cellY;
+        mapService.getLayers()[0].eachRect(_x - 20, _y - 10, 40, 20, function (x, y, entity) {
+            //console.log(arguments);
+            if (entity.isPointMeet(_x, _y)) {
+                callback(entity.handleMessage('look'));
+            }
+        });
+
+        /*var entity = mapService.getLayers()[0].get(viewportService.pos.x + cellX, viewportService.pos.y + cellY);
 
         if (entity) {
             callback(entity.handleMessage('look'));
-        }
+        }*/
     });
 
     function update() {
