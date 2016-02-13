@@ -1,17 +1,19 @@
-app.service('characterSprite', ['$http','sprite', 'spriteImage', 'rect', function ($http, sprite, spriteImage, rect) {
+app.service('characterSprite', ['$http', '$q','sprite', 'spriteImage', 'rect', function ($http, $q, sprite, spriteImage, rect) {
+    var spriteCache = null;
+
     this.CharacterSprite = function () {
-        var image = ' \\\\\\\\\\ ' +
-                    '(0 U 0)' +
-                    ' ┌-¥-┐ ' +
-                    ' |\\_/| ' +
-                    '  | |  ' +
-                    "  ┘ ┘  ";
-        var spriteIm = spriteImage.create(image, 7, 6, 3, 5);
+        var self = this;
+        var width = 7;
+        var height = 6;
 
-        sprite.Sprite.call(this, spriteIm, new rect.Rect(-3, -5, 7, 6));
+        var si = spriteImage.create(null, width, height, 3, 5)
 
-        $http.post('/sprite', {fileName: "entity/character/Move_front_left.txt"}).then(function (response) {
-            console.log(response.data);
+        sprite.Sprite.call(this, si, new rect.Rect(-3, -5, width, height));
+
+        spriteCache = this.getTextFromServer(spriteCache, "entity/character/Move_front_left.txt");
+
+        this.promise = spriteCache.promise.then(function (text) {
+            self.spriteImage.image = self.convertTextToImage(text, width);
         });
     };
 

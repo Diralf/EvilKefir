@@ -72,11 +72,14 @@ app.controller("viewport", function (
 
     var player = character.create(20, 20, mapService.currentLevel.layers[0]);
 
+    player.sprite.promise.then(function () {
+       console.log('loaded');
+    });
+
     var timerId = setInterval(function() {
-        //$log.debug('tick');
+        viewportService.update();
         $scope.gameviewLine = render.draw();
         $scope.$apply();
-        viewportService.update();
         player.handleMessage('step');
     }, 60);
 
