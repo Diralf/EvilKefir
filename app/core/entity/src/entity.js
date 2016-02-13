@@ -26,9 +26,9 @@ app.service("entity", ["collection", function (collection) {
      * @param type
      * @param params
      */
-    this.Entity.prototype.handleMessage = function (type, params) {
+    this.Entity.prototype.handleMessage = function (type) {
         if (this.onMessage.hasOwnProperty(type)) {
-            return this.onMessage[type].call(this, params);
+            return this.onMessage[type].apply(this, arguments);
         }
 
         return false;

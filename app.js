@@ -29,3 +29,5 @@ app.run(function ($rootScope, $window, $http, keyboardService, mapService, viewp
 app.config(function ($logProvider) {
     $logProvider.debugEnabled(true);
 });
+
+app.constant('transparentSymbol', ' ');
