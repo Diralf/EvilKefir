@@ -2,21 +2,19 @@ app.service("mouseService", function ($log) {
     var mouseHandlers = {};
 
     this.emitMouseEvent = function (event, evtObj, cellX, cellY) {
-        $log.debug('emitMouseEvent');
+        $log.debug('emitMouseEvent ' + event);
         if (!mouseHandlers[event]) {
-            console.error("mouseEvent: " + event + " - no handlers");
+            $log.error("mouseEvent: " + event + " - no handlers");
             return;
         }
-        mouseHandlers[event].forEach(function (handleItem) {
-            $log.debug('call handler');
-            $log.debug(handleItem);
-            handleItem(evtObj, +cellX, +cellY);
+        mouseHandlers[event].forEach(function (handleItem, index) {
+            handleItem(evtObj, +cellX, +cellY, function (result) {
+                $log.debug('handling ' + index + ' ' + event + ' finished - result: ' + result);
+            });
         })
-    }
+    };
 
     this.addMouseHandler = function (event, handler) {
-        $log.debug('addMouseHandler ' + event);
-        $log.debug(handler);
         if (!mouseHandlers[event]) {
             mouseHandlers[event] = [];
         }

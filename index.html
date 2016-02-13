@@ -15,6 +15,7 @@
             <div viewport-line ng-repeat="(linekey, line) in gameviewLine track by $index"
                     class="viewport-line"
                     cell-y="{{::linekey}}"
+                    ng-mousedown="onMouseDown($event)"
                     ><div> </div><span ng-bind="line"></span></div>
         </div>
 
@@ -48,6 +49,7 @@
         <script type="text/javascript" src="app/core/symbolGrid/src/symbolGrid.js"></script>
         <script type="text/javascript" src="app/core/unique/src/unique.js"></script>
 
+        <script type="text/javascript" src="app/entities/staticObject.js"></script>
         <script type="text/javascript" src="app/map/src/mapService.js"></script>
         <script type="text/javascript" src="app/viewport/src/viewport.js"></script>
         <script type="text/javascript" src="app/viewport/src/directive/viewportLine.js"></script>

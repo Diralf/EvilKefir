@@ -1,16 +1,37 @@
 app.service("entity", ["collection", function (collection) {
-    var self = this;
+    var service = this;
     var validID = 0;
-    var entityCollection = collection.create();
+
+    this.entityCollection = collection.create();
 
     this.create = function () {
-        var entity = entityCollection.add(validID, new this.Entity(validID));
-        validID++;
-        return entity;
+        return new this.Entity();
     };
 
-    this.Entity = function (id) {
-        this.id = id;
+    this.Entity = function () {
+        this.id = validID;
+        validID++;
+        this.onMessage = {};
+
+        service.entityCollection.add(this.id, this);
     };
+
+    /**
+     * в объект this.onMessage добавляется свойство
+     *  имя которого есть type сообщения
+     *  само свойство функция котороя обрабатывает сообщение данного типа
+     *  в параметрах объект params
+     *
+     *  из вне вызывается метод handleMessage(type, params)
+     * @param type
+     * @param params
+     */
+    this.Entity.prototype.handleMessage = function (type, params) {
+        if (this.onMessage.hasOwnProperty(type)) {
+            return this.onMessage[type].call(this, params);
+        }
+
+        return false;
+    }
 
 }]);

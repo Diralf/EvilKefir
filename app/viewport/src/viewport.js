@@ -1,4 +1,17 @@
-app.controller("viewport", function ($scope, $log, character, characterData, characterControl, mouseService, mapService, viewportService, render, symbolWidthService, entityVisible, spriteImage) {
+app.controller("viewport", function (
+    $scope,
+    $log,
+    character,
+    characterData,
+    characterControl,
+    mouseService,
+    mapService,
+    viewportService,
+    render,
+    symbolWidthService,
+    entityVisible,
+    spriteImage,
+    staticObject) {
 
     /*characterControl.moveHandler( function (relX, relY) {
 
@@ -11,7 +24,7 @@ app.controller("viewport", function ($scope, $log, character, characterData, cha
         update();
     });*/
 
-    mouseService.addMouseHandler("mousedown", function (evt, cellX, cellY) {
+    /*mouseService.addMouseHandler("mousedown", function (evt, cellX, cellY) {
         var imageSquare = spriteImage.create('╔══╗║  ║║  ║╚══╝', 4, 4, 1, 3);
 
         mapService.getLayers()[0].add(
@@ -21,6 +34,14 @@ app.controller("viewport", function ($scope, $log, character, characterData, cha
                 imageSquare
             )
         );
+    });*/
+
+    mouseService.addMouseHandler("mousedown", function (evt, cellX, cellY, callback) {
+        var entity = mapService.getLayers()[0].get(viewportService.pos.x + cellX, viewportService.pos.y + cellY);
+
+        if (entity) {
+            callback(entity.handleMessage('look'));
+        }
     });
 
     function update() {
@@ -50,6 +71,13 @@ app.controller("viewport", function ($scope, $log, character, characterData, cha
         character.create(20, 20, mapService.currentLevel.layers[0]),
         20, 20
     );
+
+    var imageSquare = spriteImage.create('╔══╗║ss║║  ║╚══╝', 4, 4, 1, 3);
+
+
+    mapService.currentLevel.layers[0].add(new staticObject.StaticObject(40, 20, imageSquare));
+    mapService.currentLevel.layers[0].add(new staticObject.StaticObject(60, 30, imageSquare));
+    mapService.currentLevel.layers[0].add(new staticObject.StaticObject(80, 10, imageSquare));
 
     /*setTimeout(function run() {
         $scope.gameviewLine = render.draw();

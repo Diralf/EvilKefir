@@ -22,6 +22,11 @@ app.service("character", ['entityVisible', 'spriteImage', 'characterControl', fu
         });
 
         this.layer = layer;
+
+        this.onMessage.look = function () {
+            console.log('I also look!!!');
+            return true;
+        }
     }
 
     Character.prototype = Object.create(entityVisible.EntityVisible.prototype);
