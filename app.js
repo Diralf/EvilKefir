@@ -30,4 +30,4 @@ app.config(function ($logProvider) {
     $logProvider.debugEnabled(true);
 });
 
-app.constant('transparentSymbol', ' ');
+app.constant('transparentSymbol', 'g');
