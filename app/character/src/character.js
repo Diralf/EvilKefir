@@ -1,5 +1,5 @@
-app.service("character", ['entityVisible', 'spriteImage', 'characterControl', 'point',
-    function (entityVisible, spriteImage, characterControl, point) {
+app.service("character", ['entityVisible', 'spriteImage', 'characterControl', 'point', 'characterSprite',
+    function (entityVisible, spriteImage, characterControl, point, characterSprite) {
 
     this.create = function (x, y, layer) {
         return new Character(x, y, layer);
@@ -7,16 +7,10 @@ app.service("character", ['entityVisible', 'spriteImage', 'characterControl', 'p
 
     function Character (x, y, layer) {
         var self = this;
-        var image = ' \\\\\\\\\\ ' +
-                    '(0 U 0)' +
-                    ' ┌-¥-┐ ' +
-                    ' |\\_/| ' +
-                    '  | |  ' +
-                    "  ┘ ┘  ";
-        var sprite = spriteImage.create(image, 7, 6, 3, 5);
+        var sprite = new characterSprite.CharacterSprite();
 
         // super call
-        entityVisible.EntityVisible.call(this, x, y, sprite);
+        entityVisible.EntityVisible.call(this, x, y, sprite.spriteImage);
 
         var target = point.create(x, y);
         var isMove = false;
@@ -37,17 +31,14 @@ app.service("character", ['entityVisible', 'spriteImage', 'characterControl', 'p
 
             if (isMove) {
                 var res = this.findPath();
-                this.x += res.x;
-                this.y += res.y;
+                this.moveIn(this.x + (res.x), this.y + res.y);
             }
         };
 
         characterControl.moveHandler(function (rX, rY) {
-            if (layer.moveOn(self.x, self.y, rX, rY)) {
-                return 0;
-            }
-            self.x += rX;
-            self.y += rY;
+            self.moveIn(self.x + rX, self.y + rY);
+            target.x = self.x;
+            target.y = self.y;
         });
 
         this.findPath = function () {
@@ -58,7 +49,7 @@ app.service("character", ['entityVisible', 'spriteImage', 'characterControl', 'p
             var resY = _y > 0 ? 1 : ( _y < 0 ? -1 : 0);
 
             return point.create(resX, resY);
-        }
+        };
     }
 
     Character.prototype = Object.create(entityVisible.EntityVisible.prototype);

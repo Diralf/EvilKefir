@@ -1,7 +1,7 @@
 app.service('spriteImage', [function () {
     this.create = function (image, width, height, centerX, centerY) {
         return new SpriteImage(image, width, height, centerX, centerY);
-    }
+    };
 
     function SpriteImage (image, width, height, centerX, centerY) {
         this.image = image || '$';
@@ -9,5 +9,5 @@ app.service('spriteImage', [function () {
         this.height = height || 1;
         this.centerX = centerX || 0;
         this.centerY = centerY || 0;
-    };
+    }
 }]);
