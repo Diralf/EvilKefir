@@ -11,9 +11,7 @@ app.run(function ($rootScope, $window, $http, keyboardService, mapService, viewp
     var onEnter = function () {
         //console.log('start game send request');
         $http.post('/game/0', {checkpoint: "cehck enter"}).then(function (response) {
-            console.log('started');
-            console.log(response);
-            console.log(response.data);
+
         });
     };
 
