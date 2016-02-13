@@ -3,10 +3,13 @@ app.directive("viewportLine", function ($log, mouseService, symbolWidthService) 
         restrict: "EA",
         link: function ($scope, $element, $attr) {
 
-            $element.bind("mousedown", function (evt) {
-                $log.debug('eventMouse');
-                mouseService.emitMouseEvent("mousedown", evt, symbolWidthService.xToSymbolNumber(evt.offsetX), $attr.cellY);
-            });
+            $scope.onMouseDown = function (evt) {
+                mouseService.emitMouseEvent(
+                    "mousedown",
+                    evt,
+                    symbolWidthService.xToSymbolNumber(evt.offsetX),
+                    $attr.cellY);
+            };
 
             $element.bind("mouseover", function (evt) {
                 $element.find("div").addClass("show");

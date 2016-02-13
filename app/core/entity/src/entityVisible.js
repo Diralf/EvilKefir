@@ -1,14 +1,16 @@
 app.service('entityVisible', ['$log', 'entity', 'sprite', function ($log, entity, sprite) {
     this.create = function (x, y, image) {
         return new this.EntityVisible(x, y, image);
-    }
+    };
 
     this.EntityVisible = function (x, y, image) {
-        this.entity = entity.create();
+        entity.Entity.apply(this);
         this.sprite = sprite.create(image);
         this.x = x || 0;
         this.y = y || 0;
-    }
+    };
+
+    this.EntityVisible.prototype = Object.create(entity.Entity.prototype);
 
     this.EntityVisible.prototype.draw = function (context) {
         var image = this.sprite.spriteImage;
