@@ -1,13 +1,14 @@
 app.service('entityVisible', ['$log', 'entity', 'sprite', 'collision', 'transparentSymbol', function ($log, entity, sprite, collision, transparentSymbol) {
-    this.create = function (x, y, image) {
-        return new this.EntityVisible(x, y, image);
+    this.create = function (x, y, image, layer) {
+        return new this.EntityVisible(x, y, image, layer);
     };
 
-    this.EntityVisible = function (x, y, image) {
+    this.EntityVisible = function (x, y, image, layer) {
         entity.Entity.apply(this);
         this.sprite = sprite.create(image);
         this.x = x || 0;
         this.y = y || 0;
+        this.layer = layer;
     };
 
     this.EntityVisible.prototype = Object.create(entity.Entity.prototype);
@@ -26,6 +27,20 @@ app.service('entityVisible', ['$log', 'entity', 'sprite', 'collision', 'transpar
                 }
             }
         }
+    };
+
+    this.EntityVisible.prototype.moveIn = function (x, y) {
+        if (!this.layer) {
+            $log.error('Layer in entity is not defined');
+        }
+
+        if (this.layer && this.layer.moveIn(this.x, this.y, x, y)) {
+            return false;
+        }
+
+        this.x = x;
+        this.y = y;
+        return true;
     };
 
     this.EntityVisible.prototype.isPointMeet = function (x, y) {
