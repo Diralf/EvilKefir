@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('../db/mongoose');
+var fileloader = require('../fileloader');
 
 var player = mongoose.Schema({
     ip: String,
@@ -21,7 +22,9 @@ router.route('/game/0').post(function (req, res) {
     player.save(function () {
     });
 
-    res.end();
+    fileloader("assets/map/room1.txt", function (data) {
+        res.end(data);
+    });
 });
 
 router.route('/game/1').post(function (req, res) {
