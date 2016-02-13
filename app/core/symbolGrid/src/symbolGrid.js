@@ -42,6 +42,36 @@ app.service('symbolGrid', ['collection', function (collection) {
         return grid;
     };
 
+    this.SymbolGrid.prototype.initFromMatrix = function (textMatrix) {
+        var mapArray = [];
+
+        textMatrix.forEach(function (line) {
+            var chunkArray = []; //[arrayLines, arrayLines, arrayLines]
+
+            line.forEach(function (chunk) {
+                chunkArray.push(chunk.split('\n')); // push(arrayLines);
+            });
+
+            var linesLine;
+            chunkArray.forEach(function (chunkLines) {
+                if (!linesLine) {
+                    linesLine = chunkLines.map(function (line) {
+                        return line.slice(0, -1);
+                    });
+                } else {
+                    chunkLines.forEach(function (line, index) {
+                         linesLine[index] += line.slice(0, -1);
+                    });
+                }
+            });
+
+            mapArray = mapArray.concat(linesLine);
+        });
+
+        console.log(mapArray);
+        this.init(mapArray);
+    };
+
     this.SymbolGrid.prototype.init = function (startData) {
         if (typeof startData === 'string') {
             this.data = this.initFromText(startData);
