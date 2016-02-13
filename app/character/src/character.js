@@ -42,7 +42,27 @@ app.service("character", ['entityVisible', 'spriteImage', 'characterControl', 'p
                 var res = this.findPath();
                 this.moveIn(this.x + (res.x), this.y + res.y);
             }
+
+
         };
+
+        this.onMessage.check = function () {
+            var self = this;
+            console.log('-------------check');
+            this.layer.layerEach(function (x, y, entity) {
+                //if (self.id == entity.id) return;
+
+                if (self.isMeetingEntity(self.x, self.y, entity)) {
+                    console.log(entity.id + " meeted");
+                } else {
+                    console.log(entity.id)
+                }
+            });
+        }
+        var self = this;
+        characterControl.moveHandler( function (relX, relY) {
+            self.handleMessage('check');
+        });
     }
 
     Character.prototype = Object.create(entityVisible.EntityVisible.prototype);

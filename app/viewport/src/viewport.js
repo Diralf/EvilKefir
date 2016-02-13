@@ -12,7 +12,8 @@ app.controller("viewport", function (
     entityVisible,
     sprite,
     spriteImage,
-    staticObject) {
+    staticObject,
+    rect) {
 
     /*characterControl.moveHandler( function (relX, relY) {
 
@@ -89,7 +90,7 @@ app.controller("viewport", function (
     );
 
     var imageSquare = spriteImage.create('╔══╗║ss║║  ║╚══╝', 4, 4, 1, 3);
-    var spriteSquare = sprite.create(imageSquare);
+    var spriteSquare = sprite.create(imageSquare, new rect.Rect(-1, -3, 4, 4));
 
 
     mapService.currentLevel.layers[0].add(new staticObject.StaticObject(40, 20, spriteSquare));
