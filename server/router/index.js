@@ -22,9 +22,7 @@ router.route('/game/0').post(function (req, res) {
     player.save(function () {
     });
 
-    fileloader("assets/map/room1.txt", function (data) {
-        res.end(data);
-    });
+    res.end();
 });
 
 router.route('/game/1').post(function (req, res) {
@@ -38,6 +36,12 @@ router.route('/game/1').post(function (req, res) {
     });
 
     res.end();
+});
+
+router.route('/sprite').post(function (req, res) {
+    fileloader("assets/" + req.body.fileName, function (data) {
+        res.end(data);
+    });
 });
 
 module.exports = router;
