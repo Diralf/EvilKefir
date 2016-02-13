@@ -2,6 +2,7 @@ app.service("viewportService", ["symbolWidthService", "mapService", "characterCo
     function (symbolWidthService, mapService, characterControl, point, pointLimit) {
 
     var self = this;
+    this.player = null;
 
     this.pos = pointLimit.create(0, 0,
                                  point.create(0, 0),
@@ -16,8 +17,10 @@ app.service("viewportService", ["symbolWidthService", "mapService", "characterCo
         });*/
     };
 
-    this.update = function (symbol) {
-
+    this.update = function () {
+        if (this.player)
+            this.pos.moveIn(parseInt(this.player.x - (this.dimension.x / 2)),
+                            parseInt(this.player.y - (this.dimension.y / 2)));
     };
 
     this.resize = function () {
