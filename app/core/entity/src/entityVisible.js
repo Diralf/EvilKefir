@@ -1,4 +1,6 @@
-app.service('entityVisible', ['$log', 'entity', 'sprite', 'collision', 'transparentSymbol', function ($log, entity, sprite, collision, transparentSymbol) {
+app.service('entityVisible', ['$log', 'entity', 'sprite', 'collision', 'transparentSymbol', 'rect',
+    function ($log, entity, sprite, collision, transparentSymbol, rect) {
+
     this.create = function (x, y, image, layer) {
         return new this.EntityVisible(x, y, image, layer);
     };
@@ -12,6 +14,15 @@ app.service('entityVisible', ['$log', 'entity', 'sprite', 'collision', 'transpar
     };
 
     this.EntityVisible.prototype = Object.create(entity.Entity.prototype);
+
+    this.EntityVisible.prototype.getMaskRect = function (x, y) {
+        x = x || this.x;
+        y = y || this.y;
+
+        var mask = this.sprite.mask;
+
+        return new rect.Rect(mask.x + x, mask.y + y, mask.w, mask.h);
+    };
 
     this.EntityVisible.prototype.draw = function (context) {
         var image = this.sprite.spriteImage;
@@ -45,14 +56,11 @@ app.service('entityVisible', ['$log', 'entity', 'sprite', 'collision', 'transpar
 
     this.EntityVisible.prototype.isPointMeet = function (x, y) {
         var image = this.sprite.spriteImage;
-        var rect = {
-            x: this.x - image.centerX,
-            y: this.y - image.centerY,
-            w: image.width,
-            h: image.height
-        };
-        console.log(rect);
-        return collision.pointToRect({x: x, y: y}, rect);
+        return collision.pointToRect({x: x, y: y}, image.getRect(this.x, this.y));
+    };
+
+    this.EntityVisible.prototype.isMeetingEntity = function (x, y, entity) {
+        return collision.rectIntersectRect(this.getMaskRect(x, y), entity.getMaskRect());
     }
 }]);
 
