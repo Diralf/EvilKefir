@@ -10,7 +10,7 @@ app.service("mapService", ['level', 'entityVisible', 'spriteImage', function (le
 
         var startArray = [];
         for (var i = 0; i < 500; i++) {
-            startArray[i] = new Array(500 + 1).join("."); // that will return {string}
+            startArray[i] = new Array(500 + 1).join(" "); // that will return {string}
         }
 
         this.currentLevel.tile.init(startArray);

@@ -1,4 +1,4 @@
-app.service('entityVisible', ['$log', 'entity', 'sprite', 'collision', function ($log, entity, sprite, collision) {
+app.service('entityVisible', ['$log', 'entity', 'sprite', 'collision', 'transparentSymbol', function ($log, entity, sprite, collision, transparentSymbol) {
     this.create = function (x, y, image) {
         return new this.EntityVisible(x, y, image);
     };
@@ -21,7 +21,7 @@ app.service('entityVisible', ['$log', 'entity', 'sprite', 'collision', function 
                 var conX = +this.x + j - image.centerX - context.x;
                 var imSym = j + (i * image.width);
 
-                if (!(conX < 0 || conY < 0 || conX >= context.w || conY >= context.h)) {
+                if (image.image[imSym]!==transparentSymbol && !(conX < 0 || conY < 0 || conX >= context.w || conY >= context.h)) {
                     context.grid[conY][conX] = image.image[imSym];
                 }
             }

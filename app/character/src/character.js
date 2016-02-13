@@ -1,15 +1,19 @@
-app.service("character", ['entityVisible', 'spriteImage', 'characterControl', function (entityVisible, spriteImage, characterControl) {
+app.service("character", ['entityVisible', 'spriteImage', 'characterControl', 'point',
+    function (entityVisible, spriteImage, characterControl, point) {
+
     this.create = function (x, y, layer) {
         return new Character(x, y, layer);
     };
 
     function Character (x, y, layer) {
         var self = this;
-        var image = ' ═══ ' +
-                    '║* *║' +
-                    '║---║' +
-                    ' ═══ ';
-        var sprite = spriteImage.create(image, 5, 4, 2, 3);
+        var image = ' \\\\\\\\\\ ' +
+                    '(0 U 0)' +
+                    ' ┌-¥-┐ ' +
+                    ' |\\_/| ' +
+                    '  | |  ' +
+                    "  ┘ ┘  ";
+        var sprite = spriteImage.create(image, 7, 6, 3, 5);
 
         entityVisible.EntityVisible.call(this, x, y, sprite);
 
@@ -26,6 +30,10 @@ app.service("character", ['entityVisible', 'spriteImage', 'characterControl', fu
         this.onMessage.look = function () {
             console.log('I also look!!!');
             return true;
+        };
+
+        this.onMessage.move = function (type, x, y) {
+            var target = point.create(x, y);
         }
     }
 
