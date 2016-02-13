@@ -10,6 +10,7 @@ app.controller("viewport", function (
     render,
     symbolWidthService,
     entityVisible,
+    sprite,
     spriteImage,
     staticObject) {
 
@@ -88,11 +89,12 @@ app.controller("viewport", function (
     );
 
     var imageSquare = spriteImage.create('╔══╗║ss║║  ║╚══╝', 4, 4, 1, 3);
+    var spriteSquare = sprite.create(imageSquare);
 
 
-    mapService.currentLevel.layers[0].add(new staticObject.StaticObject(40, 20, imageSquare));
-    mapService.currentLevel.layers[0].add(new staticObject.StaticObject(60, 30, imageSquare));
-    mapService.currentLevel.layers[0].add(new staticObject.StaticObject(80, 10, imageSquare));
+    mapService.currentLevel.layers[0].add(new staticObject.StaticObject(40, 20, spriteSquare));
+    mapService.currentLevel.layers[0].add(new staticObject.StaticObject(60, 30, spriteSquare));
+    mapService.currentLevel.layers[0].add(new staticObject.StaticObject(80, 10, spriteSquare));
 
     /*setTimeout(function run() {
         $scope.gameviewLine = render.draw();

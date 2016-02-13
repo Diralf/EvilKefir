@@ -21,8 +21,12 @@ describe('entityVisible', function () {
                 centerY: 3
             };
 
-            this.entity1 = this.entityVisible.create(5, 5, this.image);
-            this.entity2 = this.entityVisible.create(6, 6, this.image);
+            this.sprite = {
+                spriteImage: this.image
+            };
+
+            this.entity1 = this.entityVisible.create(5, 5, this.sprite);
+            this.entity2 = this.entityVisible.create(6, 6, this.sprite);
 
             this.grid = [
                 ['.','.','.','.','.','.','.','.'],

@@ -3,9 +3,9 @@ app.service('entityVisible', ['$log', 'entity', 'sprite', 'collision', 'transpar
         return new this.EntityVisible(x, y, image, layer);
     };
 
-    this.EntityVisible = function (x, y, image, layer) {
+    this.EntityVisible = function (x, y, spr, layer) {
         entity.Entity.apply(this);
-        this.sprite = sprite.create(image);
+        this.sprite = spr || sprite.create(image);
         this.x = x || 0;
         this.y = y || 0;
         this.layer = layer;
