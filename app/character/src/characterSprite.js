@@ -8,7 +8,7 @@ app.service('characterSprite', ['$http', '$q','sprite', 'spriteImage', 'rect', f
 
         var si = spriteImage.create(null, width, height, 3, 5);
 
-        sprite.Sprite.call(this, si, new rect.Rect(-1, 0, 3, 1));
+        sprite.Sprite.call(this, si, new rect.Rect(-2, -1, 5, 2));
 
         spriteCache = this.getTextFromServer(spriteCache, "entity/character/Move_front_left.txt");
 
