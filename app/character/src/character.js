@@ -1,5 +1,5 @@
-app.service("character", ['entityVisible', 'spriteImage', 'characterControl', 'point', 'characterSprite',
-    function (entityVisible, spriteImage, characterControl, point, characterSprite) {
+app.service("character", ['entityVisible', 'spriteImage', 'characterControl', 'point', 'characterSprite', 'message',
+    function (entityVisible, spriteImage, characterControl, point, characterSprite, message) {
 
     this.create = function (x, y, layer) {
         return new Character(x, y, layer);
@@ -26,43 +26,44 @@ app.service("character", ['entityVisible', 'spriteImage', 'characterControl', 'p
             return point.create(resX, resY);
         };
 
-        this.onMessage.look = function () {
+        this.onMessage[message.LOOK] = function () {
             console.log('I also look!!!');
             return true;
         };
 
-        this.onMessage.move = function (type, x, y) {
+        this.onMessage[message.MOVE] = function (type, x, y) {
+            if (x % 2) x -= 1;
             target = point.create(x, y);
         };
 
-        this.onMessage.step = function (type) {
+        this.onMessage[message.STEP] = function (type) {
             isMove = !(target.x === this.x && target.y === this.y);
 
             if (isMove) {
                 var res = this.findPath();
-                this.moveIn(this.x + (res.x), this.y + res.y);
+                var nx = this.x + (res.x*2);
+                var ny = this.y + res.y;
+                var canMove = true;
+
+                this.checkCollisionEntity(
+                    nx, ny,
+                    function (entity) {
+                        console.log(entity.id + " meeted");
+                        canMove = false;
+                    },
+                    function (entity) {
+                        console.log(entity.id);
+                    }
+                );
+
+                if (canMove) this.moveIn(nx, ny);
+            } else {
+                target.x = this.x;
+                target.y = this.y;
             }
 
 
         };
-
-        this.onMessage.check = function () {
-            var self = this;
-            console.log('-------------check');
-            this.layer.layerEach(function (x, y, entity) {
-                //if (self.id == entity.id) return;
-
-                if (self.isMeetingEntity(self.x, self.y, entity)) {
-                    console.log(entity.id + " meeted");
-                } else {
-                    console.log(entity.id)
-                }
-            });
-        }
-        var self = this;
-        characterControl.moveHandler( function (relX, relY) {
-            self.handleMessage('check');
-        });
     }
 
     Character.prototype = Object.create(entityVisible.EntityVisible.prototype);

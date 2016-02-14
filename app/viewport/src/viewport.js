@@ -13,30 +13,8 @@ app.controller("viewport", function (
     sprite,
     spriteImage,
     staticObject,
-    rect) {
-
-    /*characterControl.moveHandler( function (relX, relY) {
-
-        if (!mapService.getLayers()[0].moveOn(characterData.x, characterData.y, relX, relY)) {
-            characterData.x += relX;
-            characterData.y += relY;
-        }
-
-        $scope.$apply();
-        update();
-    });*/
-
-    /*mouseService.addMouseHandler("mousedown", function (evt, cellX, cellY) {
-        var imageSquare = spriteImage.create('╔══╗║  ║║  ║╚══╝', 4, 4, 1, 3);
-
-        mapService.getLayers()[0].add(
-            entityVisible.create(
-                viewportService.pos.x + cellX,
-                viewportService.pos.y + cellY,
-                imageSquare
-            )
-        );
-    });*/
+    rect,
+    message) {
 
     mouseService.addMouseHandler("mousedown", function (evt, cellX, cellY, callback) {
         var _x = viewportService.pos.x + cellX;
@@ -47,10 +25,10 @@ app.controller("viewport", function (
         });
 
         callback(entities.some(function (entity) {
-            return entity.isPointMeet(_x, _y) && entity.handleMessage('look');
+            return entity.isPointMeet(_x, _y) && entity.handleMessage(message.LOOK);
         }));
 
-        player.handleMessage('move', _x, _y);
+        player.handleMessage(message.MOVE, _x, _y);
     });
 
     function update() {

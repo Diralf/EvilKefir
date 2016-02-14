@@ -1,8 +1,8 @@
-app.service('staticObject', ['entityVisible',function (entityVisible) {
-    this.StaticObject = function (x, y, image) {
-        entityVisible.EntityVisible.call(this, x, y, image);
+app.service('staticObject', ['entityVisible', 'message', function (entityVisible, message) {
+    this.StaticObject = function (x, y, image, layer) {
+        entityVisible.EntityVisible.call(this, x, y, image, layer);
 
-        this.onMessage.look = function (params) {
+        this.onMessage[message.LOOK] = function (params) {
             console.log("he look on me! I - " + this.id);
             return true;
         };
