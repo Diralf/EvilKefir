@@ -1,4 +1,4 @@
-app.service('sprite', ['$q', '$http', 'spriteImage', 'rect', function ($q, $http, spriteImage, rect) {
+app.service('sprite', ['spriteImage', 'rect', function (spriteImage, rect) {
     this.create = function (image, mask) {
         return new this.Sprite(image, mask);
     };
@@ -16,24 +16,5 @@ app.service('sprite', ['$q', '$http', 'spriteImage', 'rect', function ($q, $http
 
     };
 
-    this.Sprite.prototype.getTextFromServer = function (cache, fileName) {
-        if (!cache) {
-            cache = $q.defer();
 
-            $http.post('/sprite', {fileName: fileName}).then(function (response) {
-                cache.resolve(response.data);
-            });
-        }
-        return cache;
-    };
-
-    this.Sprite.prototype.convertTextToImage = function (text, width) {
-        var res = '';
-
-        text.split('\n').forEach(function (part) {
-            res += part.slice(0, width);
-        });
-
-        return res;
-    }
 }]);
