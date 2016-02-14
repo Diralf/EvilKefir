@@ -6,11 +6,9 @@ app.service('strip', ['$http', '$q', 'spriteImage', function ($http, $q, spriteI
             cache[fileName] = $q.defer();
 
             $http.post('/sprite', {fileName: fileName}).then(function (response) {
-                var width;
 
                 var lines = response.data.split('\n').map(function (line) {
-                    if (!width) width = line.length - 1;
-                    return line.slice(0, width);
+                    return line.replace(new RegExp(String.fromCharCode(13), 'g'), '');
                 });
 
                 cache[fileName].resolve(lines);

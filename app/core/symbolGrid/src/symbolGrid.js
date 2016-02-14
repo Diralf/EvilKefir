@@ -50,10 +50,12 @@ app.service('symbolGrid', ['collection', function (collection) {
             var chunkArray = []; //[arrayLines, arrayLines, arrayLines]
 
             line.forEach(function (chunk) {
-                chunkArray.push(chunk.split('\n')); // push(arrayLines);
+                chunkArray.push(chunk.split('\n').map(function (line) {
+                    return line.replace(new RegExp(String.fromCharCode(13), 'g'), '');
+                })); // push(arrayLines);
             });
 
-            widthChunk = chunkArray[0][0].length - 1;
+            widthChunk = chunkArray[0][0].length;
             console.log(widthChunk);
             var linesLine;
             chunkArray.forEach(function (chunkLines) {
@@ -75,11 +77,11 @@ app.service('symbolGrid', ['collection', function (collection) {
 
         function getCorrectLine(line, width) {
             var widthLine = line.length;
+            var addition = '';
             if (widthLine < width) {
-                var addition = new Array(width - widthLine + 2).join(' ');
-                return line.slice(0, -1) + addition;
+                addition = new Array(width - widthLine + 1).join(' ');
             }
-            return line.slice(0, width);
+            return line + addition;
         }
     };
 
