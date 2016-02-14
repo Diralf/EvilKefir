@@ -16,6 +16,14 @@ app.controller("viewport", function (
     rect,
     message) {
 
+    var text = 'КУЛАК';
+    var border = new Array(text.length+1).join('─');
+
+    $scope.weapon = {
+        border: border,
+        text: text
+    };
+
     var mouseHold = false;
 
     var mouseX = 0;
@@ -101,5 +109,16 @@ app.controller("viewport", function (
         $scope.$apply();
         setTimeout(run, 17);
     }, 17);*/
+
+    var current = 0;
+
+    $scope.buttons = [true, false, false, false];
+
+    $scope.setActive = function (number) {
+        $scope.buttons[number] = true;
+        $scope.buttons[current] = false;
+        current = number;
+    }
+
 
 });
