@@ -5,9 +5,10 @@ app.service('level', ['symbolGrid', 'layer', function (symbolGrid, layer) {
 
     this.Level = function (layerCount) {
         this.tile = symbolGrid.create();
+        this.mask = symbolGrid.create();
 
         this.layers = createLayers(layerCount || 3);
-    }
+    };
 
     this.Level.prototype.width = function () {
         return this.tile.width;

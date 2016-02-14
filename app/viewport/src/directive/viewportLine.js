@@ -11,6 +11,14 @@ app.directive("viewportLine", function ($log, mouseService, symbolWidthService) 
                     $attr.cellY);
             };
 
+            $scope.onMouseUp = function (evt) {
+                mouseService.emitMouseEvent(
+                    "mouseup",
+                    evt,
+                    symbolWidthService.xToSymbolNumber(evt.offsetX),
+                    $attr.cellY);
+            };
+
             $element.bind("mouseover", function (evt) {
                 $element.find("div").addClass("show");
             });
@@ -24,6 +32,12 @@ app.directive("viewportLine", function ($log, mouseService, symbolWidthService) 
                     evt.preventDefault();
                     $element.find("div").css("left", symbolWidthService.xToCellX(evt.offsetX) + "px");
                 }
+
+                mouseService.emitMouseEvent(
+                    "mousemove",
+                    evt,
+                    symbolWidthService.xToSymbolNumber(evt.offsetX),
+                    $attr.cellY);
             });
         }
     }

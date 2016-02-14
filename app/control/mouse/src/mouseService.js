@@ -2,7 +2,6 @@ app.service("mouseService", function ($log) {
     var mouseHandlers = {};
 
     this.emitMouseEvent = function (event, evtObj, cellX, cellY) {
-        $log.debug('emitMouseEvent ' + event);
         if (!mouseHandlers[event]) {
             $log.error("mouseEvent: " + event + " - no handlers");
             return;

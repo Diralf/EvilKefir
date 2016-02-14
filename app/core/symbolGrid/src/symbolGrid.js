@@ -68,7 +68,6 @@ app.service('symbolGrid', ['collection', function (collection) {
             mapArray = mapArray.concat(linesLine);
         });
 
-        console.log(mapArray);
         this.init(mapArray);
     };
 

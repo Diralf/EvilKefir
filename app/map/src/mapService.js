@@ -17,8 +17,6 @@ app.service("mapService", ['$http', 'level', 'entityVisible', 'spriteImage', fun
         this.currentLevel.tile.init(startArray);
 
         $http.post('/sprite', {fileName: 'map/room1.txt'}).then(function (response) {
-            console.log(response.data);
-            //self.currentLevel.tile.init(response.data);
             var matrix = [];
 
             for (var i = 0; i < 4; i++) {
@@ -27,9 +25,9 @@ app.service("mapService", ['$http', 'level', 'entityVisible', 'spriteImage', fun
                     matrix[i][j] = response.data;
                 }
             }
-            console.log(matrix);
 
             self.currentLevel.tile.initFromMatrix(matrix);
+            self.currentLevel.mask.initFromMatrix(matrix);
         });
 
         //var imageSquare = spriteImage.create('╔═╗║ ║║ ║╚═╝', 3, 4, 1, 3);
