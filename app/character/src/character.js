@@ -36,6 +36,8 @@ app.service("character", ['entityVisible', 'spriteImage', 'characterControl', 'p
             if (isMove) {
                 var res = findPath.call(this);
 
+                this.sprite.calcDir(res.x, res.y);
+
                 if (res.x || res.y)
                     this.moveIn(this.x + res.x, this.y + res.y);
                 else

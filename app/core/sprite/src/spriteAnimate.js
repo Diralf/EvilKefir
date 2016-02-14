@@ -4,7 +4,7 @@ app.service('spriteAnimate', ['$q', 'sprite', 'strip', function ($q, sprite, str
         sprite.Sprite.call(this, null, mask);
 
         this.frame = 0;
-        this.dir = 2;
+        this.dir = 0;
 
         this.strips = {};
         this.currentStrip = null;
