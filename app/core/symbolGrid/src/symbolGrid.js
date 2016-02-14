@@ -44,6 +44,7 @@ app.service('symbolGrid', ['collection', function (collection) {
 
     this.SymbolGrid.prototype.initFromMatrix = function (textMatrix) {
         var mapArray = [];
+        var widthChunk = 0;
 
         textMatrix.forEach(function (line) {
             var chunkArray = []; //[arrayLines, arrayLines, arrayLines]
@@ -52,15 +53,17 @@ app.service('symbolGrid', ['collection', function (collection) {
                 chunkArray.push(chunk.split('\n')); // push(arrayLines);
             });
 
+            widthChunk = chunkArray[0][0].length - 1;
+            console.log(widthChunk);
             var linesLine;
             chunkArray.forEach(function (chunkLines) {
                 if (!linesLine) {
                     linesLine = chunkLines.map(function (line) {
-                        return line.slice(0, -1);
+                        return getCorrectLine(line, widthChunk);
                     });
                 } else {
                     chunkLines.forEach(function (line, index) {
-                         linesLine[index] += line.slice(0, -1);
+                         linesLine[index] += getCorrectLine(line, widthChunk);
                     });
                 }
             });
@@ -69,6 +72,15 @@ app.service('symbolGrid', ['collection', function (collection) {
         });
 
         this.init(mapArray);
+
+        function getCorrectLine(line, width) {
+            var addition = '';
+            var widthLine = line.length - 1;
+            if (widthLine < width) {
+                addition = new Array(width - widthLine).join(' ');
+            }
+            return line.slice(0, -1) + addition;
+        }
     };
 
     this.SymbolGrid.prototype.init = function (startData) {
@@ -81,6 +93,7 @@ app.service('symbolGrid', ['collection', function (collection) {
         }
 
         var size = calcSize(this.data);
+        console.log(size);
         this.width = size.width;
         this.height = size.height;
     };
