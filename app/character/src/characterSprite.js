@@ -17,9 +17,24 @@ app.service('characterSprite', ['$q', 'spriteAnimate', 'strip', 'rect', function
             height: 6,
             centerX: 3,
             centerY: 5,
-            speed: 0.1
+            speed: 0
+        });
+
+        this.loadStripSet('move',[
+            "entity/character/move/Move_back_left.txt",
+            "entity/character/move/Move_back_right.txt",
+            "entity/character/move/Move_front_left.txt",
+            "entity/character/move/Move_front_right.txt"
+        ], {
+            frameCount: 2,
+            dirCount: 4,
+            width: 7,
+            height: 6,
+            centerX: 3,
+            centerY: 5,
+            speed: 0.27
         }).then(function () {
-            self.changeStrip('await');
+            self.changeStrip('move');
         });
 
     };
