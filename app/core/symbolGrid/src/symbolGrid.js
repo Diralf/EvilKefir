@@ -93,7 +93,6 @@ app.service('symbolGrid', ['collection', function (collection) {
         }
 
         var size = calcSize(this.data);
-        console.log(size);
         this.width = size.width;
         this.height = size.height;
     };
