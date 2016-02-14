@@ -1,6 +1,8 @@
 app.service('entityVisible', ['$log', 'entity', 'sprite', 'collision', 'transparentSymbol', 'rect',
     function ($log, entity, sprite, collision, transparentSymbol, rect) {
 
+    var rectCheckCollision = new rect.Rect(-20, -10, 40, 20);
+
     this.create = function (x, y, image, layer) {
         return new this.EntityVisible(x, y, image, layer);
     };
@@ -61,6 +63,27 @@ app.service('entityVisible', ['$log', 'entity', 'sprite', 'collision', 'transpar
 
     this.EntityVisible.prototype.isMeetingEntity = function (x, y, entity) {
         return collision.rectIntersectRect(this.getMaskRect(x, y), entity.getMaskRect());
-    }
+    };
+
+    this.EntityVisible.prototype.checkCollisionEntity = function (x, y, callbackTrue, callbackFalse) {
+        var self = this;
+        x = x || this.x;
+        y = y || this.y;
+
+        this.layer.eachRect(x + rectCheckCollision.x,
+                            y + rectCheckCollision.y,
+                            rectCheckCollision.w,
+                            rectCheckCollision.h,
+            function (cx, cy, entity) {
+                if (self.id == entity.id) return;
+
+                if (self.isMeetingEntity(x, y, entity)) {
+                    callbackTrue(entity);
+                } else {
+                    callbackFalse(entity)
+                }
+            }
+        );
+    };
 }]);
 

@@ -1,4 +1,5 @@
-app.constant('MESSAGE_TYPES', {
+app.constant('message', {
+    CHECK_COLLISION: 'check_collision',
     COLLISION: 'collision',
     MOVE: 'move',
     STEP: 'step',
