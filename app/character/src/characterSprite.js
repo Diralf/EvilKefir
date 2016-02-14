@@ -25,4 +25,25 @@ app.service('characterSprite', ['$q', 'spriteAnimate', 'strip', 'rect', function
     };
 
     this.CharacterSprite.prototype = Object.create(spriteAnimate.SpriteAnimate.prototype);
+
+    this.CharacterSprite.prototype.calcDir = function (x, y) {
+        var matrix = {
+            '-1': {
+                '-2': 0,
+                '0': this.dir % 2 ? 1 : 0,
+                '2': 1
+            },
+            '0': {
+                '-2': 2,
+                '0': this.dir,
+                '2': 3
+            },
+            '1': {
+                '-2': 2,
+                '0': this.dir % 2 ? 3 : 2,
+                '2': 3
+            }
+        };
+        this.dir = matrix[y+''][x+''];
+    }
 }]);
