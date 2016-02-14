@@ -48,7 +48,7 @@ app.controller("viewport", function (
     viewportService.resize();
     update();
 
-    var player = character.create(20, 20, mapService.currentLevel.layers[0]);
+    var player = character.create(20, 30, mapService.currentLevel.layers[0]);
 
     player.sprite.promise.then(function () {
        console.log('loaded');
@@ -63,7 +63,7 @@ app.controller("viewport", function (
 
     mapService.currentLevel.layers[0].add(
         player,
-        20, 20
+        20, 30
     );
 
     viewportService.player = player;
