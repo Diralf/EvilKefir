@@ -23,6 +23,10 @@ app.service("character", ['entityVisible', 'spriteImage', 'characterControl', 'p
 
         this.onMessage[message.MOVE] = function (type, x, y) {
             if (x % 2) x -= 1;
+
+            if (Math.abs(this.x - x) < 2) x = this.x;
+            if (Math.abs(this.y - y) < 2) y = this.y;
+
             target = point.create(x, y);
         };
 
@@ -87,7 +91,7 @@ app.service("character", ['entityVisible', 'spriteImage', 'characterControl', 'p
 
             if (canMove) {
                 this.checkCollisionMap(
-                    x, y, mapService.currentLevel.tile,
+                    x, y, mapService.currentLevel.mask,
                     function () {
                         canMove = false;
                     }

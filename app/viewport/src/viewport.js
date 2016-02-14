@@ -16,6 +16,20 @@ app.controller("viewport", function (
     rect,
     message) {
 
+    var mouseHold = false;
+
+    var mouseX = 0;
+    var mouseY = 0;
+
+    var player = character.create(20, 30, mapService.currentLevel.layers[0]);
+
+    mapService.currentLevel.layers[0].add(
+        player,
+        20, 30
+    );
+
+    viewportService.player = player;
+
     mouseService.addMouseHandler("mousedown", function (evt, cellX, cellY, callback) {
         var _x = viewportService.pos.x + cellX;
         var _y = viewportService.pos.y + cellY;
@@ -28,45 +42,51 @@ app.controller("viewport", function (
             return entity.isPointMeet(_x, _y) && entity.handleMessage(message.LOOK);
         }));
 
+        mouseHold = true;
+
         player.handleMessage(message.MOVE, _x, _y);
     });
 
-    function update() {
-        //$scope.gameviewLine = render.draw();
+    mouseService.addMouseHandler("mouseup", function (evt, cellX, cellY, callback) {
+        mouseHold = false;
+    });
+
+    mouseService.addMouseHandler("mousemove", function (evt, cellX, cellY, callback) {
+        mouseX = cellX;
+        mouseY = cellY;
+    });
+
+    function updatePlayer() {
+        if (mouseHold) {
+            player.handleMessage(
+                message.MOVE,
+                viewportService.pos.x + mouseX,
+                viewportService.pos.y + mouseY
+            );
+        }
     }
 
     symbolWidthService.addListener('resize', function () {
         viewportService.resize();
-        //$scope.gameviewLine = render.draw();
     });
 
     $scope.gameviewLine = [];
 
     viewportService.init("=");
-
-    //viewportService.viewport[characterData.y][characterData.x] = '0';
     viewportService.resize();
-    update();
-
-    var player = character.create(20, 30, mapService.currentLevel.layers[0]);
 
     player.sprite.promise.then(function () {
        console.log('loaded');
     });
 
     var timerId = setInterval(function() {
+        updatePlayer();
         viewportService.update();
         $scope.gameviewLine = render.draw();
         $scope.$apply();
         player.handleMessage('step');
     }, 60);
 
-    mapService.currentLevel.layers[0].add(
-        player,
-        20, 30
-    );
-
-    viewportService.player = player;
 
     var imageSquare = spriteImage.create('╔══╗║ss║║  ║╚══╝', 4, 4, 1, 3);
     var spriteSquare = sprite.create(imageSquare, new rect.Rect(-1, -1, 4, 2));
