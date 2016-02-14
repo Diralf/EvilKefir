@@ -74,12 +74,12 @@ app.service('symbolGrid', ['collection', function (collection) {
         this.init(mapArray);
 
         function getCorrectLine(line, width) {
-            var addition = '';
-            var widthLine = line.length - 1;
+            var widthLine = line.length;
             if (widthLine < width) {
-                addition = new Array(width - widthLine).join(' ');
+                var addition = new Array(width - widthLine + 2).join(' ');
+                return line.slice(0, -1) + addition;
             }
-            return line.slice(0, -1) + addition;
+            return line.slice(0, width);
         }
     };
 
