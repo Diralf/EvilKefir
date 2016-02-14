@@ -78,9 +78,9 @@ app.service('entityVisible', ['$log', 'entity', 'sprite', 'collision', 'transpar
                 if (self.id == entity.id) return;
 
                 if (self.isMeetingEntity(x, y, entity)) {
-                    callbackTrue(entity);
+                    callbackTrue && callbackTrue(entity);
                 } else {
-                    callbackFalse(entity)
+                    callbackFalse && callbackFalse(entity);
                 }
             }
         );
