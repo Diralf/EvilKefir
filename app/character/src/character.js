@@ -28,6 +28,10 @@ app.service("character", ['entityVisible', 'spriteImage', 'characterControl', 'p
             if (Math.abs(this.y - y) < 2) y = this.y;
 
             target = point.create(x, y);
+
+            if (this.sprite.currentStrip.name !== 'move') {
+                this.sprite.changeStrip('move');
+            }
         };
 
         this.onMessage[message.STEP] = function (type) {
@@ -82,6 +86,7 @@ app.service("character", ['entityVisible', 'spriteImage', 'characterControl', 'p
             target.x = this.x;
             target.y = this.y;
             isMove = false;
+            this.sprite.changeStrip('await');
         }
 
         function checkCollision (x, y) {
