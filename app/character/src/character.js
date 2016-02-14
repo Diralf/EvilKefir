@@ -24,7 +24,7 @@ app.service("character", ['entityVisible', 'spriteImage', 'characterControl', 'p
         this.onMessage[message.MOVE] = function (type, x, y) {
             if (x % 2) x -= 1;
 
-            if (Math.abs(this.x - x) < 2) x = this.x;
+            if (Math.abs(this.x - x) < 4) x = this.x;
             if (Math.abs(this.y - y) < 2) y = this.y;
 
             target = point.create(x, y);
