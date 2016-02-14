@@ -16,16 +16,6 @@ app.service("character", ['entityVisible', 'spriteImage', 'characterControl', 'p
         var target = point.create(x, y);
         var isMove = false;
 
-        this.findPath = function () {
-            var _x = target.x - this.x;
-            var _y = target.y - this.y;
-
-            var resX = _x > 0 ? 1 : ( _x < 0 ? -1 : 0);
-            var resY = _y > 0 ? 1 : ( _y < 0 ? -1 : 0);
-
-            return point.create(resX, resY);
-        };
-
         this.onMessage[message.LOOK] = function () {
             console.log('I also look!!!');
             return true;
@@ -40,43 +30,71 @@ app.service("character", ['entityVisible', 'spriteImage', 'characterControl', 'p
             isMove = target.x != this.x || target.y != this.y;
 
             if (isMove) {
-                var res = this.findPath();
-                var nx = this.x + (res.x*2);
-                var ny = this.y + res.y;
-                var canMove = true;
+                var res = findPath.call(this);
 
-                this.checkCollisionEntity(
-                    nx, ny,
-                    function (entity) {
-                        console.log(entity.id + " meeted");
-                        canMove = false;
-                    },
-                    function (entity) {
-                        console.log(entity.id);
-                    }
-                );
-                if (canMove) {
-                    this.checkCollisionMap(
-                        nx, ny, mapService.currentLevel.tile,
-                        function () {
-                            console.log('collide with map');
-                            canMove = false;
-                        }
-                    );
-                }
-
-                if (canMove) this.moveIn(nx, ny);
-                else stopMove.call(this);
+                if (res.x || res.y)
+                    this.moveIn(this.x + res.x, this.y + res.y);
+                else
+                    stopMove.call(this);
 
             } else {
                 stopMove.call(this);
             }
         };
 
+        function findPath () {
+            var dir = findDirection.call(this);
+
+            var xycheck = checkCollision.call(this, this.x + dir.x, this.y + dir.y);
+            var xcheck;
+            var ycheck;
+
+            if (!xycheck) {
+                xcheck = checkCollision.call(this, this.x + dir.x, this.y);
+                ycheck = checkCollision.call(this, this.x,         this.y + dir.y);
+
+                if (!xcheck) dir.x = 0;
+                if (!ycheck) dir.y = 0;
+            }
+
+            return dir;
+        }
+
+        function findDirection () {
+            var _x = target.x - this.x;
+            var _y = target.y - this.y;
+
+            var resX = _x > 0 ? 2 : ( _x < 0 ? -2 : 0);
+            var resY = _y > 0 ? 1 : ( _y < 0 ? -1 : 0);
+
+            return point.create(resX, resY);
+        }
+
         function stopMove() {
             target.x = this.x;
             target.y = this.y;
             isMove = false;
+        }
+
+        function checkCollision (x, y) {
+            var canMove = true;
+            this.checkCollisionEntity(
+                x, y,
+                function (entity) {
+                    canMove = false;
+                }
+            );
+
+            if (canMove) {
+                this.checkCollisionMap(
+                    x, y, mapService.currentLevel.tile,
+                    function () {
+                        canMove = false;
+                    }
+                );
+            }
+
+            return canMove;
         }
     }
 
