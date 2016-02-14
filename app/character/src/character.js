@@ -37,7 +37,7 @@ app.service("character", ['entityVisible', 'spriteImage', 'characterControl', 'p
         };
 
         this.onMessage[message.STEP] = function (type) {
-            isMove = !(target.x === this.x && target.y === this.y);
+            isMove = target.x != this.x || target.y != this.y;
 
             if (isMove) {
                 var res = this.findPath();
@@ -57,13 +57,18 @@ app.service("character", ['entityVisible', 'spriteImage', 'characterControl', 'p
                 );
 
                 if (canMove) this.moveIn(nx, ny);
+                else stopMove.call(this);
+
             } else {
-                target.x = this.x;
-                target.y = this.y;
+                stopMove.call(this);
             }
-
-
         };
+
+        function stopMove() {
+            target.x = this.x;
+            target.y = this.y;
+            isMove = false;
+        }
     }
 
     Character.prototype = Object.create(entityVisible.EntityVisible.prototype);

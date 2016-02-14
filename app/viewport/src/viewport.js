@@ -69,7 +69,7 @@ app.controller("viewport", function (
     viewportService.player = player;
 
     var imageSquare = spriteImage.create('╔══╗║ss║║  ║╚══╝', 4, 4, 1, 3);
-    var spriteSquare = sprite.create(imageSquare, new rect.Rect(-1, -3, 4, 4));
+    var spriteSquare = sprite.create(imageSquare, new rect.Rect(-1, 0, 4, 1));
 
 
     mapService.currentLevel.layers[0].add(new staticObject.StaticObject(40, 20, spriteSquare));
