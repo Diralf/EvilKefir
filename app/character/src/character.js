@@ -44,6 +44,8 @@ app.service("character", ['entityVisible', 'spriteImage', 'characterControl', 'p
             } else {
                 stopMove.call(this);
             }
+
+            this.sprite.step();
         };
 
         function findPath () {
