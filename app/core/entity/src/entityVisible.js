@@ -85,5 +85,24 @@ app.service('entityVisible', ['$log', 'entity', 'sprite', 'collision', 'transpar
             }
         );
     };
+
+    this.EntityVisible.prototype.checkCollisionMap = function (x, y, map, callbackTrue, callbackFalse) {
+        x = x || this.x;
+        y = y || this.y;
+        var noCollideSymbol = ' ';
+        var rcoll = this.getMaskRect(x, y);
+        var rectMap = map.getRect(rcoll.x, rcoll.y, rcoll.w, rcoll.h);
+
+        var result = rectMap.some(function (line) {
+            return line.some(function (symbol) {
+                return symbol != noCollideSymbol;
+            })
+        });
+
+        if (result)
+            callbackTrue && callbackTrue(rectMap);
+        else
+            callbackFalse && callbackFalse(rectMap);
+    };
 }]);
 

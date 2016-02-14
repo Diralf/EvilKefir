@@ -1,5 +1,5 @@
-app.service("character", ['entityVisible', 'spriteImage', 'characterControl', 'point', 'characterSprite', 'message',
-    function (entityVisible, spriteImage, characterControl, point, characterSprite, message) {
+app.service("character", ['entityVisible', 'spriteImage', 'characterControl', 'point', 'characterSprite', 'message', 'mapService',
+    function (entityVisible, spriteImage, characterControl, point, characterSprite, message, mapService) {
 
     this.create = function (x, y, layer) {
         return new Character(x, y, layer);
@@ -55,6 +55,15 @@ app.service("character", ['entityVisible', 'spriteImage', 'characterControl', 'p
                         console.log(entity.id);
                     }
                 );
+                if (canMove) {
+                    this.checkCollisionMap(
+                        nx, ny, mapService.currentLevel.tile,
+                        function () {
+                            console.log('collide with map');
+                            canMove = false;
+                        }
+                    );
+                }
 
                 if (canMove) this.moveIn(nx, ny);
                 else stopMove.call(this);
