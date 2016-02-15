@@ -15,30 +15,40 @@ app.service('fans', ['npc', 'characterSprite', 'game', 'dialogs', 'message', 'np
                     speed: 0.2
                 }
             }, {
-                path: 'entity/fans/Await_front_left.txt',
+                path: 'entity/fans/Death_front_left.txt',
                 params: {
-                    frameCount: 2,
+                    frameCount: 3,
                     dirCount: 1,
                     width: 26,
-                    height: 12,
+                    height: 13,
                     centerX: 0,
                     centerY: 0,
-                    speed: 0.02
+                    speed: 0
                 }
             }, new rect.Rect(0, 0, 26, 12)
         ), layer);
 
         this.weaponDeath = game.weapons.knife;
         this.isTalked = false;
+        this.fansCount = 0;
+        this.isDead = false;
     };
 
     this.Fans.prototype = Object.create(npc.NPC.prototype);
 
     this.Fans.prototype.attack = function (params) {
-        if (game.currentWeapon.weapon.damage < this.weaponDeath.damage) {
-            params.player.handleMessage(message.DEATH, this);
-        } else {
-            this.handleMessage(message.DEATH, params);
+        if (!this.isDead){
+            if (game.currentWeapon.weapon.damage < this.weaponDeath.damage) {
+                params.player.handleMessage(message.DEATH, this);
+            } else {
+                this.sprite.changeStrip('death');
+                this.sprite.frame = this.fansCount;
+                this.fansCount++;
+                if (this.fansCount >= 3) {
+                    this.isDead = true;
+                    this.handleMessage(message.DEATH, params);
+                }
+            }
         }
 
         return npc.NPC.prototype.attack.call(this, params);
@@ -52,15 +62,16 @@ app.service('fans', ['npc', 'characterSprite', 'game', 'dialogs', 'message', 'np
     };
 
     this.Fans.prototype.talk = function (params) {
-        game.startDialog(dialogs.fans.talk);
-
+        if (!this.isDead) {
+            game.startDialog(dialogs.fans.talk);
+        }
         return npc.NPC.prototype.talk.call(this, params);
     };
 
     this.Fans.prototype.death = function (params) {
         game.changeWeapon(game.weapons.rose);
         game.startDialog(dialogs.fans.death);
-        this.die();
+        //this.die();
         return npc.NPC.prototype.death.call(this, params);
     };
 }]);
