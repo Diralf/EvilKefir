@@ -14,15 +14,8 @@ app.controller("viewport", function (
     spriteImage,
     staticObject,
     rect,
-    message) {
-
-    var text = 'КУЛАК';
-    var border = new Array(text.length+1).join('─');
-
-    $scope.weapon = {
-        border: border,
-        text: text
-    };
+    message,
+    game) {
 
     var mouseHold = false;
 
@@ -110,15 +103,49 @@ app.controller("viewport", function (
         setTimeout(run, 17);
     }, 17);*/
 
-    var current = 0;
 
-    $scope.buttons = [true, false, false, false];
 
-    $scope.setActive = function (number) {
-        $scope.buttons[number] = true;
-        $scope.buttons[current] = false;
-        current = number;
-    }
+    $scope.buttons = [{
+        text: 'Идти',
+        active: true,
+        border: ''
+    },{
+        text: 'Атаковать',
+        active: false,
+        border: ''
+    },{
+        text: 'Осмотреть',
+        active: false,
+        border: ''
+    },{
+        text: 'Говорить',
+        active: false,
+        border: ''
+    }];
+
+    var current = $scope.buttons[0];
+    $scope.hint = '';
+
+    $scope.setActive = function (button) {
+        if (button == current) return;
+        button.active = true;
+        current.active = false;
+        current = button;
+
+        $scope.hint = button.text !== 'Идти' ? button.text : '';
+    };
+
+    $scope.setBorder = function (text) {
+        return new Array(text.length+1).join('═');
+    };
+
+
+    game.changeWeapon('кулак');
+
+    $scope.weapon = {
+        border: game.borderWeapon,
+        text: game.weapon
+    };
 
 
 });

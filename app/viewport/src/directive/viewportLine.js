@@ -31,6 +31,9 @@ app.directive("viewportLine", function ($log, mouseService, symbolWidthService) 
                 if (evt.target.tagName == "SPAN") {
                     evt.preventDefault();
                     $element.find("div").css("left", symbolWidthService.xToCellX(evt.offsetX) + "px");
+                    var i = $element.parent().find("i")
+                    i.css("left", symbolWidthService.xToCellX(evt.offsetX+20) + "px");
+                    i.css("top", $element[0].offsetTop + "px");
                 }
 
                 mouseService.emitMouseEvent(
