@@ -11,12 +11,33 @@ app.service('game',['$q', 'message', function ($q, message) {
 
     };
 
-    this.weapon = 'кулак';
+    this.weapons = {
+        hand: {
+            title: 'кулак',
+            damage: 1
+        },
+        plank: {
+            title: 'палка',
+            damage: 2
+        },
+        knife: {
+            title: 'нож',
+            damage: 3
+        },
+        rose: {
+            title: 'роза',
+            damage: 4
+        }
+    };
+
+    this.weapon = this.weapons.hand;
     this.borderWeapon = '';
     this.changeWeapon = function (newWeapon) {
         this.weapon = newWeapon;
-        this.borderWeapon = new Array(newWeapon.length+1).join('─');
+        this.borderWeapon = new Array(newWeapon.title.length+1).join('─');
     };
+
+
 
     this.actions = {
         move: {
@@ -55,11 +76,12 @@ app.service('game',['$q', 'message', function ($q, message) {
 
     this.startDialog = function (dialog) {
         var self = this;
-        this.onStopPlayer = function () {
-            self.dialog.item = dialog;
-            self.dialog.show = true;
-            self.onStopPlayer = null;
-        };
+        self.dialog.item = dialog;
+        self.dialog.show = true;
+        //self.onStopPlayer = null;
+        /*this.onStopPlayer = function () {
+
+        };*/
     };
 
     this.nextDialog = function () {

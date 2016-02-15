@@ -18,6 +18,7 @@ app.controller("viewport", function (
     game,
     pionerWC,
     pionerPark,
+    fox,
     entity) {
 
     var mouseHold = false;
@@ -28,10 +29,14 @@ app.controller("viewport", function (
     var player = character.create(20, 30, mapService.currentLevel.layers[0]);
     var pwc = new pionerWC.PionerWC(30, 30, mapService.currentLevel.layers[0]);
     var ppark = new pionerPark.PionerPark(50, 30, mapService.currentLevel.layers[0]);
+    var fox1 = new fox.Fox(50, 40, mapService.currentLevel.layers[0]);
+    var fox2 = new fox.Fox(60, 40, mapService.currentLevel.layers[0]);
 
     mapService.currentLevel.layers[0].add(player);
     mapService.currentLevel.layers[0].add(pwc);
     mapService.currentLevel.layers[0].add(ppark);
+    mapService.currentLevel.layers[0].add(fox1);
+    mapService.currentLevel.layers[0].add(fox2);
 
     viewportService.player = player;
 
@@ -43,14 +48,18 @@ app.controller("viewport", function (
         var _y = viewportService.pos.y + cellY;
 
         if (game.currentAction != game.actions.move) {
-            var entities = [];
-            mapService.getLayers()[0].eachRect(_x - 20, _y - 10, 40, 20, function (x, y, entity) {
-                entities.unshift(entity);
-            });
 
-            var resultEvent = entities.some(function (entity) {
-                return entity.isPointMeet(_x, _y) && entity.handleMessage(game.currentAction.message);
-            });
+            var mes = game.currentAction.message;
+
+            if (game.currentAction != game.actions.look) {
+                game.onStopPlayer = function () {
+                    callback(checkAction(_x, _y, mes));
+                    game.onStopPlayer = null;
+                };
+            } else {
+                callback(checkAction(_x, _y, mes))
+            }
+
 
             if (game.currentAction != game.actions.look && calcDistance(player.x / 2, _x / 2, player.y, _y) > 3) {
                 player.handleMessage(message.MOVE, _x, _y);
@@ -61,7 +70,7 @@ app.controller("viewport", function (
                 $scope.setActive($scope.buttons[0]);
             }
 
-            return callback(resultEvent);
+            return 0;
         }
 
         mouseHold = true;
@@ -69,6 +78,20 @@ app.controller("viewport", function (
         player.handleMessage(message.MOVE, _x, _y);
         //pwc.handleMessage(message.ATTACK);
     });
+
+    function checkAction (_x, _y, mes) {
+        var entities = [];
+        mapService.getLayers()[0].eachRect(_x - 20, _y - 10, 40, 20, function (x, y, item) {
+            entities.unshift(item);
+        });
+
+        return entities.some(function (item) {
+            return item.isPointMeet(_x, _y)
+                && item.handleMessage(mes, {
+                    player: player
+                });
+        });
+    }
 
     function calcDistance(x1, x2, y1, y2) {
         return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
@@ -172,11 +195,11 @@ app.controller("viewport", function (
     };
 
 
-    game.changeWeapon('кулак');
+    game.changeWeapon(game.weapons.hand);
 
     $scope.weapon = {
         border: game.borderWeapon,
-        text: game.weapon
+        text: game.weapon.title
     };
 
     $scope.dialog = game.dialog;

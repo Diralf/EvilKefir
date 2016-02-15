@@ -34,7 +34,7 @@ app.service('characterSprite', ['$q', 'spriteAnimate', 'strip', 'rect', function
             height: 6,
             centerX: 3,
             centerY: 5,
-            speed: 0.25
+            speed: 0.2
         });
 
     };

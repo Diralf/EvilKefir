@@ -48,6 +48,12 @@ app.service('entityVisible', ['$log', 'entity', 'sprite', 'collision', 'transpar
         }
     };
 
+    this.EntityVisible.prototype.die = function () {
+        entity.Entity.prototype.die.call(this);
+
+        this.layer.remove(this.x, this.y);
+    };
+
     this.EntityVisible.prototype.moveIn = function (x, y) {
         if (!this.layer) {
             $log.error('Layer in entity is not defined');

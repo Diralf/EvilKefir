@@ -49,5 +49,11 @@ app.value('dialogs', {
         attack: {
             text: "Пионер: Ты что творишь!"
         }
+    },
+
+    fox: {
+        look: {
+            text: "Это лиса"
+        }
     }
 });
