@@ -16,11 +16,11 @@
                 <div class="button-bar">
                     <div ng-repeat="button in buttons"
                          class="button"
-                         ng-class="{hold: button.active}"
+                         ng-class="{hold: button.active, red: button.red}"
                          ng-click="setActive(button)">
-                        <div><span ng-bind="::'╔═' + setBorder(button.text) + '═╗'"></span></div>
-                        <div><span ng-bind="::'║ ' + button.text + ' ║'"></span></div>
-                        <div><span ng-bind="::'╚═' + setBorder(button.text) + '═╝'"></span></div>
+                        <div><span ng-bind="::'╔═' + setBorder(button.action.title) + '═╗'"></span></div>
+                        <div><span ng-bind="::'║ ' + button.action.title + ' ║'"></span></div>
+                        <div><span ng-bind="::'╚═' + setBorder(button.action.title) + '═╝'"></span></div>
                     </div>
 
                     <div class="weapon">

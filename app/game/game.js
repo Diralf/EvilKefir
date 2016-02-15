@@ -1,4 +1,4 @@
-app.service('game',['$q', function ($q) {
+app.service('game',['$q', 'message', function ($q, message) {
     this.loadMap = function (callback) {
 
     };
@@ -19,13 +19,25 @@ app.service('game',['$q', function ($q) {
     };
 
     this.actions = {
-        move: 'Идти',
-        attack: 'Атаковать',
-        look: 'Осмотреть',
-        talk: 'Говорить'
+        move: {
+            title: 'Идти',
+            message: message.MOVE
+        },
+        attack: {
+            title: 'Атаковать',
+            message: message.ATTACK
+        },
+        look: {
+            title: 'Осмотреть',
+            message: message.LOOK
+        },
+        talk: {
+            title: 'Говорить',
+            message: message.TALK
+        }
     };
 
-    this.currectAction = this.actions.move;
+    this.currentAction = this.actions.move;
 
     this.dialog = {
         item: {

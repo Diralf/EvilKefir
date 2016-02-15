@@ -43,20 +43,40 @@ app.controller("viewport", function (
 
         var _x = viewportService.pos.x + cellX;
         var _y = viewportService.pos.y + cellY;
-        var entities = [];
-        mapService.getLayers()[0].eachRect(_x - 20, _y - 10, 40, 20, function (x, y, entity) {
-            entities.unshift(entity);
-        });
 
-        callback(entities.some(function (entity) {
-            return entity.isPointMeet(_x, _y) && entity.handleMessage(message.LOOK);
-        }));
+        if (game.currentAction != game.actions.move) {
+            var entities = [];
+            mapService.getLayers()[0].eachRect(_x - 20, _y - 10, 40, 20, function (x, y, entity) {
+                entities.unshift(entity);
+            });
+
+            var resultEvent = entities.some(function (entity) {
+                return entity.isPointMeet(_x, _y) && entity.handleMessage(game.currentAction.message);
+            });
+
+            callback(resultEvent);
+
+            if (game.currentAction != game.actions.attack) {
+                game.currentAction = game.actions.move;
+                $scope.setActive($scope.buttons[0]);
+            }
+
+            if (calcDistance(player.x / 2, _x / 2, player.y, _y) > 3) {
+                player.handleMessage(message.MOVE, _x, _y);
+            }
+
+            return 0;
+        }
 
         mouseHold = true;
 
         player.handleMessage(message.MOVE, _x, _y);
-        pwc.handleMessage(message.ATTACK);
+        //pwc.handleMessage(message.ATTACK);
     });
+
+    function calcDistance(x1, x2, y1, y2) {
+        return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+    }
 
     mouseService.addMouseHandler("mouseup", function (evt, cellX, cellY, callback) {
         mouseHold = false;
@@ -116,32 +136,35 @@ app.controller("viewport", function (
 
 
     $scope.buttons = [{
-        text: game.actions.move,
-        active: true
+        active: true,
+        action: game.actions.move
     },{
-        text: game.actions.attack,
-        active: false
+        active: false,
+        action: game.actions.attack,
+        red: true
     },{
-        text: game.actions.look,
-        active: false
+        active: false,
+        action: game.actions.look
     },{
-        text: game.actions.talk,
-        active: false
+        active: false,
+        action: game.actions.talk
     }];
 
     var current = $scope.buttons[0];
     $scope.hint = '';
 
     $scope.setActive = function (button) {
-        if (button == current) return;
-        button.active = true;
+        if (button === current && current !== $scope.buttons[0]) {
+            $scope.setActive($scope.buttons[0]);
+            return;
+        }
         current.active = false;
+        button.active = true;
         current = button;
 
-        game.currentAction = button.text;
-        game.dialog.show = !game.dialog.show;
+        game.currentAction = button.action;
 
-        $scope.hint = button.text !== 'Идти' ? button.text : '';
+        $scope.hint = button.action !== game.actions.move ? button.action.title : '';
     };
 
     $scope.setBorder = function (text) {
