@@ -14,35 +14,24 @@
         <div class="interface">
             <div ng-controller="viewport" class="viewport">
                 <div class="button-bar">
-                    <div class="button" ng-class="{hold: buttons[0]}" ng-click="setActive(0)">
-                        <div>╔══════╗</div>
-                        <div>║ ИДТИ ║</div>
-                        <div>╚══════╝</div>
-                    </div>
-                    <div class="button" ng-class="{hold: buttons[1]}" ng-click="setActive(1)">
-                        <div>╔═══════════╗</div>
-                        <div>║ АТАКОВАТЬ ║</div>
-                        <div>╚═══════════╝</div>
-                    </div>
-                    <div class="button" ng-class="{hold: buttons[2]}" ng-click="setActive(2)">
-                        <div>╔═══════════╗</div>
-                        <div>║ ОСМОТРЕТЬ ║</div>
-                        <div>╚═══════════╝</div>
-                    </div>
-                    <div class="button" ng-class="{hold: buttons[3]}" ng-click="setActive(3)">
-                        <div>╔══════════╗</div>
-                        <div>║ ГОВОРИТЬ ║</div>
-                        <div>╚══════════╝</div>
+                    <div ng-repeat="button in buttons"
+                         class="button"
+                         ng-class="{hold: button.active}"
+                         ng-click="setActive(button)">
+                        <div><span ng-bind="::'╔═' + setBorder(button.text) + '═╗'"></span></div>
+                        <div><span ng-bind="::'║ ' + button.text + ' ║'"></span></div>
+                        <div><span ng-bind="::'╚═' + setBorder(button.text) + '═╝'"></span></div>
                     </div>
 
                     <div class="weapon">
-                        <div>┌─<span ng-bind="weapon.border"></span>─┐</div>
-                        <div>│ <span ng-bind="weapon.text"></span> │</div>
-                        <div>└─<span ng-bind="weapon.border"></span>─┘</div>
+                        <div><span ng-bind="'┌─' + weapon.border + '─┐'">|</span></div>
+                        <div><span ng-bind="'│ ' + weapon.text + ' │'">|</span></div>
+                        <div><span ng-bind="'└─' + weapon.border + '─┘'">|</span></div>
                     </div>
                 </div>
                 <div symbol-width></div>
                 <div class="view">
+                    <i>{{hint}}</i>
                     <div viewport-line ng-repeat="(linekey, line) in gameviewLine track by $index"
                             class="viewport-line"
                             cell-y="{{::linekey}}"
@@ -89,6 +78,7 @@
         <script type="text/javascript" src="app/core/unique/src/unique.js"></script>
 
         <script type="text/javascript" src="app/entities/staticObject.js"></script>
+        <script type="text/javascript" src="app/game/game.js"></script>
         <script type="text/javascript" src="app/map/src/mapService.js"></script>
         <script type="text/javascript" src="app/viewport/src/viewport.js"></script>
         <script type="text/javascript" src="app/viewport/src/directive/viewportLine.js"></script>

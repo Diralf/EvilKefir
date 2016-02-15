@@ -9,5 +9,12 @@ app.service('game',['$q', function ($q) {
 
     this.loadAssets = function (callback) {
 
+    };
+
+    this.weapon = 'кулак';
+    this.borderWeapon = '';
+    this.changeWeapon = function (newWeapon) {
+        this.weapon = newWeapon;
+        this.borderWeapon = new Array(newWeapon.length+1).join('─');
     }
 }]);
