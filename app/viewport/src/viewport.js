@@ -16,7 +16,8 @@ app.controller("viewport", function (
     rect,
     message,
     game,
-    pionerWC) {
+    pionerWC,
+    entity) {
 
     var mouseHold = false;
 
@@ -48,8 +49,6 @@ app.controller("viewport", function (
                 return entity.isPointMeet(_x, _y) && entity.handleMessage(game.currentAction.message);
             });
 
-            callback(resultEvent);
-
             if (game.currentAction != game.actions.look && calcDistance(player.x / 2, _x / 2, player.y, _y) > 3) {
                 player.handleMessage(message.MOVE, _x, _y);
             }
@@ -59,7 +58,7 @@ app.controller("viewport", function (
                 $scope.setActive($scope.buttons[0]);
             }
 
-            return 0;
+            return callback(resultEvent);
         }
 
         mouseHold = true;
@@ -105,6 +104,10 @@ app.controller("viewport", function (
     });
 
     var timerId = setInterval(function() {
+        entity.entityCollection.each(function (key, item) {
+            item.step();
+        });
+
         updatePlayer();
         viewportService.update();
         $scope.gameviewLine = render.draw();

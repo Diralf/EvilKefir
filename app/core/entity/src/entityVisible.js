@@ -26,6 +26,12 @@ app.service('entityVisible', ['$log', 'entity', 'sprite', 'collision', 'transpar
         return new rect.Rect(mask.x + x, mask.y + y, mask.w, mask.h);
     };
 
+    this.EntityVisible.prototype.step = function () {
+        entity.Entity.prototype.step.call(this);
+
+        this.sprite.step();
+    };
+
     this.EntityVisible.prototype.draw = function (context) {
         var image = this.sprite.spriteImage;
 

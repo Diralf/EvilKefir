@@ -12,7 +12,7 @@ app.service('sprite', ['spriteImage', 'rect', function (spriteImage, rect) {
         return this.spriteImage.image;
     };
 
-    this.Sprite.prototype.draw = function (context) {
+    this.Sprite.prototype.step = function (context) {
 
     };
 

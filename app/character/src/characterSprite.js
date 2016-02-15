@@ -18,6 +18,8 @@ app.service('characterSprite', ['$q', 'spriteAnimate', 'strip', 'rect', function
             centerX: 3,
             centerY: 5,
             speed: 0
+        }).then(function () {
+            self.changeStrip('await');
         });
 
         this.loadStripSet('move',[
@@ -33,8 +35,6 @@ app.service('characterSprite', ['$q', 'spriteAnimate', 'strip', 'rect', function
             centerX: 3,
             centerY: 5,
             speed: 0.27
-        }).then(function () {
-            self.changeStrip('move');
         });
 
     };
