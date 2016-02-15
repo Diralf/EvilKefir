@@ -25,12 +25,6 @@
     position: relative;
 }
 
-.view > i {
-    position: absolute;
-    color: #aaa;
-    font-size: 9pt;
-}
-
 @media screen and (max-height: 600px) {
     .viewport {
         height: 100%;
@@ -65,6 +59,18 @@
     display: block;
     background-color: #AAA;
     z-index: -1;
+}
+
+.view > i {
+    display: none;
+}
+
+.view > i.show {
+    display: block;
+    position: absolute;
+    color: #aaa;
+    font-size: 9pt;
+    font-style: normal;
 }
 
 .button-bar {
