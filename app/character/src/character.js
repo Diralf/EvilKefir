@@ -1,5 +1,5 @@
-app.service("character", ['entityVisible', 'spriteImage', 'characterControl', 'point', 'characterSprite', 'message', 'mapService', 'game', 'dialogs',
-    function (entityVisible, spriteImage, characterControl, point, characterSprite, message, mapService, game, dialogs) {
+app.service("character", ['$window','entityVisible', 'spriteImage', 'characterControl', 'point', 'characterSprite', 'message', 'mapService', 'game', 'dialogs',
+    function ($window, entityVisible, spriteImage, characterControl, point, characterSprite, message, mapService, game, dialogs) {
 
     this.create = function (x, y, layer) {
         return new Character(x, y, layer);
@@ -16,6 +16,8 @@ app.service("character", ['entityVisible', 'spriteImage', 'characterControl', 'p
         var target = point.create(x, y);
         var isMove = false;
 
+        game.startDialog(dialogs.start);
+
         this.onMessage[message.LOOK] = function () {
             console.log('I also look!!!');
             return true;
@@ -24,6 +26,7 @@ app.service("character", ['entityVisible', 'spriteImage', 'characterControl', 'p
         this.onMessage[message.DEATH] = function () {
 
             game.startDialog(dialogs.die);
+            $window.location.reload();
 
             return true;
         };

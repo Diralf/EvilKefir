@@ -1,22 +1,4 @@
-﻿\gggggggggggggggggggggggg
-g\ggggggggggggggggggggggg
-gg\gggggggggggggggggggggg
-ggg\ggggggggggggggggggggg
-gggg\gggggggggg┌───^^┐ggg
-ggggg\gggg¢/¯¯¯┘ -   │ggg
-gggggg\ggg└──────┐┌──┘ggg
-ggggggg\gggggg┌──┴┴─────┐
-ggggggggÐ═════┤▒▒▒▒▒▒▒▒▒│
-ggggggggÐ═════┤▒▒▒▒▒▒▒▒▒│
-gggggggggggggg│▒▒▒▒▒▒▒▒▒│
-gggggggggggggg│▒▒▒▒▒▒▒▒▒│
-gggggggggggggg│▒▒▒▒▒▒▒▒▒│
-gggggggggggggg│▒▒▒▒│▒▒▒▒│
-gggggggggggggg└╗─╗─┴────┘
-ggggggggggggggg║g║ggggggg
-ggggggggggggggg║g║ggggggg
-ggggggggggggggg▀g▀ggggggg
-ggggggggggggggggggggggggg
+﻿ggggggggggggggggggggggggg
 ggggggggggggggggggggggggg
 ggggggggggggggggggggggggg
 ggggggggggggggggggggggggg
@@ -26,7 +8,7 @@ gggggggggg└──────┐┌──┘ggg
 gggggggggggggg┌──┴┴─────┐
 ggggggggÐ═════┤▒▒▒▒▒▒▒▒▒│
 ggggggg/Ð═════┤▒▒▒▒▒▒▒▒▒│
-gggggg/ggggggg│▒▒▒▒X▒▒▒▒│
+gggggg/ggggggg│▒▒R.I.P▒▒│
 ggggg/gggggggg│▒▒▒▒▒▒▒▒▒│
 gggg/ggggggggg│▒▒▒▒▒▒▒▒▒│
 ggg/gggggggggg│▒▒▒▒│▒▒▒▒│

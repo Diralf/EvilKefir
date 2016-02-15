@@ -17,7 +17,7 @@ app.service('horse', ['npc', 'characterSprite', 'game', 'dialogs', 'message', 'n
             }, {
                 path: 'entity/horse/Death_front_left.txt',
                 params: {
-                    frameCount: 2,
+                    frameCount: 1,
                     dirCount: 1,
                     width: 25,
                     height: 18,
@@ -30,15 +30,19 @@ app.service('horse', ['npc', 'characterSprite', 'game', 'dialogs', 'message', 'n
 
         this.weaponDeath = game.weapons.plank;
         this.isTalked = false;
+        this.isDead = false;
     };
 
     this.Horse.prototype = Object.create(npc.NPC.prototype);
 
     this.Horse.prototype.attack = function (params) {
-        if (game.currentWeapon.weapon.damage < this.weaponDeath.damage) {
-            params.player.handleMessage(message.DEATH, this);
-        } else {
-            this.handleMessage(message.DEATH, params);
+        if (!this.isDead) {
+            if (game.currentWeapon.weapon.damage < this.weaponDeath.damage) {
+                params.player.handleMessage(message.DEATH, this);
+            } else {
+                this.isDead = true;
+                this.handleMessage(message.DEATH, params);
+            }
         }
 
         return npc.NPC.prototype.attack.call(this, params);
@@ -52,15 +56,16 @@ app.service('horse', ['npc', 'characterSprite', 'game', 'dialogs', 'message', 'n
     };
 
     this.Horse.prototype.talk = function (params) {
-        game.startDialog(dialogs.horse.talk);
-
+        if (!this.isDead) {
+            game.startDialog(dialogs.horse.talk);
+        }
         return npc.NPC.prototype.talk.call(this, params);
     };
 
     this.Horse.prototype.death = function (params) {
         game.changeWeapon(game.weapons.knife);
         game.startDialog(dialogs.horse.death);
-        this.die();
+        this.sprite.changeStrip('death');
         return npc.NPC.prototype.death.call(this, params);
     };
 }]);
