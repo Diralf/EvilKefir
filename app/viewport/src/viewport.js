@@ -17,6 +17,7 @@ app.controller("viewport", function (
     message,
     game,
     pionerWC,
+    pionerPark,
     entity) {
 
     var mouseHold = false;
@@ -26,9 +27,11 @@ app.controller("viewport", function (
 
     var player = character.create(20, 30, mapService.currentLevel.layers[0]);
     var pwc = new pionerWC.PionerWC(30, 30, mapService.currentLevel.layers[0]);
+    var ppark = new pionerPark.PionerPark(50, 30, mapService.currentLevel.layers[0]);
 
     mapService.currentLevel.layers[0].add(player);
     mapService.currentLevel.layers[0].add(pwc);
+    mapService.currentLevel.layers[0].add(ppark);
 
     viewportService.player = player;
 
