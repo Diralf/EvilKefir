@@ -20,6 +20,7 @@ app.controller("viewport", function (
     pionerPark,
     fox,
     horse,
+    fans,
     entity) {
 
     var mouseHold = false;
@@ -33,6 +34,7 @@ app.controller("viewport", function (
     var fox1 = new fox.Fox(50, 40, mapService.currentLevel.layers[0]);
     var fox2 = new fox.Fox(60, 40, mapService.currentLevel.layers[0]);
     var hor = new horse.Horse(60, 60, mapService.currentLevel.layers[0]);
+    var fns = new fans.Fans(70, 60, mapService.currentLevel.layers[0]);
 
     mapService.currentLevel.layers[0].add(player);
     mapService.currentLevel.layers[0].add(pwc);
@@ -40,6 +42,7 @@ app.controller("viewport", function (
     mapService.currentLevel.layers[0].add(fox1);
     mapService.currentLevel.layers[0].add(fox2);
     mapService.currentLevel.layers[0].add(hor);
+    mapService.currentLevel.layers[0].add(fns);
 
     viewportService.player = player;
 
