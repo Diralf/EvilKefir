@@ -51,5 +51,34 @@ app.service('game',['$q', 'message', function ($q, message) {
         },
         show: false,
         height: 7
-    }
+    };
+
+    this.startDialog = function (dialog) {
+        var self = this;
+        this.onStopPlayer = function () {
+            self.dialog.item = dialog;
+            self.dialog.show = true;
+            self.onStopPlayer = null;
+        };
+    };
+
+    this.nextDialog = function () {
+        if (this.dialog.show) {
+            if (this.dialog.item.next) {
+                this.dialog.item = this.dialog.item.next;
+            } else {
+                this.endDialog();
+            }
+            return true
+        }
+        return false;
+    };
+
+    this.endDialog = function () {
+        this.dialog.show = false;
+    };
+
+    this.onStopPlayer = function () {};
+
+
 }]);

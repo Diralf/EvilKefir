@@ -34,7 +34,7 @@ app.service("character", ['entityVisible', 'spriteImage', 'characterControl', 'p
             }
         };
 
-        this.onMessage[message.STEP] = function (type) {
+        this.onMessage[message.STEP] = function (type, callback) {
             isMove = target.x != this.x || target.y != this.y;
 
             if (isMove) {
@@ -44,11 +44,13 @@ app.service("character", ['entityVisible', 'spriteImage', 'characterControl', 'p
 
                 if (res.x || res.y)
                     this.moveIn(this.x + res.x, this.y + res.y);
-                else
+                else {
                     stopMove.call(this);
-
+                    callback && callback();
+                }
             } else {
                 stopMove.call(this);
+                callback && callback();
             }
 
             this.sprite.step();
