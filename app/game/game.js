@@ -50,7 +50,7 @@ app.service('game',['$q', 'message', function ($q, message) {
             }
         },
         show: false,
-        height: 7
+        height: 4
     };
 
     this.startDialog = function (dialog) {

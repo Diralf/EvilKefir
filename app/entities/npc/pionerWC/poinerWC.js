@@ -1,5 +1,6 @@
 app.service('pionerWC', ['npc', 'characterSprite', 'game', 'dialogs',
     function (npc, characterSprite, game, dialogs) {
+        
     this.PionerWC = function (x, y, layer) {
         npc.NPC.call(this, x, y, new characterSprite.CharacterSprite(), layer);
 
