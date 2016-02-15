@@ -19,6 +19,7 @@ app.controller("viewport", function (
     pionerWC,
     pionerPark,
     fox,
+    horse,
     entity) {
 
     var mouseHold = false;
@@ -31,12 +32,14 @@ app.controller("viewport", function (
     var ppark = new pionerPark.PionerPark(50, 30, mapService.currentLevel.layers[0]);
     var fox1 = new fox.Fox(50, 40, mapService.currentLevel.layers[0]);
     var fox2 = new fox.Fox(60, 40, mapService.currentLevel.layers[0]);
+    var hor = new horse.Horse(60, 60, mapService.currentLevel.layers[0]);
 
     mapService.currentLevel.layers[0].add(player);
     mapService.currentLevel.layers[0].add(pwc);
     mapService.currentLevel.layers[0].add(ppark);
     mapService.currentLevel.layers[0].add(fox1);
     mapService.currentLevel.layers[0].add(fox2);
+    mapService.currentLevel.layers[0].add(hor);
 
     viewportService.player = player;
 
@@ -53,8 +56,10 @@ app.controller("viewport", function (
 
             if (game.currentAction != game.actions.look) {
                 game.onStopPlayer = function () {
-                    callback(checkAction(_x, _y, mes));
-                    game.onStopPlayer = null;
+                    if (calcDistance(player.x / 2, _x / 2, player.y, _y) < 8) {
+                        callback(checkAction(_x, _y, mes));
+                        game.onStopPlayer = null;
+                    }
                 };
             } else {
                 callback(checkAction(_x, _y, mes))
@@ -63,6 +68,7 @@ app.controller("viewport", function (
 
             if (game.currentAction != game.actions.look && calcDistance(player.x / 2, _x / 2, player.y, _y) > 3) {
                 player.handleMessage(message.MOVE, _x, _y);
+                mouseHold = true;
             }
 
             if (game.currentAction != game.actions.attack) {
@@ -194,13 +200,12 @@ app.controller("viewport", function (
         return new Array(text.length+1).join('═');
     };
 
+    $scope.weapon = game.currentWeapon;
 
-    game.changeWeapon(game.weapons.hand);
-
-    $scope.weapon = {
+    /*{
         border: game.borderWeapon,
-        text: game.weapon.title
-    };
+        weapon: game.weapon
+    };*/
 
     $scope.dialog = game.dialog;
 

@@ -30,12 +30,20 @@ app.service('game',['$q', 'message', function ($q, message) {
         }
     };
 
-    this.weapon = this.weapons.hand;
-    this.borderWeapon = '';
-    this.changeWeapon = function (newWeapon) {
-        this.weapon = newWeapon;
-        this.borderWeapon = new Array(newWeapon.title.length+1).join('─');
+    this.currentWeapon = {
+        weapon: this.weapons.hand,
+        border: ''
     };
+
+
+
+
+    this.changeWeapon = function (newWeapon) {
+        this.currentWeapon.weapon = newWeapon;
+        this.currentWeapon.border = new Array(newWeapon.title.length+1).join('─');
+    };
+
+    this.changeWeapon(this.currentWeapon.weapon);
 
 
 

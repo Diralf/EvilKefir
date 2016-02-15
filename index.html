@@ -25,7 +25,7 @@
 
                     <div class="weapon">
                         <div><span ng-bind="'┌─' + weapon.border + '─┐'">|</span></div>
-                        <div><span ng-bind="'│ ' + weapon.text + ' │'">|</span></div>
+                        <div><span ng-bind="'│ ' + weapon.weapon.title + ' │'">|</span></div>
                         <div><span ng-bind="'└─' + weapon.border + '─┘'">|</span></div>
                     </div>
                 </div>
@@ -80,6 +80,7 @@
 
         <script type="text/javascript" src="app/entities/staticObject.js"></script>
         <script type="text/javascript" src="app/entities/npc/fox/fox.js"></script>
+        <script type="text/javascript" src="app/entities/npc/horse/horse.js"></script>
         <script type="text/javascript" src="app/entities/npc/pionerPark/poinerPark.js"></script>
         <script type="text/javascript" src="app/entities/npc/pionerWC/poinerWC.js"></script>
         <script type="text/javascript" src="app/entities/npc/npc.js"></script>

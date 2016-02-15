@@ -1,16 +1,16 @@
-app.service('fox', ['npc', 'characterSprite', 'game', 'dialogs', 'message',
+app.service('horse', ['npc', 'characterSprite', 'game', 'dialogs', 'message',
     function (npc, characterSprite, game, dialogs, message) {
         
-    this.Fox = function (x, y, layer) {
+    this.Horse = function (x, y, layer) {
         npc.NPC.call(this, x, y, new characterSprite.CharacterSprite(), layer);
 
         this.weaponDeath = game.weapons.plank;
         this.isTalked = false;
     };
 
-    this.Fox.prototype = Object.create(npc.NPC.prototype);
+    this.Horse.prototype = Object.create(npc.NPC.prototype);
 
-    this.Fox.prototype.attack = function (params) {
+    this.Horse.prototype.attack = function (params) {
         if (game.currentWeapon.weapon.damage < this.weaponDeath.damage) {
             params.player.handleMessage(message.DEATH, this);
         } else {
@@ -20,23 +20,23 @@ app.service('fox', ['npc', 'characterSprite', 'game', 'dialogs', 'message',
         return npc.NPC.prototype.attack.call(this, params);
     };
 
-    this.Fox.prototype.look = function (params) {
+    this.Horse.prototype.look = function (params) {
 
-        game.startDialog(dialogs.fox.look);
+        game.startDialog(dialogs.horse.look);
 
         return npc.NPC.prototype.look.call(this, params);
     };
 
-    this.Fox.prototype.talk = function (params) {
-        params.player.handleMessage(message.DEATH, this);
+    this.Horse.prototype.talk = function (params) {
+        game.startDialog(dialogs.horse.talk);
 
         return npc.NPC.prototype.talk.call(this, params);
     };
 
-    this.Fox.prototype.death = function (params) {
-
+    this.Horse.prototype.death = function (params) {
+        game.changeWeapon(game.weapons.knife);
+        game.startDialog(dialogs.horse.death);
         this.die();
-
         return npc.NPC.prototype.death.call(this, params);
     };
 }]);
