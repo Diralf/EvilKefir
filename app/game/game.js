@@ -31,7 +31,7 @@ app.service('game',['$q', 'message', function ($q, message) {
     };
 
     this.currentWeapon = {
-        weapon: this.weapons.hand,
+        weapon: this.weapons.plank,
         border: ''
     };
 
