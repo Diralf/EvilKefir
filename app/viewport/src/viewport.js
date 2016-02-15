@@ -32,14 +32,8 @@ app.controller("viewport", function (
     viewportService.player = player;
 
     mouseService.addMouseHandler("mousedown", function (evt, cellX, cellY, callback) {
-        if (game.dialog.show) {
-            if (game.dialog.item.next) {
-                game.dialog.item = game.dialog.item.next;
-            } else {
-                game.dialog.show = false;
-            }
-            return 0;
-        }
+        if (game.nextDialog()) return 0;
+        game.onStopPlayer = null;
 
         var _x = viewportService.pos.x + cellX;
         var _y = viewportService.pos.y + cellY;
@@ -56,13 +50,13 @@ app.controller("viewport", function (
 
             callback(resultEvent);
 
+            if (game.currentAction != game.actions.look && calcDistance(player.x / 2, _x / 2, player.y, _y) > 3) {
+                player.handleMessage(message.MOVE, _x, _y);
+            }
+
             if (game.currentAction != game.actions.attack) {
                 game.currentAction = game.actions.move;
                 $scope.setActive($scope.buttons[0]);
-            }
-
-            if (calcDistance(player.x / 2, _x / 2, player.y, _y) > 3) {
-                player.handleMessage(message.MOVE, _x, _y);
             }
 
             return 0;
@@ -115,7 +109,7 @@ app.controller("viewport", function (
         viewportService.update();
         $scope.gameviewLine = render.draw();
         $scope.$apply();
-        player.handleMessage('step');
+        player.handleMessage('step', game.onStopPlayer);
     }, 60);
 
 
