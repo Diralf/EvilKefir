@@ -21,6 +21,7 @@ app.controller("viewport", function (
     fox,
     horse,
     fans,
+    kefir,
     entity) {
 
     var mouseHold = false;
@@ -28,21 +29,27 @@ app.controller("viewport", function (
     var mouseX = 0;
     var mouseY = 0;
 
-    var player = character.create(20, 30, mapService.currentLevel.layers[0]);
-    var pwc = new pionerWC.PionerWC(30, 30, mapService.currentLevel.layers[0]);
-    var ppark = new pionerPark.PionerPark(50, 30, mapService.currentLevel.layers[0]);
-    var fox1 = new fox.Fox(50, 40, mapService.currentLevel.layers[0]);
-    var fox2 = new fox.Fox(60, 40, mapService.currentLevel.layers[0]);
-    var hor = new horse.Horse(60, 60, mapService.currentLevel.layers[0]);
-    var fns = new fans.Fans(70, 60, mapService.currentLevel.layers[0]);
+    var player = character.create(24, 30, mapService.currentLevel.layers[0]);
+    var pwc = new pionerWC.PionerWC(206, 27, mapService.currentLevel.layers[0]);
+    var ppark = new pionerPark.PionerPark(140, 63, mapService.currentLevel.layers[0]);
+    var fox1 = new fox.Fox(208, 69, mapService.currentLevel.layers[0]);
+    var fox2 = new fox.Fox(252, 62, mapService.currentLevel.layers[0]);
+    var fox3 = new fox.Fox(320, 59, mapService.currentLevel.layers[0]);
+    var fox4 = new fox.Fox(294, 74, mapService.currentLevel.layers[0]);
+    var hor = new horse.Horse(328, 21, mapService.currentLevel.layers[0]);
+    var fns = new fans.Fans(408, 64, mapService.currentLevel.layers[0]);
+    var kef = new kefir.Kefir(40, 64, mapService.currentLevel.layers[0]);
 
     mapService.currentLevel.layers[0].add(player);
     mapService.currentLevel.layers[0].add(pwc);
     mapService.currentLevel.layers[0].add(ppark);
     mapService.currentLevel.layers[0].add(fox1);
     mapService.currentLevel.layers[0].add(fox2);
+    mapService.currentLevel.layers[0].add(fox3);
+    mapService.currentLevel.layers[0].add(fox4);
     mapService.currentLevel.layers[0].add(hor);
     mapService.currentLevel.layers[0].add(fns);
+    mapService.currentLevel.layers[0].add(kef);
 
     viewportService.player = player;
 
