@@ -1,8 +1,32 @@
-app.service('fans', ['npc', 'characterSprite', 'game', 'dialogs', 'message',
-    function (npc, characterSprite, game, dialogs, message) {
+app.service('fans', ['npc', 'characterSprite', 'game', 'dialogs', 'message', 'npcSprite', 'rect',
+    function (npc, characterSprite, game, dialogs, message, npcSprite, rect) {
         
     this.Fans = function (x, y, layer) {
-        npc.NPC.call(this, x, y, new characterSprite.CharacterSprite(), layer);
+        npc.NPC.call(this, x, y, new npcSprite.NpcSprite(
+            {
+                path: 'entity/fans/Await_front_left.txt',
+                params: {
+                    frameCount: 2,
+                    dirCount: 1,
+                    width: 26,
+                    height: 12,
+                    centerX: 0,
+                    centerY: 0,
+                    speed: 0.2
+                }
+            }, {
+                path: 'entity/fans/Await_front_left.txt',
+                params: {
+                    frameCount: 2,
+                    dirCount: 1,
+                    width: 26,
+                    height: 12,
+                    centerX: 0,
+                    centerY: 0,
+                    speed: 0.02
+                }
+            }, new rect.Rect(0, 0, 26, 12)
+        ), layer);
 
         this.weaponDeath = game.weapons.knife;
         this.isTalked = false;

@@ -37,6 +37,8 @@ app.service('characterSprite', ['$q', 'spriteAnimate', 'strip', 'rect', function
             speed: 0.2
         });
 
+        this.dir = 3;
+
     };
 
     this.CharacterSprite.prototype = Object.create(spriteAnimate.SpriteAnimate.prototype);

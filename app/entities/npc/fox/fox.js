@@ -1,8 +1,32 @@
-app.service('fox', ['npc', 'characterSprite', 'game', 'dialogs', 'message',
-    function (npc, characterSprite, game, dialogs, message) {
+app.service('fox', ['npc', 'characterSprite', 'game', 'dialogs', 'message', 'npcSprite', 'rect',
+    function (npc, characterSprite, game, dialogs, message, npcSprite, rect) {
         
     this.Fox = function (x, y, layer) {
-        npc.NPC.call(this, x, y, new characterSprite.CharacterSprite(), layer);
+        npc.NPC.call(this, x, y, new npcSprite.NpcSprite(
+            {
+                path: 'entity/fox/Await_front_left.txt',
+                params: {
+                    frameCount: 2,
+                    dirCount: 1,
+                    width: 8,
+                    height: 3,
+                    centerX: 3,
+                    centerY: 2,
+                    speed: 0.1
+                }
+            }, {
+                path: 'entity/fox/Death_front_left.txt',
+                params: {
+                    frameCount: 2,
+                    dirCount: 1,
+                    width: 8,
+                    height: 3,
+                    centerX: 3,
+                    centerY: 2,
+                    speed: 0.02
+                }
+            }, new rect.Rect(-3, -2, 8, 3)
+        ), layer);
 
         this.weaponDeath = game.weapons.plank;
         this.isTalked = false;

@@ -1,8 +1,32 @@
-app.service('horse', ['npc', 'characterSprite', 'game', 'dialogs', 'message',
-    function (npc, characterSprite, game, dialogs, message) {
+app.service('horse', ['npc', 'characterSprite', 'game', 'dialogs', 'message', 'npcSprite', 'rect',
+    function (npc, characterSprite, game, dialogs, message, npcSprite, rect) {
         
     this.Horse = function (x, y, layer) {
-        npc.NPC.call(this, x, y, new characterSprite.CharacterSprite(), layer);
+        npc.NPC.call(this, x, y, new npcSprite.NpcSprite(
+            {
+                path: 'entity/horse/Await_front_left.txt',
+                params: {
+                    frameCount: 2,
+                    dirCount: 1,
+                    width: 25,
+                    height: 18,
+                    centerX: 17,
+                    centerY: 17,
+                    speed: 0.02
+                }
+            }, {
+                path: 'entity/horse/Death_front_left.txt',
+                params: {
+                    frameCount: 2,
+                    dirCount: 1,
+                    width: 25,
+                    height: 18,
+                    centerX: 17,
+                    centerY: 17,
+                    speed: 0.02
+                }
+            }, new rect.Rect(-1, -9, 10, 10)
+        ), layer);
 
         this.weaponDeath = game.weapons.plank;
         this.isTalked = false;

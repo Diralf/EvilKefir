@@ -31,13 +31,13 @@ app.controller("viewport", function (
 
     var player = character.create(24, 30, mapService.currentLevel.layers[0]);
     var pwc = new pionerWC.PionerWC(206, 27, mapService.currentLevel.layers[0]);
-    var ppark = new pionerPark.PionerPark(140, 63, mapService.currentLevel.layers[0]);
-    var fox1 = new fox.Fox(208, 69, mapService.currentLevel.layers[0]);
-    var fox2 = new fox.Fox(252, 62, mapService.currentLevel.layers[0]);
+    var ppark = new pionerPark.PionerPark(140, 69, mapService.currentLevel.layers[0]);
+    var fox1 = new fox.Fox(226, 64, mapService.currentLevel.layers[0]);
+    var fox2 = new fox.Fox(262, 51, mapService.currentLevel.layers[0]);
     var fox3 = new fox.Fox(320, 59, mapService.currentLevel.layers[0]);
     var fox4 = new fox.Fox(294, 74, mapService.currentLevel.layers[0]);
     var hor = new horse.Horse(328, 21, mapService.currentLevel.layers[0]);
-    var fns = new fans.Fans(408, 64, mapService.currentLevel.layers[0]);
+    var fns = new fans.Fans(388, 54, mapService.currentLevel.layers[0]);
     var kef = new kefir.Kefir(40, 64, mapService.currentLevel.layers[0]);
 
     mapService.currentLevel.layers[0].add(player);
@@ -158,14 +158,14 @@ app.controller("viewport", function (
     }, 60);
 
 
-    var imageSquare = spriteImage.create('╔══╗║ss║║  ║╚══╝', 4, 4, 1, 3);
+    /*var imageSquare = spriteImage.create('╔══╗║ss║║  ║╚══╝', 4, 4, 1, 3);
     var spriteSquare = sprite.create(imageSquare, new rect.Rect(-1, -1, 4, 2));
+*/
 
-
-    mapService.currentLevel.layers[0].add(new staticObject.StaticObject(40, 20, spriteSquare));
+   /* mapService.currentLevel.layers[0].add(new staticObject.StaticObject(40, 20, spriteSquare));
     mapService.currentLevel.layers[0].add(new staticObject.StaticObject(60, 30, spriteSquare));
     mapService.currentLevel.layers[0].add(new staticObject.StaticObject(80, 10, spriteSquare));
-
+*/
     /*setTimeout(function run() {
         $scope.gameviewLine = render.draw();
         $scope.$apply();
