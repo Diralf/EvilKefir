@@ -15,7 +15,8 @@ app.controller("viewport", function (
     staticObject,
     rect,
     message,
-    game) {
+    game,
+    pionerWC) {
 
     var mouseHold = false;
 
@@ -23,15 +24,18 @@ app.controller("viewport", function (
     var mouseY = 0;
 
     var player = character.create(20, 30, mapService.currentLevel.layers[0]);
+    var pwc = new pionerWC.PionerWC(30, 30, mapService.currentLevel.layers[0]);
 
-    mapService.currentLevel.layers[0].add(
-        player,
-        20, 30
-    );
+    mapService.currentLevel.layers[0].add(player);
+    mapService.currentLevel.layers[0].add(pwc);
 
     viewportService.player = player;
 
     mouseService.addMouseHandler("mousedown", function (evt, cellX, cellY, callback) {
+        if (game.dialog.show) {
+            return game.dialog.show = false;
+        }
+
         var _x = viewportService.pos.x + cellX;
         var _y = viewportService.pos.y + cellY;
         var entities = [];
@@ -46,6 +50,7 @@ app.controller("viewport", function (
         mouseHold = true;
 
         player.handleMessage(message.MOVE, _x, _y);
+        pwc.handleMessage(message.ATTACK);
     });
 
     mouseService.addMouseHandler("mouseup", function (evt, cellX, cellY, callback) {
@@ -129,6 +134,7 @@ app.controller("viewport", function (
         current = button;
 
         game.currentAction = button.text;
+        game.dialog.show = !game.dialog.show;
 
         $scope.hint = button.text !== 'Идти' ? button.text : '';
     };
@@ -145,5 +151,6 @@ app.controller("viewport", function (
         text: game.weapon
     };
 
+    $scope.dialog = game.dialog;
 
 });

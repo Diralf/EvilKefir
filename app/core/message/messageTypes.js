@@ -3,5 +3,8 @@ app.constant('message', {
     COLLISION: 'collision',
     MOVE: 'move',
     STEP: 'step',
-    LOOK: 'look'
+    LOOK: 'look',
+    ATTACK: 'attack',
+    TALK: 'talk',
+    DEATH: 'death'
 });

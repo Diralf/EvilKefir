@@ -97,3 +97,10 @@
     float: right;
     text-transform: uppercase;
 }
+
+.dialog {
+    position: absolute;
+    bottom: 55px;
+    margin: 18px 9px;
+    z-index: -10;
+}
