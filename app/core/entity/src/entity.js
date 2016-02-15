@@ -38,4 +38,8 @@ app.service("entity", ["collection", function (collection) {
 
     };
 
+    this.Entity.prototype.die = function () {
+        service.entityCollection.remove(this.id);
+    };
+
 }]);

@@ -15,15 +15,7 @@ app.run(function ($rootScope, $window, $http, keyboardService, mapService, viewp
         });
     };
 
-    var onExit = function () {
-        //console.log('end game send request');
-        $http.post('/game/1', {checkpoint: "cehck exit"}).then(function (response) {
-            //console.log('end game response recived');
-        });
-    };
-
     onEnter();
-    $window.onbeforeunload = onExit;
 });
 
 app.config(function ($logProvider) {

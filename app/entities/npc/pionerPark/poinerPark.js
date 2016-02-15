@@ -26,6 +26,7 @@ app.service('pionerPark', ['npc', 'characterSprite', 'game', 'dialogs',
     this.PionerPark.prototype.talk = function (params) {
         if (!this.isTalked) {
             game.startDialog(dialogs.pionerPark.talk);
+            this.isTalked = true;
         } else {
             game.startDialog(dialogs.pionerPark.wait);
         }
