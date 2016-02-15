@@ -1,8 +1,32 @@
-app.service('kefir', ['npc', 'characterSprite', 'game', 'dialogs', 'message',
-    function (npc, characterSprite, game, dialogs, message) {
+app.service('kefir', ['npc', 'characterSprite', 'game', 'dialogs', 'message', 'npcSprite', 'rect',
+    function (npc, characterSprite, game, dialogs, message, npcSprite, rect) {
         
     this.Kefir = function (x, y, layer) {
-        npc.NPC.call(this, x, y, new characterSprite.CharacterSprite(), layer);
+        npc.NPC.call(this, x, y, new npcSprite.NpcSprite(
+            {
+                path: 'entity/kefir/Await_front_left.txt',
+                params: {
+                    frameCount: 2,
+                    dirCount: 1,
+                    width: 37,
+                    height: 20,
+                    centerX: 18,
+                    centerY: 18,
+                    speed: 0.1
+                }
+            }, {
+                path: 'entity/kefir/Await_front_left.txt',
+                params: {
+                    frameCount: 2,
+                    dirCount: 1,
+                    width: 37,
+                    height: 20,
+                    centerX: 18,
+                    centerY: 18,
+                    speed: 0.1
+                }
+            }, new rect.Rect(-7, -2, 14, 4)
+        ), layer);
 
         this.weaponDeath = game.weapons.rose;
         this.isTalked = false;
