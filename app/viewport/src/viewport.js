@@ -33,7 +33,12 @@ app.controller("viewport", function (
 
     mouseService.addMouseHandler("mousedown", function (evt, cellX, cellY, callback) {
         if (game.dialog.show) {
-            return game.dialog.show = false;
+            if (game.dialog.item.next) {
+                game.dialog.item = game.dialog.item.next;
+            } else {
+                game.dialog.show = false;
+            }
+            return 0;
         }
 
         var _x = viewportService.pos.x + cellX;
