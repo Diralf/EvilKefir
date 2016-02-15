@@ -81,20 +81,29 @@
 
 .button-bar > .button {
     float: left;
-    color: #666;
+    color: #636363;
     text-transform: uppercase;
 }
 
 .button-bar > .button:hover {
-    color: #00d703;
+    color: #000;
 }
 
 .button-bar > .button.hold {
     color: #00b10c;
 }
 
+.button-bar > .button.red {
+    float: right;
+}
+
+.button-bar > .button.hold.red {
+    color: #da0600;
+}
+
 .button-bar > .weapon {
     float: right;
+    color: #373737;
     text-transform: uppercase;
 }
 
