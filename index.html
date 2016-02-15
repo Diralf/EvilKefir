@@ -31,7 +31,7 @@
                 </div>
                 <div symbol-width></div>
                 <div class="view">
-                    <i>{{hint}}</i>
+                    <i ng-bind="hint"></i>
                     <div viewport-line ng-repeat="(linekey, line) in gameviewLine track by $index"
                             class="viewport-line"
                             cell-y="{{::linekey}}"

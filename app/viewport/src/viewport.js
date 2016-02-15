@@ -106,21 +106,17 @@ app.controller("viewport", function (
 
 
     $scope.buttons = [{
-        text: 'Идти',
-        active: true,
-        border: ''
+        text: game.actions.move,
+        active: true
     },{
-        text: 'Атаковать',
-        active: false,
-        border: ''
+        text: game.actions.attack,
+        active: false
     },{
-        text: 'Осмотреть',
-        active: false,
-        border: ''
+        text: game.actions.look,
+        active: false
     },{
-        text: 'Говорить',
-        active: false,
-        border: ''
+        text: game.actions.talk,
+        active: false
     }];
 
     var current = $scope.buttons[0];
@@ -131,6 +127,8 @@ app.controller("viewport", function (
         button.active = true;
         current.active = false;
         current = button;
+
+        game.currentAction = button.text;
 
         $scope.hint = button.text !== 'Идти' ? button.text : '';
     };
