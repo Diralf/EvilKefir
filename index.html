@@ -38,6 +38,7 @@
                             ng-mousedown="onMouseDown($event)"
                             ng-mouseup="onMouseUp($event)"
                             ><div> </div><span ng-bind="line"></span></div>
+                    <div ng-if="dialog.show" class="dialog" ng-bind="dialog.item.text"></div>
                 </div>
             </div>
         </div>
@@ -78,6 +79,9 @@
         <script type="text/javascript" src="app/core/unique/src/unique.js"></script>
 
         <script type="text/javascript" src="app/entities/staticObject.js"></script>
+        <script type="text/javascript" src="app/entities/npc/pionerWC/poinerWC.js"></script>
+        <script type="text/javascript" src="app/entities/npc/npc.js"></script>
+
         <script type="text/javascript" src="app/game/game.js"></script>
         <script type="text/javascript" src="app/map/src/mapService.js"></script>
         <script type="text/javascript" src="app/viewport/src/viewport.js"></script>

@@ -32,6 +32,10 @@ app.service("entity", ["collection", function (collection) {
         }
 
         return false;
-    }
+    };
+
+    this.Entity.prototype.step = function () {
+
+    };
 
 }]);

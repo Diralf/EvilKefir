@@ -56,7 +56,7 @@ app.service('symbolGrid', ['collection', function (collection) {
             });
 
             widthChunk = chunkArray[0][0].length;
-            console.log(widthChunk);
+
             var linesLine;
             chunkArray.forEach(function (chunkLines) {
                 if (!linesLine) {

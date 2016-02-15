@@ -26,4 +26,14 @@ app.service('game',['$q', function ($q) {
     };
 
     this.currectAction = this.actions.move;
+
+    this.dialog = {
+        item: {
+            id: '1',
+            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vitae ipsum porta, egestas sapien sed, vestibulum lectus. Vivamus malesuada neque sit amet massa placerat rutrum. Vivamus imperdiet facilisis iaculis. Ut aliquam consequat vestibulum. Proin sed ultrices tellus. Maecenas mollis ultricies dui non fermentum. Fusce turpis lectus, sodales sed nisl sit amet, commodo mattis nibh.",
+            next: null
+        },
+        show: false,
+        height: 7
+    }
 }]);
