@@ -62,8 +62,6 @@ app.service("character", ['$window','entityVisible', 'spriteImage', 'characterCo
                 stopMove.call(this);
                 callback && callback();
             }
-
-            this.sprite.step();
         };
 
         function findPath () {
