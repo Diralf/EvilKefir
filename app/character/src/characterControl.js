@@ -1,4 +1,4 @@
-app.service("characterControl", function (keyboardService) {
+app.service("characterControl", ['keyboardService', function (keyboardService) {
     var moveCharacterOn;
 
     keyboardService.addHandler("W", function (key, evt) {
@@ -20,4 +20,4 @@ app.service("characterControl", function (keyboardService) {
     this.moveHandler = function (handler) {
         moveCharacterOn = handler;
     }
-});
+}]);

@@ -1,6 +1,7 @@
 app = angular.module("app", []);
 
-app.run(function ($rootScope, $window, $http, keyboardService, mapService, viewportService) {
+app.run(['$rootScope', '$http', 'keyboardService', 'mapService', 'viewportService',
+    function ($rootScope, $http, keyboardService, mapService, viewportService) {
     //console.log($rootScope);
 
     keyboardService.init();
@@ -16,7 +17,7 @@ app.run(function ($rootScope, $window, $http, keyboardService, mapService, viewp
     };
 
     onEnter();
-});
+}]);
 
 app.config(function ($logProvider) {
     $logProvider.debugEnabled(true);
