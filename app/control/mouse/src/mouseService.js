@@ -1,4 +1,4 @@
-app.service("mouseService", function ($log) {
+app.service("mouseService", ['$log', function ($log) {
     var mouseHandlers = {};
 
     this.emitMouseEvent = function (event, evtObj, cellX, cellY) {
@@ -19,4 +19,4 @@ app.service("mouseService", function ($log) {
         }
         mouseHandlers[event].push(handler);
     }
-});
+}]);

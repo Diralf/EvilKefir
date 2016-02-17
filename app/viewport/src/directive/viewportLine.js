@@ -1,4 +1,4 @@
-app.directive("viewportLine", function ($log, mouseService, symbolWidthService) {
+app.directive("viewportLine", ['$log', 'mouseService', 'symbolWidthService', function ($log, mouseService, symbolWidthService) {
     return {
         restrict: "EA",
         link: function ($scope, $element, $attr) {
@@ -46,4 +46,4 @@ app.directive("viewportLine", function ($log, mouseService, symbolWidthService) 
             });
         }
     }
-});
+}]);

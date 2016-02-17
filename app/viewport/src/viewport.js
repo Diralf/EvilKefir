@@ -1,4 +1,29 @@
-app.controller("viewport", function (
+app.controller("viewport", [
+    '$scope',
+    '$log',
+    'character',
+    'characterData',
+    'characterControl',
+    'mouseService',
+    'mapService',
+    'viewportService',
+    'render',
+    'symbolWidthService',
+    'entityVisible',
+    'sprite',
+    'spriteImage',
+    'staticObject',
+    'rect',
+    'message',
+    'game',
+    'pionerWC',
+    'pionerPark',
+    'fox',
+    'horse',
+    'fans',
+    'kefir',
+    'entity',
+    function (
     $scope,
     $log,
     character,
@@ -219,4 +244,4 @@ app.controller("viewport", function (
 
     $scope.dialog = game.dialog;
 
-});
+}]);
