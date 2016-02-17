@@ -1,4 +1,4 @@
-app.service('collision', function () {
+app.service('collision', [function () {
     this.pointToRect = function (point, rect) {
         return !(point.x < rect.x
             || point.x >= (rect.x + rect.w)
@@ -22,4 +22,4 @@ app.service('collision', function () {
                 y: rect1.y + rect1.h - 1},
                 rect2);
     };
-});
+}]);

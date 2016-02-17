@@ -1,7 +1,7 @@
 /**
  * for correctly work: place that directive in element with size equal viewport.
  */
-app.directive("symbolWidth", function (symbolWidthService) {
+app.directive("symbolWidth", ['symbolWidthService', function (symbolWidthService) {
     return {
         restrict: "AE",
         template: "<div class='symbol-width'>S</div>",
@@ -31,4 +31,4 @@ app.directive("symbolWidth", function (symbolWidthService) {
             }
         }
     };
-});
+}]);

@@ -1,4 +1,4 @@
-app.service("symbolWidthService", function () {
+app.service("symbolWidthService", [function () {
     var self = this;
 
     var widthOneSymbol = 0;
@@ -55,4 +55,4 @@ app.service("symbolWidthService", function () {
     this.addListener = function (name, callback) {
         listeners[name].push(callback);
     };
-});
+}]);
