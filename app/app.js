@@ -1,16 +1,16 @@
-app = angular.module("app", []);
+var app = angular.module('app', []);
 
-(function() {
-    "use strict";
+(function () {
+    'use strict';
 
     angular
-        .module("app")
+        .module('app')
         .run(appRun);
 
     appRun.$inject = ['$rootScope', '$http', 'keyboardService', 'mapService', 'viewportService'];
 
     function appRun($rootScope, $http, keyboardService, mapService, viewportService) {
-        //console.log($rootScope);
+        console.log($rootScope);
 
         keyboardService.init();
         mapService.init();
@@ -19,7 +19,7 @@ app = angular.module("app", []);
         //mapLoader.load();
         var onEnter = function () {
             //console.log('start game send request');
-            $http.post('/game/0', {checkpoint: "cehck enter"}).then(function (response) {
+            $http.post('/game/0', {checkpoint: 'cehck enter'}).then(function () {
 
             });
         };
