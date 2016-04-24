@@ -1,20 +1,40 @@
-app.service('sprite', ['spriteImage', 'rect', function (spriteImage, rect) {
-    this.create = function (image, mask) {
-        return new this.Sprite(image, mask);
-    };
+(function () {
+    'use strict';
 
-    this.Sprite = function (image, mask) {
-        this.spriteImage = image || spriteImage.create();
-        this.mask = mask || new rect.Rect();
-    };
+    angular
+        .module('app')
+        .service('sprite', sprite);
 
-    this.Sprite.prototype.image = function () {
-        return this.spriteImage.image;
-    };
+    // TODO запилить все классы с помошью value, с композиционной передачей зависимостей
 
-    this.Sprite.prototype.step = function (context) {
+    sprite.$inject = ['spriteImage', 'rect'];
 
-    };
+    function sprite(spriteImage, rect) {
+        this.create = create;
 
+        this.Sprite = Sprite;
+        this.Sprite.prototype.image = image;
+        this.Sprite.prototype.step = step;
 
-}]);
+        /////////////////////////////////////////////////////
+
+        function create(image, mask) {
+            return new this.Sprite(image, mask);
+        }
+
+        function Sprite(image, mask) {
+            this.spriteImage = image || spriteImage.create();
+            this.mask = mask || new rect.Rect();
+        }
+
+        function image() {
+            return this.spriteImage.image;
+        }
+
+        function step(/*context*/) {
+
+        }
+    }
+
+})();
+
