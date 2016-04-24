@@ -3,10 +3,8 @@
 
     angular
         .module('app')
-        .service('character', character);
+        .factory('Character', character);
 
-    // TODO запилить все классы с помошью value, с композиционной передачей зависимостей
-    
     character.$inject = [
         '$window',
         'entityVisible',
@@ -28,11 +26,15 @@
         game,
         dialogs) {
 
-        this.create = function (x, y, layer) {
-            return new Character(x, y, layer);
-        };
+        var Character = classCharacter;
+        Character.prototype = Object.create(entityVisible.EntityVisible.prototype);
 
-        function Character (x, y, layer) {
+        return Character;
+
+        //////////////////////////////////////////////////
+
+        //TODO отрефакторить метод
+        function classCharacter (x, y, layer) {
             // super call
             entityVisible.EntityVisible.call(this,
                 x,
@@ -158,9 +160,6 @@
                 return canMove;
             }
         }
-
-        Character.prototype = Object.create(entityVisible.EntityVisible.prototype);
-
     }
 
 })();
