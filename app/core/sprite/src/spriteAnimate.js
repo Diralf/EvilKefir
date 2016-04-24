@@ -1,74 +1,96 @@
-app.service('spriteAnimate', ['$q', 'sprite', 'strip', function ($q, sprite, strip) {
+(function () {
+    'use strict';
 
-    this.SpriteAnimate = function (mask) {
-        sprite.Sprite.call(this, null, mask);
+    angular
+        .module('app')
+        .service('spriteAnimate', spriteAnimate);
 
-        this.frame = 0;
-        this.dir = 0;
+    // TODO запилить все классы с помошью value, с композиционной передачей зависимостей
 
-        this.strips = {};
-        this.currentStrip = null;
-        this.prevStrip = null;
+    spriteAnimate.$inject = ['$q', 'sprite', 'strip'];
 
-        this.speed = 0;
+    function spriteAnimate($q, sprite, strip) {
 
-    };
+        this.SpriteAnimate = SpriteAnimate;
+        this.SpriteAnimate.prototype = Object.create(sprite.Sprite.prototype);
+        this.SpriteAnimate.prototype.step = step;
+        this.SpriteAnimate.prototype.changeStrip = changeStrip;
+        this.SpriteAnimate.prototype.revertStrip = revertStrip;
+        this.SpriteAnimate.prototype.collapseArrays = collapseArrays;
+        this.SpriteAnimate.prototype.loadStripSet = loadStripSet;
 
-    this.SpriteAnimate.prototype = Object.create(sprite.Sprite.prototype);
+        //////////////////////////////////////////////////////////
 
-    this.SpriteAnimate.prototype.step = function () {
-        if (!this.currentStrip) return 0;
+        function SpriteAnimate(mask) {
+            sprite.Sprite.call(this, null, mask);
 
-        var speed = this.currentStrip.speed || this.speed;
-        if (this.frame + speed >= this.currentStrip.frameCount - speed) {
             this.frame = 0;
+            this.dir = 0;
+
+            this.strips = {};
+            this.currentStrip = null;
+            this.prevStrip = null;
+
+            this.speed = 0;
+
         }
-        this.frame += speed;
-        this.spriteImage = this.currentStrip.dirframe(this.dir, parseInt(this.frame));
-    };
 
-    this.SpriteAnimate.prototype.changeStrip = function (stripName) {
-        if (this.strips[stripName]) {
-            this.prevStrip = this.currentStrip;
-            this.currentStrip = this.strips[stripName];
-            this.frame = 0;
-        } else {
-            console.error('Strip not exists ' + stripName);
+        function step() {
+            if (!this.currentStrip) {
+                return 0;
+            }
+
+            var speed = this.currentStrip.speed || this.speed;
+            if (this.frame + speed >= this.currentStrip.frameCount - speed) {
+                this.frame = 0;
+            }
+            this.frame += speed;
+            this.spriteImage = this.currentStrip.dirframe(this.dir, parseInt(this.frame));
         }
-    };
 
-    this.SpriteAnimate.prototype.revertStrip = function () {
-        this.changeStrip(this.prevStrip.name);
-    };
+        function changeStrip(stripName) {
+            if (this.strips[stripName]) {
+                this.prevStrip = this.currentStrip;
+                this.currentStrip = this.strips[stripName];
+                this.frame = 0;
+            } else {
+                console.error('Strip not exists ' + stripName);
+            }
+        }
 
-    this.SpriteAnimate.prototype.collapseArrays = function (arrays) {
-        var lines = [];
+        function revertStrip() {
+            this.changeStrip(this.prevStrip.name);
+        }
 
-        arrays.forEach(function (array) {
-            lines = lines.concat(array);
-        });
+        function collapseArrays(arrays) {
+            var lines = [];
 
-        return lines;
-    };
+            arrays.forEach(function (array) {
+                lines = lines.concat(array);
+            });
 
-    this.SpriteAnimate.prototype.loadStripSet = function (stripName, fileNames, properties) {
-        var self = this;
+            return lines;
+        }
 
-        return $q.all(fileNames.map(function (name) {
-            return strip.load(name);
-        })).then(function (linesArray) {
-            var stripAwait = new strip.Strip(stripName, self.collapseArrays(linesArray),
-                properties.frameCount,
-                properties.dirCount,
-                properties.width,
-                properties.height,
-                properties.centerX,
-                properties.centerY);
+        function loadStripSet(stripName, fileNames, properties) {
+            var self = this;
 
-            stripAwait.speed = properties.speed;
+            return $q.all(fileNames.map(function (name) {
+                return strip.load(name);
+            })).then(function (linesArray) {
+                var stripAwait = new strip.Strip(stripName, self.collapseArrays(linesArray),
+                    properties.frameCount,
+                    properties.dirCount,
+                    properties.width,
+                    properties.height,
+                    properties.centerX,
+                    properties.centerY);
 
-            self.strips[stripName] = stripAwait;
-        });
+                stripAwait.speed = properties.speed;
+
+                self.strips[stripName] = stripAwait;
+            });
+        }
     }
 
-}]);
+})();
