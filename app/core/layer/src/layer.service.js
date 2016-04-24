@@ -7,9 +7,9 @@
 
     // TODO запилить все классы с помошью value, с композиционной передачей зависимостей
 
-    layer.$inject = ['collection'];
+    layer.$inject = ['Collection'];
 
-    function layer(collection) {
+    function layer(Collection) {
 
         this.create = create;
 
@@ -33,7 +33,7 @@
         }
 
         function Layer() {
-            this._data = collection.create();
+            this._data = new Collection();
         }
 
         function add(entity, x, y) {
@@ -58,7 +58,7 @@
             x = +x;
             y = +y;
 
-            var line = this._data.get(y) || this._data.add(y, collection.create());
+            var line = this._data.get(y) || this._data.add(y, new Collection());
 
             return line.get(x) ? null : line.add(x, entity);
         }

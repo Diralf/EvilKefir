@@ -3,34 +3,28 @@
 
     angular
         .module('app')
-        .service('collection', collection);
-
-    // TODO запилить все классы с помошью value, с композиционной передачей зависимостей
+        .factory('Collection', collection);
 
     collection.$inject = [];
 
     function collection() {
 
-        this.create = create;
+        var Collection = classCollection;
+        Collection.prototype.set = set;
+        Collection.prototype.add = add;
+        Collection.prototype.get = get;
+        Collection.prototype.each = each;
+        Collection.prototype.eachPart = eachPart;
+        Collection.prototype.remove = remove;
+        Collection.prototype.length = lengthCollection;
+        Collection.prototype.getCollection = getCollection;
+        Collection.prototype.clear = clear;
 
-        this.Collection = Collection;
-        this.Collection.prototype.set = set;
-        this.Collection.prototype.add = add;
-        this.Collection.prototype.get = get;
-        this.Collection.prototype.each = each;
-        this.Collection.prototype.eachPart = eachPart;
-        this.Collection.prototype.remove = remove;
-        this.Collection.prototype.length = lengthCollection;
-        this.Collection.prototype.getCollection = getCollection;
-        this.Collection.prototype.clear = clear;
+        return Collection;
 
         //////////////////////////////////////////////////
 
-        function create() {
-            return new this.Collection();
-        }
-
-        function Collection() {
+        function classCollection() {
             this._data = {};
         }
 
@@ -157,7 +151,6 @@
                 self.remove(key);
             });
         }
-
     }
 
 })();

@@ -7,7 +7,7 @@
 
     character.$inject = [
         '$window',
-        'entityVisible',
+        'EntityVisible',
         'point',
         'CharacterSprite',
         'message',
@@ -18,7 +18,7 @@
 
     function character(
         $window,
-        entityVisible,
+        EntityVisible,
         point,
         CharacterSprite,
         message,
@@ -27,7 +27,7 @@
         dialogs) {
 
         var Character = classCharacter;
-        Character.prototype = Object.create(entityVisible.EntityVisible.prototype);
+        Character.prototype = Object.create(EntityVisible.prototype);
 
         return Character;
 
@@ -36,7 +36,7 @@
         //TODO отрефакторить метод
         function classCharacter (x, y, layer) {
             // super call
-            entityVisible.EntityVisible.call(this,
+            EntityVisible.call(this,
                 x,
                 y,
                 new CharacterSprite(),

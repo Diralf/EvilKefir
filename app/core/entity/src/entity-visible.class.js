@@ -3,38 +3,32 @@
 
     angular
         .module('app')
-        .service('entityVisible', entityVisible);
+        .factory('EntityVisible', entityVisible);
 
-    // TODO запилить все классы с помошью value, с композиционной передачей зависимостей
+    entityVisible.$inject = ['$log', 'Entity', 'Sprite', 'collision', 'transparentSymbol', 'rect'];
 
-    entityVisible.$inject = ['$log', 'entity', 'Sprite', 'collision', 'transparentSymbol', 'rect'];
-
-    function entityVisible($log, entity, Sprite, collision, transparentSymbol, rect) {
+    function entityVisible($log, Entity, Sprite, collision, transparentSymbol, rect) {
 
         var rectCheckCollision = new rect.Rect(-20, -10, 40, 20);
 
-        this.create = create;
+        var EntityVisible = classEntityVisible;
+        EntityVisible.prototype = Object.create(Entity.prototype);
+        EntityVisible.prototype.getMaskRect = getMaskRect;
+        EntityVisible.prototype.step = step;
+        EntityVisible.prototype.draw = draw;
+        EntityVisible.prototype.die = die;
+        EntityVisible.prototype.moveIn = moveIn;
+        EntityVisible.prototype.isPointMeet = isPointMeet;
+        EntityVisible.prototype.isMeetingEntity = isMeetingEntity;
+        EntityVisible.prototype.checkCollisionEntity = checkCollisionEntity;
+        EntityVisible.prototype.checkCollisionMap = checkCollisionMap;
 
-        this.EntityVisible = EntityVisible;
-        this.EntityVisible.prototype = Object.create(entity.Entity.prototype);
-        this.EntityVisible.prototype.getMaskRect = getMaskRect;
-        this.EntityVisible.prototype.step = step;
-        this.EntityVisible.prototype.draw = draw;
-        this.EntityVisible.prototype.die = die;
-        this.EntityVisible.prototype.moveIn = moveIn;
-        this.EntityVisible.prototype.isPointMeet = isPointMeet;
-        this.EntityVisible.prototype.isMeetingEntity = isMeetingEntity;
-        this.EntityVisible.prototype.checkCollisionEntity = checkCollisionEntity;
-        this.EntityVisible.prototype.checkCollisionMap = checkCollisionMap;
+        return EntityVisible;
 
         ////////////////////////////////////////////////////
 
-        function create(x, y, image, layer) {
-            return new this.EntityVisible(x, y, image, layer);
-        }
-
-        function EntityVisible(x, y, spr, layer) {
-            entity.Entity.apply(this);
+        function classEntityVisible(x, y, spr, layer) {
+            Entity.apply(this);
             this.sprite = spr || new Sprite();
             this.x = x || 0;
             this.y = y || 0;
@@ -51,7 +45,7 @@
         }
 
         function step() {
-            entity.Entity.prototype.step.call(this);
+            Entity.prototype.step.call(this);
 
             this.sprite.step();
         }
@@ -74,7 +68,7 @@
         }
 
         function die() {
-            entity.Entity.prototype.die.call(this);
+            Entity.prototype.die.call(this);
 
             this.layer.remove(this.x, this.y);
         }

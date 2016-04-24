@@ -3,36 +3,30 @@
 
     angular
         .module('app')
-        .service('entity', entity);
+        .factory('Entity', entity);
 
-    // TODO запилить все классы с помошью value, с композиционной передачей зависимостей
+    entity.$inject = ['Collection'];
 
-    entity.$inject = ['collection'];
-
-    function entity(collection) {
-        var service = this;
+    function entity(Collection) {
         var validID = 0;
 
-        this.entityCollection = collection.create();
+        var Entity = classEntity;
+        Entity.prototype.handleMessage = handleMessage;
+        Entity.prototype.step = step;
+        Entity.prototype.die = die;
 
-        this.create = create;
-        this.Entity = Entity;
-        this.Entity.prototype.handleMessage = handleMessage;
-        this.Entity.prototype.step = step;
-        this.Entity.prototype.die = die;
+        Entity.entityCollection = new Collection();
+
+        return Entity;
 
         ////////////////////////////////////////////////
 
-        function create() {
-            return new this.Entity();
-        }
-
-        function Entity() {
+        function classEntity() {
             this.id = validID;
             validID++;
             this.onMessage = {};
 
-            service.entityCollection.add(this.id, this);
+            Entity.entityCollection.add(this.id, this);
         }
 
         /**
@@ -57,7 +51,7 @@
         }
 
         function die() {
-            service.entityCollection.remove(this.id);
+            Entity.entityCollection.remove(this.id);
         }
 
     }

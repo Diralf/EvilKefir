@@ -5,12 +5,12 @@
         .module('app')
         .service('npc', npc);
 
-    npc.$inject = ['entityVisible', 'message'];
+    npc.$inject = ['EntityVisible', 'message'];
 
-    function npc(entityVisible, message) {
+    function npc(EntityVisible, message) {
         this.NPC = NPC;
 
-        this.NPC.prototype = Object.create(entityVisible.EntityVisible.prototype);
+        this.NPC.prototype = Object.create(EntityVisible.prototype);
 
         this.NPC.prototype.attack = attack;
 
@@ -23,7 +23,7 @@
         /////////////////////////////////////////////////////
 
         function NPC(x, y, sprite, layer) {
-            entityVisible.EntityVisible.call(this, x, y, sprite, layer);
+            EntityVisible.call(this, x, y, sprite, layer);
 
             this.onMessage[message.ATTACK] = function (type, params) {
                 console.log('message attack');
