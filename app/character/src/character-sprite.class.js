@@ -3,15 +3,21 @@
 
     angular
         .module('app')
-        .service('characterSprite', characterSprite);
-
-    // TODO запилить все классы с помошью value, с композиционной передачей зависимостей
+        .factory('CharacterSprite', characterSprite);
 
     characterSprite.$inject = ['SpriteAnimate', 'rect'];
 
     function characterSprite(SpriteAnimate, rect) {
 
-        this.CharacterSprite = function () {
+        var CharacterSprite = classCharacterSprite;
+        CharacterSprite.prototype = Object.create(SpriteAnimate.prototype);
+        CharacterSprite.prototype.calcDir = calcDir;
+
+        return CharacterSprite;
+
+        /////////////////////////////////////////////////////////////
+
+        function classCharacterSprite() {
             SpriteAnimate.call(this, new rect.Rect(-2, -1, 5, 2));
 
             var self = this;
@@ -50,12 +56,9 @@
 
 
             this.dir = 3;
+        }
 
-        };
-
-        this.CharacterSprite.prototype = Object.create(SpriteAnimate.prototype);
-
-        this.CharacterSprite.prototype.calcDir = function (x, y) {
+        function calcDir(x, y) {
             var matrix = {
                 '-1': {
                     '-2': 0,
@@ -74,7 +77,7 @@
                 }
             };
             this.dir = matrix[y+''][x+''];
-        };
+        }
     }
 
 })();

@@ -19,9 +19,9 @@ angular.module('app', []);
         //mapLoader.load();
         var onEnter = function () {
             //console.log('start game send request');
-            $http.post('/game/0', {checkpoint: 'cehck enter'}).then(function () {
+            /*$http.post('/game/0', {checkpoint: 'cehck enter'}).then(function () {
 
-            });
+            });*/
         };
 
         onEnter();

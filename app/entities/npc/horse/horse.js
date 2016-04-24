@@ -5,9 +5,9 @@
         .module('app')
         .service('horse', horse);
 
-    horse.$inject = ['npc', 'characterSprite', 'game', 'dialogs', 'message', 'npcSprite', 'rect'];
+    horse.$inject = ['npc', 'game', 'dialogs', 'message', 'npcSprite', 'rect'];
 
-    function horse(npc, characterSprite, game, dialogs, message, npcSprite, rect) {
+    function horse(npc, game, dialogs, message, npcSprite, rect) {
 
         this.Horse = function (x, y, layer) {
             npc.NPC.call(this, x, y, new npcSprite.NpcSprite(

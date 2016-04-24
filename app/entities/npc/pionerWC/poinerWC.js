@@ -5,9 +5,9 @@
         .module('app')
         .service('pionerWC', pionerWC);
 
-    pionerWC.$inject = ['npc', 'characterSprite', 'game', 'dialogs', 'npcSprite', 'rect'];
+    pionerWC.$inject = ['npc', 'game', 'dialogs', 'npcSprite', 'rect'];
 
-    function pionerWC(npc, characterSprite, game, dialogs, npcSprite, rect) {
+    function pionerWC(npc, game, dialogs, npcSprite, rect) {
 
         this.PionerWC = function (x, y, layer) {
             npc.NPC.call(this, x, y, new npcSprite.NpcSprite(

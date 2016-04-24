@@ -5,9 +5,9 @@
         .module('app')
         .service('fans', fans);
 
-    fans.$inject = ['npc', 'characterSprite', 'game', 'dialogs', 'message', 'npcSprite', 'rect'];
+    fans.$inject = ['npc', 'game', 'dialogs', 'message', 'npcSprite', 'rect'];
 
-    function fans(npc, characterSprite, game, dialogs, message, npcSprite, rect) {
+    function fans(npc, game, dialogs, message, npcSprite, rect) {
 
         this.Fans = function (x, y, layer) {
             npc.NPC.call(this, x, y, new npcSprite.NpcSprite(

@@ -11,7 +11,7 @@
         '$window',
         'entityVisible',
         'point',
-        'characterSprite',
+        'CharacterSprite',
         'message',
         'mapService',
         'game',
@@ -22,7 +22,7 @@
         $window,
         entityVisible,
         point,
-        characterSprite,
+        CharacterSprite,
         message,
         mapService,
         game,
@@ -37,7 +37,7 @@
             entityVisible.EntityVisible.call(this,
                 x,
                 y,
-                new characterSprite.CharacterSprite(),
+                new CharacterSprite(),
                 layer);
 
             var target = point.create(x, y);
