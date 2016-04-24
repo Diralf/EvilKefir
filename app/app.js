@@ -10,7 +10,7 @@ var app = angular.module('app', []);
     appRun.$inject = ['$rootScope', '$http', 'keyboardService', 'mapService', 'viewportService'];
 
     function appRun($rootScope, $http, keyboardService, mapService, viewportService) {
-        console.log($rootScope);
+        //console.log($rootScope);
 
         keyboardService.init();
         mapService.init();
