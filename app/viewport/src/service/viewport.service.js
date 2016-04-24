@@ -5,6 +5,8 @@
         .module('app')
         .service('viewportService', viewportService);
 
+    //TODO убрать Service в названии
+
     viewportService.$inject = ['symbolWidthService', 'mapService', 'characterControl', 'point', 'pointLimit'];
 
     function viewportService(symbolWidthService, mapService, characterControl, point, pointLimit) {
