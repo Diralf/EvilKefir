@@ -7,9 +7,9 @@
 
     // TODO запилить все классы с помошью value, с композиционной передачей зависимостей
 
-    level.$inject = ['symbolGrid', 'layer'];
+    level.$inject = ['symbolGrid', 'Layer'];
 
-    function level(symbolGrid, layer) {
+    function level(symbolGrid, Layer) {
         this.create = create;
 
         this.Level = Level;
@@ -41,7 +41,7 @@
             var layersObj = [];
 
             for (var i = 0; i < layerCount; i++) {
-                layersObj[i] = layer.create();
+                layersObj[i] = new Layer();
             }
 
             return layersObj;
