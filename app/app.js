@@ -1,26 +1,30 @@
 app = angular.module("app", []);
 
-app.run(['$rootScope', '$http', 'keyboardService', 'mapService', 'viewportService',
-    function ($rootScope, $http, keyboardService, mapService, viewportService) {
-    //console.log($rootScope);
+(function() {
+    "use strict";
 
-    keyboardService.init();
-    mapService.init();
-    viewportService.init();
+    angular
+        .module("app")
+        .run(appRun);
 
-    //mapLoader.load();
-    var onEnter = function () {
-        //console.log('start game send request');
-        $http.post('/game/0', {checkpoint: "cehck enter"}).then(function (response) {
+    appRun.$inject = ['$rootScope', '$http', 'keyboardService', 'mapService', 'viewportService'];
 
-        });
-    };
+    function appRun($rootScope, $http, keyboardService, mapService, viewportService) {
+        //console.log($rootScope);
 
-    onEnter();
-}]);
+        keyboardService.init();
+        mapService.init();
+        viewportService.init();
 
-app.config(function ($logProvider) {
-    $logProvider.debugEnabled(true);
-});
+        //mapLoader.load();
+        var onEnter = function () {
+            //console.log('start game send request');
+            $http.post('/game/0', {checkpoint: "cehck enter"}).then(function (response) {
 
-app.constant('transparentSymbol', 'g');
+            });
+        };
+
+        onEnter();
+    }
+})();
+
