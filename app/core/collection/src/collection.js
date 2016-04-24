@@ -1,139 +1,163 @@
-app.service("collection", [function () {
+(function () {
+    'use strict';
 
-    this.create = function () {
-        return new this.Collection();
-    };
+    angular
+        .module('app')
+        .service('collection', collection);
 
-    this.Collection = function () {
-        this._data = {};
-    };
+    // TODO запилить все классы с помошью value, с композиционной передачей зависимостей
 
-    /**
-     * Метод для замены или добавления нового элемента в коллекцию.
-     * param {string} key          - идентификатор объекта в колекции
-     * param {object} entity       - новый объект
-     * return {object} предыдущий объект или undefined если объектов с таким ключом не было.
-     */
-    this.Collection.prototype.set = function (key, entity) {
-        var prev;
+    collection.$inject = [];
 
-        if (typeof key === 'undefined' || key == null) {
-            throw new Error("Param 'key' is not defined!");
+    function collection() {
+
+        this.create = create;
+
+        this.Collection = Collection;
+        this.Collection.prototype.set = set;
+        this.Collection.prototype.add = add;
+        this.Collection.prototype.get = get;
+        this.Collection.prototype.each = each;
+        this.Collection.prototype.eachPart = eachPart;
+        this.Collection.prototype.remove = remove;
+        this.Collection.prototype.length = lengthCollection;
+        this.Collection.prototype.getCollection = getCollection;
+        this.Collection.prototype.clear = clear;
+
+        //////////////////////////////////////////////////
+
+        function create() {
+            return new this.Collection();
         }
 
-        if (typeof entity === 'undefined' || entity == null) {
-            throw new Error("Param 'entity' is not defined!");
+        function Collection() {
+            this._data = {};
         }
 
-        prev = this._data[key];
+        /**
+         * Метод для замены или добавления нового элемента в коллекцию.
+         * param {string} key          - идентификатор объекта в колекции
+         * param {object} entity       - новый объект
+         * return {object} предыдущий объект или undefined если объектов с таким ключом не было.
+         */
+        function set(key, entity) {
+            var prev;
 
-        this._data[key] = entity;
+            if (typeof key === 'undefined' || key === null) {
+                throw new Error('Param "key" is not defined!');
+            }
 
-        return prev;
-    };
+            if (typeof entity === 'undefined' || entity === null) {
+                throw new Error('Param "entity" is not defined!');
+            }
 
-    /**
-     * Добавляет новый элемент. Если ключ занят - выведет ошибку
-     * return {object} только что добавленный элемент
-     */
-    this.Collection.prototype.add = function (key, entity) {
-        if (this.get(key)) {
-            throw new Error("Entity with key '" + key + "' already exists!");
+            prev = this._data[key];
+
+            this._data[key] = entity;
+
+            return prev;
         }
 
-        this.set(key, entity);
+        /**
+         * Добавляет новый элемент. Если ключ занят - выведет ошибку
+         * return {object} только что добавленный элемент
+         */
+        function add(key, entity) {
+            if (this.get(key)) {
+                throw new Error('Entity with key "' + key + '" already exists!');
+            }
 
-        return entity;
-    };
+            this.set(key, entity);
 
-    /**
-     * Взять из коллекции один объект по ключу
-     * return {object} объект или undefined
-     */
-    this.Collection.prototype.get = function (key) {
-        return this._data[key];
-    };
-
-    /**
-     * Проход по всем элементам колеекции и выполнение для них функции callback
-     * param {function} callback - какое либо действие над каждым элеменетом коллекции
-     *      Параметры колбека:
-     *      param {string} key      - ключ текущего объекта
-     *      param {object} entity   - текущий объект
-     *      param {number} index    - индекс итерации
-     *      param {object} entities - собственно сама коллекция
-     */
-    this.Collection.prototype.each = function (callback, keys) {
-        keys = keys || Object.keys(this._data);
-
-        for (var i = 0; i < keys.length; i++) {
-            callback(keys[i], this._data[keys[i]], i, this._data);
-        }
-    };
-
-    this.Collection.prototype.eachPart = function (begin, count, callback) {
-        var keys;
-
-        if (count < 0) {
-            begin += count + 1;
-            count = -count;
+            return entity;
         }
 
-        keys = Object.keys(this._data)
-            .filter(function (item) {
-                return item >= begin && item < begin + count;
+        /**
+         * Взять из коллекции один объект по ключу
+         * return {object} объект или undefined
+         */
+        function get(key) {
+            return this._data[key];
+        }
+
+        /**
+         * Проход по всем элементам колеекции и выполнение для них функции callback
+         * param {function} callback - какое либо действие над каждым элеменетом коллекции
+         *      Параметры колбека:
+         *      param {string} key      - ключ текущего объекта
+         *      param {object} entity   - текущий объект
+         *      param {number} index    - индекс итерации
+         *      param {object} entities - собственно сама коллекция
+         */
+        function each(callback, keys) {
+            keys = keys || Object.keys(this._data);
+
+            for (var i = 0; i < keys.length; i++) {
+                callback(keys[i], this._data[keys[i]], i, this._data);
+            }
+        }
+
+        function eachPart(begin, count, callback) {
+            var keys;
+
+            if (count < 0) {
+                begin += count + 1;
+                count = -count;
+            }
+
+            keys = Object.keys(this._data)
+                .filter(function (item) {
+                    return item >= begin && item < begin + count;
+                });
+
+            this.each(callback, keys);
+        }
+
+        /**
+         * Удаление элемента коллекции по ключу
+         * param {string} key - ключ удаляемого элемента
+         * return {boolean} true - элемент удален. Если удаляемого элемента уже не было в коллекции то false
+         */
+        function remove(key) {
+            if (typeof key === 'undefined' && key == null) {
+                throw new Error('Param "key" is not defined!');
+            }
+
+            if (this._data[key]) {
+                delete this._data[key];
+                return true;
+            }
+
+            return false;
+        }
+
+        /**
+         * Взять размер коллекции
+         * return {number} размер коллекции
+         */
+        function lengthCollection() {
+            return Object.keys(this._data).length;
+        }
+
+        /**
+         * Взять коллекцию
+         * return {object} сама коллекция
+         */
+        function getCollection() {
+            return this._data;
+        }
+
+        /**
+         * Очистка коллекции
+         */
+        function clear() {
+            var self = this;
+
+            self.each(function (key) {
+                self.remove(key);
             });
-
-        this.each(callback, keys);
-    };
-
-    /**
-     * Удаление элемента коллекции по ключу
-     * param {string} key - ключ удаляемого элемента
-     * return {boolean} true - элемент удален. Если удаляемого элемента уже не было в коллекции то false
-     */
-    this.Collection.prototype.remove = function (key) {
-        if (typeof key === 'undefined' && key == null) {
-            throw new Error("Param 'key' is not defined!");
         }
 
-        if (this._data[key]) {
-            delete this._data[key];
-            return true;
-        }
+    }
 
-        return false;
-    };
-
-    /**
-     * Взять размер коллекции
-     * return {number} размер коллекции
-     */
-    this.Collection.prototype.length = function () {
-        var count = 0;
-        for (var prop in this._data) {
-            count++;
-        }
-        return count;
-    };
-
-    /**
-     * Взять коллекцию
-     * return {object} сама коллекция
-     */
-    this.Collection.prototype.getCollection = function () {
-        return this._data;
-    };
-
-    /**
-     * Очистка коллекции
-     */
-    this.Collection.prototype.clear = function () {
-        var self = this;
-
-        self.each(function (key) {
-            self.remove(key);
-        });
-    };
-
-}]);
+})();

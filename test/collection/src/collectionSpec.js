@@ -66,16 +66,16 @@ describe('collection', function () {
                 var self = this;
 
                 expect(function () { self.testCollection.set() })
-                    .toThrow(new Error("Param 'key' is not defined!"));
+                    .toThrow(new Error('Param "key" is not defined!'));
             });
 
             it('without second param, should throw error', function () {
                 var self = this;
 
                 expect(function () {self.testCollection.set(0)})
-                    .toThrow(new Error("Param 'entity' is not defined!"));
+                    .toThrow(new Error('Param "entity" is not defined!'));
                 expect(function () {self.testCollection.set("some_key")})
-                    .toThrow(new Error("Param 'entity' is not defined!"));
+                    .toThrow(new Error('Param "entity" is not defined!'));
             });
 
             it('should return undefined when setted in empty place', function () {
@@ -121,7 +121,7 @@ describe('collection', function () {
                 var self = this;
 
                 expect(function () {self.simpleCollection.add("obj1", self.entity2)})
-                    .toThrow(new Error("Entity with key 'obj1' already exists!"));
+                    .toThrow(new Error('Entity with key "obj1" already exists!'));
             });
         });
 
@@ -204,7 +204,7 @@ describe('collection', function () {
                 var self = this;
 
                 expect(function () { self.simpleCollection.remove() })
-                    .toThrow(new Error("Param 'key' is not defined!"));
+                    .toThrow(new Error('Param "key" is not defined!'));
             });
 
             it('should return true and remove object', function () {
