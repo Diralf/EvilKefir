@@ -3,25 +3,25 @@
 
     angular
         .module('app')
-        .service('spriteAnimate', spriteAnimate);
-
-    // TODO запилить все классы с помошью value, с композиционной передачей зависимостей
+        .factory('SpriteAnimate', spriteAnimate);
 
     spriteAnimate.$inject = ['$q', 'Sprite', 'strip'];
 
     function spriteAnimate($q, Sprite, strip) {
 
-        this.SpriteAnimate = SpriteAnimate;
-        this.SpriteAnimate.prototype = Object.create(Sprite.prototype);
-        this.SpriteAnimate.prototype.step = step;
-        this.SpriteAnimate.prototype.changeStrip = changeStrip;
-        this.SpriteAnimate.prototype.revertStrip = revertStrip;
-        this.SpriteAnimate.prototype.collapseArrays = collapseArrays;
-        this.SpriteAnimate.prototype.loadStripSet = loadStripSet;
+        var SpriteAnimate = classSpriteAnimate;
+        SpriteAnimate.prototype = Object.create(Sprite.prototype);
+        SpriteAnimate.prototype.step = step;
+        SpriteAnimate.prototype.changeStrip = changeStrip;
+        SpriteAnimate.prototype.revertStrip = revertStrip;
+        SpriteAnimate.prototype.collapseArrays = collapseArrays;
+        SpriteAnimate.prototype.loadStripSet = loadStripSet;
+
+        return SpriteAnimate;
 
         //////////////////////////////////////////////////////////
 
-        function SpriteAnimate(mask) {
+        function classSpriteAnimate(mask) {
             Sprite.call(this, null, mask);
 
             this.frame = 0;
