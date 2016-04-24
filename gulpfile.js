@@ -15,7 +15,8 @@ gulp.task('default', function () {
 });
 
 gulp.task('html', function() {
-    return gulp.src( './client/index.html' )
+    return gulp.src( './_index.html' )
         .pipe( includeSources() )
+        .pipe(concat('index.html'))
         .pipe( gulp.dest('./') );
 });

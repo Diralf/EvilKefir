@@ -18,7 +18,7 @@ var app = express();
 
 app.set('env', 'production');
 app.set('port', port );
-app.use(express.static(process.env.OPENSHIFT_REPO_DIR || path.join(__dirname)));
+app.use(express.static((process.env.OPENSHIFT_REPO_DIR || path.join(__dirname))));
 
 app.use(methodOverride());
 app.use(bodyParser.json());
