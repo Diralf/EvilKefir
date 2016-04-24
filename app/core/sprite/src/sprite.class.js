@@ -5,9 +5,9 @@
         .module('app')
         .factory('Sprite', sprite);
 
-    sprite.$inject = ['spriteImage', 'rect'];
+    sprite.$inject = ['SpriteImage', 'rect'];
 
-    function sprite(spriteImage, rect) {
+    function sprite(SpriteImage, rect) {
 
         var Sprite = classSprite;
         Sprite.prototype.image = image;
@@ -18,7 +18,7 @@
         /////////////////////////////////////////////////////
 
         function classSprite(image, mask) {
-            this.spriteImage = image || spriteImage.create();
+            this.spriteImage = image || new SpriteImage();
             this.mask = mask || new rect.Rect();
         }
 
