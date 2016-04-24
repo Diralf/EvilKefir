@@ -5,6 +5,8 @@
         .module('app')
         .service('mapService', mapService);
 
+    //TODO убрать Service в названии
+
     mapService.$inject = ['$http', '$q', 'level'];
 
     function mapService($http, $q, level) {

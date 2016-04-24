@@ -5,6 +5,8 @@
         .module('app')
         .service('symbolWidthService', symbolWidthService);
 
+    //TODO убрать Service в названии
+
     symbolWidthService.$inject = [];
 
     function symbolWidthService() {
