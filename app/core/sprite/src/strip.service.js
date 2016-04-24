@@ -7,9 +7,9 @@
 
     // TODO запилить все классы с помошью value, с композиционной передачей зависимостей
 
-    strip.$inject = ['$http', '$q', 'spriteImage'];
+    strip.$inject = ['$http', '$q', 'SpriteImage'];
 
-    function strip($http, $q, spriteImage) {
+    function strip($http, $q, SpriteImage) {
         var cache = {};
 
         this.load = load;
@@ -49,7 +49,7 @@
                 this.images[i] = [];
                 for (var j = 0; j < this.frameCount; j++) {
                     var imageString = fullStripArray.slice(offsetFrame, offsetFrame + height).join('');
-                    this.images[i][j] = spriteImage.create(imageString, width, height, centerX, centerY);
+                    this.images[i][j] = new SpriteImage(imageString, width, height, centerX, centerY);
                     offsetFrame += height;
                 }
             }

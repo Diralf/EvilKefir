@@ -3,26 +3,22 @@
 
     angular
         .module('app')
-        .service('spriteImage', spriteImage);
+        .factory('SpriteImage', spriteImage);
 
     // TODO запилить все классы с помошью value, с композиционной передачей зависимостей
 
     spriteImage.$inject = ['rect'];
 
     function spriteImage(rect) {
-        this.create = create;
 
-        this.SpriteImage = SpriteImage;
+        var SpriteImage = classSpriteImage;
+        SpriteImage.prototype.getRect = getRect;
 
-        this.SpriteImage.prototype.getRect = getRect;
+        return SpriteImage;
 
         ////////////////////////////////////
 
-        function create(image, width, height, centerX, centerY) {
-            return new SpriteImage(image, width, height, centerX, centerY);
-        }
-
-        function SpriteImage (image, width, height, centerX, centerY) {
+        function classSpriteImage (image, width, height, centerX, centerY) {
             this.image = image || '$';
             this.width = width || 1;
             this.height = height || 1;
