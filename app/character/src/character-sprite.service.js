@@ -7,12 +7,12 @@
 
     // TODO запилить все классы с помошью value, с композиционной передачей зависимостей
 
-    characterSprite.$inject = ['$q', 'spriteAnimate', 'strip', 'rect'];
+    characterSprite.$inject = ['$q', 'SpriteAnimate', 'strip', 'rect'];
 
-    function characterSprite($q, spriteAnimate, strip, rect) {
+    function characterSprite($q, SpriteAnimate, strip, rect) {
 
         this.CharacterSprite = function () {
-            spriteAnimate.SpriteAnimate.call(this, new rect.Rect(-2, -1, 5, 2));
+            SpriteAnimate.call(this, new rect.Rect(-2, -1, 5, 2));
 
             var self = this;
 
@@ -53,7 +53,7 @@
 
         };
 
-        this.CharacterSprite.prototype = Object.create(spriteAnimate.SpriteAnimate.prototype);
+        this.CharacterSprite.prototype = Object.create(SpriteAnimate.prototype);
 
         this.CharacterSprite.prototype.calcDir = function (x, y) {
             var matrix = {
