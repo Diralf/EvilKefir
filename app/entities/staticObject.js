@@ -1,12 +1,27 @@
-app.service('staticObject', ['entityVisible', 'message', function (entityVisible, message) {
-    this.StaticObject = function (x, y, sprite, layer) {
-        entityVisible.EntityVisible.call(this, x, y, sprite, layer);
+(function () {
+    'use strict';
 
-        this.onMessage[message.LOOK] = function (params) {
-            console.log("he look on me! I - " + this.id);
-            return true;
-        };
-    };
+    angular
+        .module('app')
+        .service('staticObject', staticObject);
 
-    this.StaticObject.prototype = Object.create(entityVisible.EntityVisible.prototype);
-}]);
+    staticObject.$inject = ['entityVisible', 'message'];
+
+    function staticObject(entityVisible, message) {
+
+        this.StaticObject = StaticObject;
+        this.StaticObject.prototype = Object.create(entityVisible.EntityVisible.prototype);
+
+        ////////////////////////////////////////////
+
+        function StaticObject(x, y, sprite, layer) {
+            entityVisible.EntityVisible.call(this, x, y, sprite, layer);
+
+            this.onMessage[message.LOOK] = function (/*params*/) {
+                console.log('he look on me! I - ' + this.id);
+                return true;
+            };
+        }
+    }
+
+})();
