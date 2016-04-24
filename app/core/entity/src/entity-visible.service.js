@@ -7,9 +7,9 @@
 
     // TODO запилить все классы с помошью value, с композиционной передачей зависимостей
 
-    entityVisible.$inject = ['$log', 'entity', 'sprite', 'collision', 'transparentSymbol', 'rect'];
+    entityVisible.$inject = ['$log', 'entity', 'Sprite', 'collision', 'transparentSymbol', 'rect'];
 
-    function entityVisible($log, entity, sprite, collision, transparentSymbol, rect) {
+    function entityVisible($log, entity, Sprite, collision, transparentSymbol, rect) {
 
         var rectCheckCollision = new rect.Rect(-20, -10, 40, 20);
 
@@ -35,7 +35,7 @@
 
         function EntityVisible(x, y, spr, layer) {
             entity.Entity.apply(this);
-            this.sprite = spr || sprite.create();
+            this.sprite = spr || new Sprite();
             this.x = x || 0;
             this.y = y || 0;
             this.layer = layer;
