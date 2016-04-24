@@ -3,36 +3,30 @@
 
     angular
         .module('app')
-        .service('layer', layer);
-
-    // TODO запилить все классы с помошью value, с композиционной передачей зависимостей
+        .factory('Layer', layer);
 
     layer.$inject = ['Collection'];
 
     function layer(Collection) {
 
-        this.create = create;
+        var Layer = classLayer;
+        Layer.prototype.add = add;
+        Layer.prototype.get = get;
+        Layer.prototype.remove = remove;
+        Layer.prototype.layerEach = layerEach;
+        Layer.prototype.eachRect = eachRect;
+        Layer.prototype.moveIn = moveIn;
+        Layer.prototype.moveOn = moveOn;
+        Layer.prototype.clear = clear;
+        Layer.prototype.size = size;
+        Layer.prototype.count = count;
+        Layer.prototype.getLayer = getLayer;
 
-        this.Layer = Layer;
-        this.Layer.prototype.add = add;
-        this.Layer.prototype.get = get;
-        this.Layer.prototype.remove = remove;
-        this.Layer.prototype.layerEach = layerEach;
-        this.Layer.prototype.eachRect = eachRect;
-        this.Layer.prototype.moveIn = moveIn;
-        this.Layer.prototype.moveOn = moveOn;
-        this.Layer.prototype.clear = clear;
-        this.Layer.prototype.size = size;
-        this.Layer.prototype.count = count;
-        this.Layer.prototype.getLayer = getLayer;
+        return Layer;
 
         /////////////////////////////////////////////////////
 
-        function create() {
-            return new this.Layer();
-        }
-
-        function Layer() {
+        function classLayer() {
             this._data = new Collection();
         }
 
