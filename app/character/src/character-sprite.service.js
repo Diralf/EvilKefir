@@ -7,9 +7,9 @@
 
     // TODO запилить все классы с помошью value, с композиционной передачей зависимостей
 
-    characterSprite.$inject = ['$q', 'SpriteAnimate', 'strip', 'rect'];
+    characterSprite.$inject = ['SpriteAnimate', 'rect'];
 
-    function characterSprite($q, SpriteAnimate, strip, rect) {
+    function characterSprite(SpriteAnimate, rect) {
 
         this.CharacterSprite = function () {
             SpriteAnimate.call(this, new rect.Rect(-2, -1, 5, 2));
