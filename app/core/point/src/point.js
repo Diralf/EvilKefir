@@ -1,23 +1,45 @@
-app.service("point", [function () {
-    this.create = function (x, y) {
-        return new this.Point(x, y);
-    };
+(function () {
+    'use strict';
 
-    this.Point = function (x, y) {
-        this.x = +x || 0;
-        this.y = +y || 0;
-    };
+    angular
+        .module('app')
+        .service('point', point);
 
-    this.Point.prototype.moveIn = function (x, y) {
-        this.x = +x;
-        this.y = +y;
-    };
+    // TODO запилить все классы с помошью value, с композиционной передачей зависимостей
 
-    this.Point.prototype.moveOn = function (x, y) {
-        this.moveIn(this.x + x, this.y + y);
-    };
+    point.$inject = [];
 
-    this.Point.prototype.setPoint = function (point) {
-        this.moveIn(point.x, point.y);
-    };
-}]);
+    function point() {
+        this.create = create;
+
+        this.Point = Point;
+        this.Point.prototype.moveIn = moveIn;
+        this.Point.prototype.moveOn = moveOn;
+        this.Point.prototype.setPoint = setPoint;
+
+        ////////////////////////////////////////////////////////
+
+        function create(x, y) {
+            return new this.Point(x, y);
+        }
+
+        function Point(x, y) {
+            this.x = +x || 0;
+            this.y = +y || 0;
+        }
+
+        function moveIn(x, y) {
+            this.x = +x;
+            this.y = +y;
+        }
+
+        function moveOn(x, y) {
+            this.moveIn(this.x + x, this.y + y);
+        }
+
+        function setPoint(point) {
+            this.moveIn(point.x, point.y);
+        }
+    }
+
+})();
