@@ -5,6 +5,8 @@
         .module('app')
         .service('layer', layer);
 
+    // TODO запилить все классы с помошью value, с композиционной передачей зависимостей
+
     layer.$inject = ['collection'];
 
     function layer(collection) {
