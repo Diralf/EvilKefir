@@ -5,9 +5,9 @@
         .module('app')
         .service('kefir', kefir);
 
-    kefir.$inject = ['npc', 'game', 'dialogs', 'message', 'npcSprite', 'rect'];
+    kefir.$inject = ['npc', 'game', 'dialogs', 'message', 'npcSprite', 'Rect'];
 
-    function kefir(npc, game, dialogs, message, npcSprite, rect) {
+    function kefir(npc, game, dialogs, message, npcSprite, Rect) {
 
         this.Kefir = function (x, y, layer) {
             npc.NPC.call(this, x, y, new npcSprite.NpcSprite(
@@ -33,7 +33,7 @@
                         centerY: 18,
                         speed: 0.1
                     }
-                }, new rect.Rect(-7, -2, 14, 4)
+                }, new Rect(-7, -2, 14, 4)
             ), layer);
 
             this.weaponDeath = game.weapons.rose;

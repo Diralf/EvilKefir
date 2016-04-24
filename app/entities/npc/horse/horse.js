@@ -5,9 +5,9 @@
         .module('app')
         .service('horse', horse);
 
-    horse.$inject = ['npc', 'game', 'dialogs', 'message', 'npcSprite', 'rect'];
+    horse.$inject = ['npc', 'game', 'dialogs', 'message', 'npcSprite', 'Rect'];
 
-    function horse(npc, game, dialogs, message, npcSprite, rect) {
+    function horse(npc, game, dialogs, message, npcSprite, Rect) {
 
         this.Horse = function (x, y, layer) {
             npc.NPC.call(this, x, y, new npcSprite.NpcSprite(
@@ -33,7 +33,7 @@
                         centerY: 17,
                         speed: 0.02
                     }
-                }, new rect.Rect(-1, -9, 10, 10)
+                }, new Rect(-1, -9, 10, 10)
             ), layer);
 
             this.weaponDeath = game.weapons.plank;

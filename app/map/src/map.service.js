@@ -7,9 +7,9 @@
 
     //TODO убрать Service в названии
 
-    mapService.$inject = ['$http', '$q', 'level'];
+    mapService.$inject = ['$http', '$q', 'Level'];
 
-    function mapService($http, $q, level) {
+    function mapService($http, $q, Level) {
         this.levels = [];
         this.currentLevel = null;
 
@@ -21,7 +21,7 @@
 
         function init() {
             var self = this;
-            this.levels.push(level.create());
+            this.levels.push(new Level());
             this.currentLevel = this.levels[0];
 
             var startArray = [];

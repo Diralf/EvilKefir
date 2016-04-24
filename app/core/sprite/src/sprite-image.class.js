@@ -5,9 +5,9 @@
         .module('app')
         .factory('SpriteImage', spriteImage);
 
-    spriteImage.$inject = ['rect'];
+    spriteImage.$inject = ['Rect'];
 
-    function spriteImage(rect) {
+    function spriteImage(Rect) {
 
         var SpriteImage = classSpriteImage;
         SpriteImage.prototype.getRect = getRect;
@@ -27,7 +27,7 @@
         function getRect(x, y) {
             x = x || 0;
             y = y || 0;
-            return new rect.Rect(x - this.centerX, y - this.centerY, this.width, this.height);
+            return new Rect(x - this.centerX, y - this.centerY, this.width, this.height);
         }
     }
 })();

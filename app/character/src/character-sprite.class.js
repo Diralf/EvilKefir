@@ -5,9 +5,9 @@
         .module('app')
         .factory('CharacterSprite', characterSprite);
 
-    characterSprite.$inject = ['SpriteAnimate', 'rect'];
+    characterSprite.$inject = ['SpriteAnimate', 'Rect'];
 
-    function characterSprite(SpriteAnimate, rect) {
+    function characterSprite(SpriteAnimate, Rect) {
 
         var CharacterSprite = classCharacterSprite;
         CharacterSprite.prototype = Object.create(SpriteAnimate.prototype);
@@ -18,7 +18,7 @@
         /////////////////////////////////////////////////////////////
 
         function classCharacterSprite() {
-            SpriteAnimate.call(this, new rect.Rect(-2, -1, 5, 2));
+            SpriteAnimate.call(this, new Rect(-2, -1, 5, 2));
 
             var self = this;
 
