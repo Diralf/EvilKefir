@@ -119,7 +119,7 @@
          * return {boolean} true - элемент удален. Если удаляемого элемента уже не было в коллекции то false
          */
         function remove(key) {
-            if (typeof key === 'undefined' && key == null) {
+            if (typeof key === 'undefined' || key === null) {
                 throw new Error('Param "key" is not defined!');
             }
 
