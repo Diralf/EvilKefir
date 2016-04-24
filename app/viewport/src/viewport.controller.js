@@ -7,20 +7,12 @@
 
     viewport.$inject = [
         '$scope',
-        '$log',
         'Character',
-        'characterData',
-        'characterControl',
         'mouseService',
         'mapService',
         'viewportService',
         'render',
         'symbolWidthService',
-        'entityVisible',
-        'Sprite',
-        'SpriteImage',
-        'staticObject',
-        'rect',
         'message',
         'game',
         'pionerWC',
@@ -29,25 +21,17 @@
         'horse',
         'fans',
         'kefir',
-        'entity'
+        'Entity'
     ];
 
     function viewport(
         $scope,
-        $log,
         Character,
-        characterData,
-        characterControl,
         mouseService,
         mapService,
         viewportService,
         render,
         symbolWidthService,
-        entityVisible,
-        Sprite,
-        SpriteImage,
-        staticObject,
-        rect,
         message,
         game,
         pionerWC,
@@ -56,7 +40,7 @@
         horse,
         fans,
         kefir,
-        entity) {
+        Entity) {
 
         var mouseHold = false;
 
@@ -180,7 +164,7 @@
         });
 
         var timerId = setInterval(function() {
-            entity.entityCollection.each(function (key, item) {
+            Entity.entityCollection.each(function (key, item) {
                 item.step();
             });
 
