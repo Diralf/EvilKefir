@@ -1,31 +1,51 @@
-app.service('level', ['symbolGrid', 'layer', function (symbolGrid, layer) {
-    this.create = function (layerCount) {
-        return new this.Level(layerCount);
-    };
+(function () {
+    'use strict';
 
-    this.Level = function (layerCount) {
-        this.tile = symbolGrid.create();
-        this.mask = symbolGrid.create();
+    angular
+        .module('app')
+        .service('level', level);
 
-        this.layers = createLayers(layerCount || 3);
-    };
+    // TODO запилить все классы с помошью value, с композиционной передачей зависимостей
 
-    this.Level.prototype.width = function () {
-        return this.tile.width;
-    };
+    level.$inject = ['symbolGrid', 'layer'];
 
-    this.Level.prototype.height = function () {
-        return this.tile.height;
-    };
+    function level(symbolGrid, layer) {
+        this.create = create;
 
-    function createLayers(layerCount) {
-        var layersObj = [];
+        this.Level = Level;
+        this.Level.prototype.width = width;
+        this.Level.prototype.height = height;
 
-        for (var i = 0; i < layerCount; i++) {
-            layersObj[i] = layer.create();
+        //////////////////////////////////////////////////////////
+
+        function create(layerCount) {
+            return new this.Level(layerCount);
         }
 
-        return layersObj;
-    };
+        function Level(layerCount) {
+            this.tile = symbolGrid.create();
+            this.mask = symbolGrid.create();
 
-}]);
+            this.layers = createLayers(layerCount || 3);
+        }
+
+        function width() {
+            return this.tile.width;
+        }
+
+        function height() {
+            return this.tile.height;
+        }
+
+        function createLayers(layerCount) {
+            var layersObj = [];
+
+            for (var i = 0; i < layerCount; i++) {
+                layersObj[i] = layer.create();
+            }
+
+            return layersObj;
+        }
+
+    }
+})();
