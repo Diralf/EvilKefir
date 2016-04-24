@@ -3,20 +3,20 @@
 
     angular
         .module('app')
-        .service('strip', strip);
-
-    // TODO запилить все классы с помошью value, с композиционной передачей зависимостей
+        .factory('Strip', strip);
 
     strip.$inject = ['$http', '$q', 'SpriteImage'];
 
     function strip($http, $q, SpriteImage) {
         var cache = {};
 
-        this.load = load;
+        var Strip = classStrip;
+        Strip.prototype.dirframe = dirframe;
 
-        this.Strip = Strip;
+        /** static */
+        Strip.load = load;
 
-        this.Strip.prototype.dirframe = dirframe;
+        return Strip;
 
         ///////////////////////////////////////////
 
@@ -37,7 +37,7 @@
             return cache[fileName].promise;
         }
 
-        function Strip(name, fullStripArray, countFrames, countDir, width, height, centerX, centerY) {
+        function classStrip(name, fullStripArray, countFrames, countDir, width, height, centerX, centerY) {
             this.name = name;
             this.images = [];
             this.frameCount = countFrames;

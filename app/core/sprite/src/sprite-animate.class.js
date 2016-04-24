@@ -5,9 +5,9 @@
         .module('app')
         .factory('SpriteAnimate', spriteAnimate);
 
-    spriteAnimate.$inject = ['$q', 'Sprite', 'strip'];
+    spriteAnimate.$inject = ['$q', 'Sprite', 'Strip'];
 
-    function spriteAnimate($q, Sprite, strip) {
+    function spriteAnimate($q, Sprite, Strip) {
 
         var SpriteAnimate = classSpriteAnimate;
         SpriteAnimate.prototype = Object.create(Sprite.prototype);
@@ -76,9 +76,9 @@
             var self = this;
 
             return $q.all(fileNames.map(function (name) {
-                return strip.load(name);
+                return Strip.load(name);
             })).then(function (linesArray) {
-                var stripAwait = new strip.Strip(stripName, self.collapseArrays(linesArray),
+                var stripAwait = new Strip(stripName, self.collapseArrays(linesArray),
                     properties.frameCount,
                     properties.dirCount,
                     properties.width,

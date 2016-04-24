@@ -5,8 +5,6 @@
         .module('app')
         .factory('SpriteImage', spriteImage);
 
-    // TODO запилить все классы с помошью value, с композиционной передачей зависимостей
-
     spriteImage.$inject = ['rect'];
 
     function spriteImage(rect) {
