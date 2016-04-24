@@ -24,7 +24,8 @@
             if (!cache[fileName]) {
                 cache[fileName] = $q.defer();
 
-                $http.post('/sprite', {fileName: fileName}).then(function (response) {
+                $http.post('assets/' + fileName, {fileName: fileName}).then(function (response) {
+                //$http.post('/sprite', {fileName: fileName}).then(function (response) {
 
                     var lines = response.data.split('\n').map(function (line) {
                         return line.replace(new RegExp(String.fromCharCode(13), 'g'), '');

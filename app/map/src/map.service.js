@@ -51,7 +51,8 @@
             ];
 
             $q.all(maps.map(function (item) {
-                return $http.post('/sprite', {fileName: item});
+                return $http.post('assets/' + item, {fileName: item});
+                //return $http.post('/sprite', {fileName: item});
             })).then(function (maps) {
                 var matrix = [
                     [maps[1].data, maps[7].data, maps[6].data, maps[4].data, maps[9].data, maps[9].data],
