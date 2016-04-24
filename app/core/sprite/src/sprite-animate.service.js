@@ -7,12 +7,12 @@
 
     // TODO запилить все классы с помошью value, с композиционной передачей зависимостей
 
-    spriteAnimate.$inject = ['$q', 'sprite', 'strip'];
+    spriteAnimate.$inject = ['$q', 'Sprite', 'strip'];
 
-    function spriteAnimate($q, sprite, strip) {
+    function spriteAnimate($q, Sprite, strip) {
 
         this.SpriteAnimate = SpriteAnimate;
-        this.SpriteAnimate.prototype = Object.create(sprite.Sprite.prototype);
+        this.SpriteAnimate.prototype = Object.create(Sprite.prototype);
         this.SpriteAnimate.prototype.step = step;
         this.SpriteAnimate.prototype.changeStrip = changeStrip;
         this.SpriteAnimate.prototype.revertStrip = revertStrip;
@@ -22,7 +22,7 @@
         //////////////////////////////////////////////////////////
 
         function SpriteAnimate(mask) {
-            sprite.Sprite.call(this, null, mask);
+            Sprite.call(this, null, mask);
 
             this.frame = 0;
             this.dir = 0;
