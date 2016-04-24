@@ -7,14 +7,14 @@
 
     //TODO убрать Service в названии
 
-    viewportService.$inject = ['symbolWidthService', 'mapService', 'characterControl', 'point', 'pointLimit'];
+    viewportService.$inject = ['symbolWidthService', 'mapService', 'Point', 'PointLimit'];
 
-    function viewportService(symbolWidthService, mapService, characterControl, point, pointLimit) {
+    function viewportService(symbolWidthService, mapService, Point, PointLimit) {
         var self = this;
 
         this.player = null;
-        this.pos = pointLimit.create(0, 0, point.create(0, 0), point.create(500, 500));
-        this.dimension = pointLimit.create(80, 30, point.create(0, 0));
+        this.pos = new PointLimit(0, 0, new Point(0, 0), new Point(500, 500));
+        this.dimension = new PointLimit(80, 30, new Point(0, 0));
 
         this.init = init;
         this.update = update;

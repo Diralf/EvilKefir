@@ -5,9 +5,9 @@
         .module('app')
         .service('fox', fox);
 
-    fox.$inject = ['npc', 'game', 'dialogs', 'message', 'npcSprite', 'rect'];
+    fox.$inject = ['npc', 'game', 'dialogs', 'message', 'npcSprite', 'Rect'];
 
-    function fox(npc, game, dialogs, message, npcSprite, rect) {
+    function fox(npc, game, dialogs, message, npcSprite, Rect) {
 
         this.Fox = function (x, y, layer) {
             npc.NPC.call(this, x, y, new npcSprite.NpcSprite(
@@ -33,7 +33,7 @@
                         centerY: 2,
                         speed: 0.02
                     }
-                }, new rect.Rect(-3, -2, 8, 3)
+                }, new Rect(-3, -2, 8, 3)
             ), layer);
 
             this.weaponDeath = game.weapons.plank;

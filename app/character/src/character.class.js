@@ -8,7 +8,7 @@
     character.$inject = [
         '$window',
         'EntityVisible',
-        'point',
+        'Point',
         'CharacterSprite',
         'message',
         'mapService',
@@ -19,7 +19,7 @@
     function character(
         $window,
         EntityVisible,
-        point,
+        Point,
         CharacterSprite,
         message,
         mapService,
@@ -42,7 +42,7 @@
                 new CharacterSprite(),
                 layer);
 
-            var target = point.create(x, y);
+            var target = new Point(x, y);
             var isMove = false;
 
             game.startDialog(dialogs.start);
@@ -72,7 +72,7 @@
                     y = this.y;
                 }
 
-                target = point.create(x, y);
+                target = new Point(x, y);
 
                 if (this.sprite.currentStrip.name !== 'move') {
                     this.sprite.changeStrip('move');
@@ -101,7 +101,7 @@
             };
 
             function findPath () {
-                var dir = findDirection.call(this);
+                var dir = findDiwrection.call(this);
 
                 var xycheck = checkCollision.call(this, this.x + dir.x, this.y + dir.y);
                 var xcheck;
@@ -129,7 +129,7 @@
                 var resX = _x > 0 ? 2 : ( _x < 0 ? -2 : 0);
                 var resY = _y > 0 ? 1 : ( _y < 0 ? -1 : 0);
 
-                return point.create(resX, resY);
+                return new Point(resX, resY);
             }
 
             function stopMove() {

@@ -5,11 +5,11 @@
         .module('app')
         .factory('EntityVisible', entityVisible);
 
-    entityVisible.$inject = ['$log', 'Entity', 'Sprite', 'collision', 'transparentSymbol', 'rect'];
+    entityVisible.$inject = ['$log', 'Entity', 'Sprite', 'collision', 'transparentSymbol', 'Rect'];
 
-    function entityVisible($log, Entity, Sprite, collision, transparentSymbol, rect) {
+    function entityVisible($log, Entity, Sprite, collision, transparentSymbol, Rect) {
 
-        var rectCheckCollision = new rect.Rect(-20, -10, 40, 20);
+        var rectCheckCollision = new Rect(-20, -10, 40, 20);
 
         var EntityVisible = classEntityVisible;
         EntityVisible.prototype = Object.create(Entity.prototype);
@@ -41,7 +41,7 @@
 
             var mask = this.sprite.mask;
 
-            return new rect.Rect(mask.x + x, mask.y + y, mask.w, mask.h);
+            return new Rect(mask.x + x, mask.y + y, mask.w, mask.h);
         }
 
         function step() {
