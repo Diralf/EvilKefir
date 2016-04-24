@@ -5,9 +5,10 @@
         .module('app')
         .controller('viewport', viewport);
 
-    viewport.$inject = ['$scope',
+    viewport.$inject = [
+        '$scope',
         '$log',
-        'character',
+        'Character',
         'characterData',
         'characterControl',
         'mouseService',
@@ -34,7 +35,7 @@
     function viewport(
         $scope,
         $log,
-        character,
+        Character,
         characterData,
         characterControl,
         mouseService,
@@ -62,7 +63,7 @@
         var mouseX = 0;
         var mouseY = 0;
 
-        var player = character.create(24, 30, mapService.currentLevel.layers[0]);
+        var player = new Character(24, 30, mapService.currentLevel.layers[0]);
         var pwc = new pionerWC.PionerWC(206, 27, mapService.currentLevel.layers[0]);
         var ppark = new pionerPark.PionerPark(140, 69, mapService.currentLevel.layers[0]);
         var fox1 = new fox.Fox(226, 64, mapService.currentLevel.layers[0]);
