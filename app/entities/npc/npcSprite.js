@@ -1,17 +1,31 @@
-app.service('npcSprite', ['$q', 'spriteAnimate', 'strip', 'rect', function ($q, spriteAnimate, strip, rect) {
+(function () {
+    'use strict';
 
-    this.NpcSprite = function (await, death, mask) {
-        spriteAnimate.SpriteAnimate.call(this, mask);
+    angular
+        .module('app')
+        .service('npcSprite', npcSprite);
 
-        var self = this;
+    npcSprite.$inject = ['$q', 'spriteAnimate'];
 
-        this.promise = $q.all([
-            this.loadStripSet('await',[await.path], await.params),
-            this.loadStripSet('death',[death.path], death.params)
-        ]).then(function () {
-            self.changeStrip('await');
-        });
-    };
+    function npcSprite($q, spriteAnimate) {
 
-    this.NpcSprite.prototype = Object.create(spriteAnimate.SpriteAnimate.prototype);
-}]);
+        this.NpcSprite = NpcSprite;
+        this.NpcSprite.prototype = Object.create(spriteAnimate.SpriteAnimate.prototype);
+
+        ////////////////////////////////////////
+
+        function NpcSprite(await, death, mask) {
+            spriteAnimate.SpriteAnimate.call(this, mask);
+
+            var self = this;
+
+            this.promise = $q.all([
+                this.loadStripSet('await',[await.path], await.params),
+                this.loadStripSet('death',[death.path], death.params)
+            ]).then(function () {
+                self.changeStrip('await');
+            });
+        }
+    }
+
+})();
