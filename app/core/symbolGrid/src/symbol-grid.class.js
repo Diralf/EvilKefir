@@ -3,30 +3,24 @@
 
     angular
         .module('app')
-        .service('symbolGrid', symbolGrid);
-
-    // TODO запилить все классы с помошью value, с композиционной передачей зависимостей
+        .service('SymbolGrid', symbolGrid);
 
     symbolGrid.$inject = [];
 
     function symbolGrid() {
 
-        this.create = create;
+        var SymbolGrid = classSymbolGrid;
+        SymbolGrid.prototype.getRect = getRect;
+        SymbolGrid.prototype.initFromText = initFromText;
+        SymbolGrid.prototype.initFromStringArray = initFromStringArray;
+        SymbolGrid.prototype.initFromMatrix = initFromMatrix;
+        SymbolGrid.prototype.init = init;
 
-        this.SymbolGrid = SymbolGrid;
-        this.SymbolGrid.prototype.getRect = getRect;
-        this.SymbolGrid.prototype.initFromText = initFromText;
-        this.SymbolGrid.prototype.initFromStringArray = initFromStringArray;
-        this.SymbolGrid.prototype.initFromMatrix = initFromMatrix;
-        this.SymbolGrid.prototype.init = init;
+        return SymbolGrid;
 
         ////////////////////////////////////////////////
 
-        function create() {
-            return new this.SymbolGrid();
-        }
-
-        function SymbolGrid() {
+        function classSymbolGrid() {
             this.data = [];
             this.width = 0;
             this.height = 0;

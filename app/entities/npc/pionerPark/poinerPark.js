@@ -5,9 +5,9 @@
         .module('app')
         .service('pionerPark', pionerPark);
 
-    pionerPark.$inject = ['npc', 'game', 'dialogs', 'npcSprite', 'rect'];
+    pionerPark.$inject = ['npc', 'game', 'dialogs', 'npcSprite', 'Rect'];
 
-    function pionerPark(npc, game, dialogs, npcSprite, rect) {
+    function pionerPark(npc, game, dialogs, npcSprite, Rect) {
 
         this.PionerPark = function (x, y, layer) {
             npc.NPC.call(this, x, y, new npcSprite.NpcSprite(
@@ -33,7 +33,7 @@
                         centerY: 5,
                         speed: 0.1
                     }
-                }, new rect.Rect(-2, -1, 5, 2)
+                }, new Rect(-2, -1, 5, 2)
             ), layer);
 
             this.isTalked = false;

@@ -3,29 +3,22 @@
 
     angular
         .module('app')
-        .service('pointLimit', pointLimit);
+        .factory('PointLimit', pointLimit);
 
-    // TODO запилить все классы с помошью value, с композиционной передачей зависимостей
+    pointLimit.$inject = ['Point'];
 
-    pointLimit.$inject = ['point'];
+    function pointLimit(Point) {
 
-    function pointLimit(point) {
-        this.create = create;
+        var PointLimit = classPointLimit;
+        PointLimit.prototype = Object.create(Point.prototype);
+        PointLimit.prototype.moveIn = moveIn;
 
-        this.PointLimit = PointLimit;
-
-        this.PointLimit.prototype = Object.create(point.Point.prototype);
-
-        this.PointLimit.prototype.moveIn = moveIn;
+        return PointLimit;
 
         //////////////////////////////////////////////////////////////
 
-        function create(x, y, pointMin, pointMax) {
-            return new this.PointLimit(x, y, pointMin, pointMax);
-        }
-
-        function PointLimit(x, y, pointMin, pointMax) {
-            point.Point.call(this, x, y);
+        function classPointLimit(x, y, pointMin, pointMax) {
+            Point.call(this, x, y);
             this.pointMin = pointMin || null;
             this.pointMax = pointMax || null;
 
@@ -46,7 +39,7 @@
                 y = this.pointMax.y;
             }
 
-            point.Point.prototype.moveIn.call(this, x, y);
+            Point.prototype.moveIn.call(this, x, y);
         }
     }
 

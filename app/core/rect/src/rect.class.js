@@ -3,21 +3,21 @@
 
     angular
         .module('app')
-        .service('rect', rect);
+        .factory('Rect', rect);
 
-    // TODO запилить все классы с помошью value, с композиционной передачей зависимостей
+    rect.$inject = ['Point'];
 
-    rect.$inject = ['point'];
+    function rect(Point) {
 
-    function rect(point) {
+        var Rect = classRect;
 
-        this.Rect = Rect;
+        return Rect;
 
         //////////////////////////////////////////////////
 
-        function Rect(x, y, w, h) {
-            this.place = new point.Point(x || 0, y || 0);
-            this.size = new point.Point(w || 0, h || 0);
+        function classRect(x, y, w, h) {
+            this.place = new Point(x || 0, y || 0);
+            this.size = new Point(w || 0, h || 0);
 
             Object.defineProperty(this, 'x', {
                 get: function() {

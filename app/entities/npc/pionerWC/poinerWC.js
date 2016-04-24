@@ -5,9 +5,9 @@
         .module('app')
         .service('pionerWC', pionerWC);
 
-    pionerWC.$inject = ['npc', 'game', 'dialogs', 'npcSprite', 'rect'];
+    pionerWC.$inject = ['npc', 'game', 'dialogs', 'npcSprite', 'Rect'];
 
-    function pionerWC(npc, game, dialogs, npcSprite, rect) {
+    function pionerWC(npc, game, dialogs, npcSprite, Rect) {
 
         this.PionerWC = function (x, y, layer) {
             npc.NPC.call(this, x, y, new npcSprite.NpcSprite(
@@ -33,7 +33,7 @@
                         centerY: 5,
                         speed: 0.1
                     }
-                }, new rect.Rect(-2, -1, 5, 2)
+                }, new Rect(-2, -1, 5, 2)
             ), layer);
 
             this.isTalked = false;
