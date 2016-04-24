@@ -5,9 +5,9 @@
         .module('app')
         .service('pionerPark', pionerPark);
 
-    pionerPark.$inject = ['npc', 'characterSprite', 'game', 'dialogs', 'npcSprite', 'rect'];
+    pionerPark.$inject = ['npc', 'game', 'dialogs', 'npcSprite', 'rect'];
 
-    function pionerPark(npc, characterSprite, game, dialogs, npcSprite, rect) {
+    function pionerPark(npc, game, dialogs, npcSprite, rect) {
 
         this.PionerPark = function (x, y, layer) {
             npc.NPC.call(this, x, y, new npcSprite.NpcSprite(
