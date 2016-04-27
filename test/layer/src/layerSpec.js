@@ -82,9 +82,9 @@ describe('layer', function () {
                 var self = this;
 
                 expect(function() {self.emptyLayer.add(self.entity6)})
-                    .toThrow(new Error("Param 'x' is not defined!"));
+                    .toThrow(new Error('Param "x" is not defined!'));
                 expect(function() {self.emptyLayer.add(self.entity6, 3)})
-                    .toThrow(new Error("Param 'y' is not defined!"));
+                    .toThrow(new Error('Param "y" is not defined!'));
             });
 
             it('should be added on current place in exists line and return self', function () {

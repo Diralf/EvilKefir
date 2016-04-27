@@ -5,9 +5,9 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <link rel="stylesheet" type="text/css" href="index.css" />
-        <link rel="stylesheet" type="text/css" href="app/viewport/css/viewport.css" />
-        <link rel="stylesheet" type="text/css" href="app/viewport/css/symbolWidth.css" />
+        <link rel="stylesheet" href="./app/index.css">
+<link rel="stylesheet" href="./app/viewport/css/symbolWidth.css">
+<link rel="stylesheet" href="./app/viewport/css/viewport.css">
 
     </head>
     <body ng-app="app" >
@@ -50,61 +50,56 @@
         </div>
 
 
-        <script type="text/javascript" src="components/angular/angular.min.js"></script>
-        <script type="text/javascript" src="components/angular-mocks/angular-mocks.js"></script>
+        <script type="text/javascript" src="./components/angular/angular.min.js"></script>
+        <script type="text/javascript" src="./components/angular-mocks/angular-mocks.js"></script>
 
+        <script src="./app/app.js"></script>
+<script src="./app/character/src/character-control.service.js"></script>
+<script src="./app/character/src/character-data.service.js"></script>
+<script src="./app/character/src/character-logic.service.js"></script>
+<script src="./app/character/src/character-sprite.class.js"></script>
+<script src="./app/character/src/character.class.js"></script>
+<script src="./app/config/initialization.run.js"></script>
+<script src="./app/config/transparent-symbol.constant.js"></script>
+<script src="./app/control/keyboard/src/keyboard.service.js"></script>
+<script src="./app/control/keyboard/src/keys.constant.js"></script>
+<script src="./app/control/mouse/src/mouse.service.js"></script>
+<script src="./app/core/collection/src/collection.class.js"></script>
+<script src="./app/core/collision/src/collision.service.js"></script>
+<script src="./app/core/entity/src/entity-visible.class.js"></script>
+<script src="./app/core/entity/src/entity.class.js"></script>
+<script src="./app/core/layer/src/layer.class.js"></script>
+<script src="./app/core/level/src/level.class.js"></script>
+<script src="./app/core/message/message.constant.js"></script>
+<script src="./app/core/point/src/point-limit.class.js"></script>
+<script src="./app/core/point/src/point.class.js"></script>
+<script src="./app/core/rect/src/rect.class.js"></script>
+<script src="./app/core/render/src/render.service.js"></script>
+<script src="./app/core/sprite/src/sprite-animate.class.js"></script>
+<script src="./app/core/sprite/src/sprite-image.class.js"></script>
+<script src="./app/core/sprite/src/sprite.class.js"></script>
+<script src="./app/core/sprite/src/strip.class.js"></script>
+<script src="./app/core/symbolGrid/src/symbol-grid.class.js"></script>
+<script src="./app/core/unique/src/unique.service.js"></script>
+<script src="./app/entities/npc/fans/fans.js"></script>
+<script src="./app/entities/npc/fox/fox.js"></script>
+<script src="./app/entities/npc/horse/horse.js"></script>
+<script src="./app/entities/npc/kefir/kefir.js"></script>
+<script src="./app/entities/npc/npc-sprite.service.js"></script>
+<script src="./app/entities/npc/npc.service.js"></script>
+<script src="./app/entities/npc/pionerPark/poinerPark.js"></script>
+<script src="./app/entities/npc/pionerWC/poinerWC.js"></script>
+<script src="./app/entities/static-object.service.js"></script>
+<script src="./app/game/dialogs.value.js"></script>
+<script src="./app/game/game.service.js"></script>
+<script src="./app/map/src/map.service.js"></script>
+<script src="./app/viewport/src/directive/symbol-width.directive.js"></script>
+<script src="./app/viewport/src/directive/viewport-line.directive.js"></script>
+<script src="./app/viewport/src/service/symbol-width.service.js"></script>
+<script src="./app/viewport/src/service/viewport.service.js"></script>
+<script src="./app/viewport/src/viewport.controller.js"></script>
 
-        <script type="text/javascript" src="dist/dist.js"></script>
-
-        <!--<script type="text/javascript" src="app/app.js"></script>
-
-        <script type="text/javascript" src="app/character/src/character.js"></script>
-        <script type="text/javascript" src="app/character/src/characterData.js"></script>
-        <script type="text/javascript" src="app/character/src/characterLogic.js"></script>
-        <script type="text/javascript" src="app/character/src/characterControl.js"></script>
-        <script type="text/javascript" src="app/character/src/characterSprite.js"></script>
-
-        <script type="text/javascript" src="app/control/keyboard/src/keyboardService.js"></script>
-        <script type="text/javascript" src="app/control/keyboard/src/keysConstant.js"></script>
-        <script type="text/javascript" src="app/control/mouse/src/mouseService.js"></script>
-
-        <script type="text/javascript" src="app/core/collection/src/collection.js"></script>
-        <script type="text/javascript" src="app/core/collision/src/collision.js"></script>
-        <script type="text/javascript" src="app/core/entity/src/entity.js"></script>
-        <script type="text/javascript" src="app/core/entity/src/entityVisible.js"></script>
-        <script type="text/javascript" src="app/core/layer/src/layer.js"></script>
-        <script type="text/javascript" src="app/core/level/src/level.js"></script>
-        <script type="text/javascript" src="app/core/message/messageTypes.js"></script>
-        <script type="text/javascript" src="app/core/movement/src/movement.js"></script>
-        <script type="text/javascript" src="app/core/point/src/point.js"></script>
-        <script type="text/javascript" src="app/core/point/src/pointLimit.js"></script>
-        <script type="text/javascript" src="app/core/rect/src/rect.js"></script>
-        <script type="text/javascript" src="app/core/render/src/render.js"></script>
-        <script type="text/javascript" src="app/core/sprite/src/sprite.js"></script>
-        <script type="text/javascript" src="app/core/sprite/src/spriteAnimate.js"></script>
-        <script type="text/javascript" src="app/core/sprite/src/strip.js"></script>
-        <script type="text/javascript" src="app/core/sprite/src/spriteImage.js"></script>
-        <script type="text/javascript" src="app/core/symbolGrid/src/symbolGrid.js"></script>
-        <script type="text/javascript" src="app/core/unique/src/unique.js"></script>
-
-        <script type="text/javascript" src="app/entities/staticObject.js"></script>
-        <script type="text/javascript" src="app/entities/npc/fans/fans.js"></script>
-        <script type="text/javascript" src="app/entities/npc/fox/fox.js"></script>
-        <script type="text/javascript" src="app/entities/npc/horse/horse.js"></script>
-        <script type="text/javascript" src="app/entities/npc/kefir/kefir.js"></script>
-        <script type="text/javascript" src="app/entities/npc/pionerPark/poinerPark.js"></script>
-        <script type="text/javascript" src="app/entities/npc/pionerWC/poinerWC.js"></script>
-        <script type="text/javascript" src="app/entities/npc/npc.js"></script>
-        <script type="text/javascript" src="app/entities/npc/npcSprite.js"></script>
-
-        <script type="text/javascript" src="app/game/game.js"></script>
-        <script type="text/javascript" src="app/game/dialogs.js"></script>
-        <script type="text/javascript" src="app/map/src/mapService.js"></script>
-        <script type="text/javascript" src="app/viewport/src/viewport.js"></script>
-        <script type="text/javascript" src="app/viewport/src/directive/viewportLine.js"></script>
-        <script type="text/javascript" src="app/viewport/src/directive/symbolWidth.js"></script>
-        <script type="text/javascript" src="app/viewport/src/service/viewportService.js"></script>
-        <script type="text/javascript" src="app/viewport/src/service/symbolWidthService.js"></script>-->
+        <!--<script type="text/javascript" src="dist/dist.js"></script>-->
 
     </body>
 </html>
