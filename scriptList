@@ -1,0 +1,4 @@
+components/angular/angular.min.js
+components/angular-mocks/angular-mocks.js
+components/paperjs-v0.9.25/dist/paper-core.js
+components/paperjs-v0.9.25/dist/paper-full.js
