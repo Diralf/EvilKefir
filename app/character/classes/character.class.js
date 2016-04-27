@@ -101,7 +101,7 @@
             };
 
             function findPath () {
-                var dir = findDiwrection.call(this);
+                var dir = findDirection.call(this);
 
                 var xycheck = checkCollision.call(this, this.x + dir.x, this.y + dir.y);
                 var xcheck;
