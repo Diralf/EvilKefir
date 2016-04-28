@@ -68,7 +68,17 @@
     "browser",
     "element",
     "by",
-    "io"
+    "io",
+    "paper",
+    "Group",
+    "Layer",
+    "Raster",
+    "Path",
+    "Shape",
+    "CompoundPath",
+    "PlacedSymbol",
+    "PointText",
+    "view"
   ],
   "indent": 2
 }
