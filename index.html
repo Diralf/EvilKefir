@@ -55,8 +55,8 @@
 
         <script src="components/angular/angular.min.js"></script>
 <script src="components/angular-mocks/angular-mocks.js"></script>
-<script src="components/paperjs-v0.9.25/dist/paper-core.js"></script>
-<script src="components/paperjs-v0.9.25/dist/paper-full.js"></script>
+<script src="components/paperjs-v0.9.25/dist/paper-full.js"></script>
+<script src="components/lodash/lodash.js"></script>
 
         <script src="./app/app.js"></script>
 <script src="./app/character/classes/character-sprite.class.js"></script>
@@ -66,6 +66,7 @@
 <script src="./app/character/services/character-logic.service.js"></script>
 <script src="./app/config/constants/transparent-symbol.constant.js"></script>
 <script src="./app/config/initialization.run.js"></script>
+<script src="./app/control/action/services/action-collection.service.js"></script>
 <script src="./app/control/keyboard/constants/keys.constant.js"></script>
 <script src="./app/control/keyboard/services/keyboard.service.js"></script>
 <script src="./app/control/mouse/services/mouse.service.js"></script>
@@ -76,6 +77,11 @@
 <script src="./app/core/layer/classes/layer.class.js"></script>
 <script src="./app/core/level/classes/level.class.js"></script>
 <script src="./app/core/message/constants/message.constant.js"></script>
+<script src="./app/core/on/happen-set.class.js"></script>
+<script src="./app/core/on/happen.class.js"></script>
+<script src="./app/core/on/listener.class.js"></script>
+<script src="./app/core/on/on-action.class.js"></script>
+<script src="./app/core/on/on.class.js"></script>
 <script src="./app/core/point/classes/point-limit.class.js"></script>
 <script src="./app/core/point/classes/point.class.js"></script>
 <script src="./app/core/rect/classes/rect.class.js"></script>
@@ -97,11 +103,10 @@
 <script src="./app/entities/services/static-object.service.js"></script>
 <script src="./app/game/dialogs.value.js"></script>
 <script src="./app/game/services/game.service.js"></script>
-<script src="./app/graphics/spritePixel/sprite-pixel.js"></script>
 <script src="./app/map/services/map.service.js"></script>
 <script src="./app/paper/context.config.js"></script>
-<script src="./app/paper/directive/paper-canvas.directive.js"></script>
-<script src="./app/paper/services/image-loader.service.js"></script>
+<script src="./app/paper/directives/paper-canvas.directive.js"></script>
+<script src="./app/paper/services/paper-project.service.js"></script>
 <script src="./app/viewport/contollers/viewport.controller.js"></script>
 <script src="./app/viewport/directive/symbol-width.directive.js"></script>
 <script src="./app/viewport/directive/viewport-line.directive.js"></script>

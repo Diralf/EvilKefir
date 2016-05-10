@@ -78,7 +78,8 @@
     "CompoundPath",
     "PlacedSymbol",
     "PointText",
-    "view"
+    "view",
+    "_"
   ],
   "indent": 2
 }

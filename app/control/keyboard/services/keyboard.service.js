@@ -3,26 +3,25 @@
 
     angular
         .module('app')
-        .service('keyboardService', keyboardService);
-    //TODO убрать Service в названии
+        .service('keyboard', keyboard);
 
-    keyboardService.$inject = ['$document', 'KEYS'];
+    keyboard.$inject = ['$document', 'KEYS', 'On'];
 
-    function keyboardService($document, KEYS) {
+    function keyboard($document, KEYS, On) {
+        var self = this;
         var _handleKeyEvent = {};
 
+        this.on = new On();
         this.init = init;
         this.addHandler = addHandler;
 
         function init() {
             $document.bind('keydown', function(evt) {
+                console.log(evt.which);
                 var key = KEYS[evt.which];
                 if (key) {
-                    // Нажата нужная клавиша
                     evt.preventDefault();
-                    if (_handleKeyEvent[key]) {
-                        _handleKeyEvent[key](evt);
-                    }
+                    self.on.emit(key, evt);
                 }
             });
         }

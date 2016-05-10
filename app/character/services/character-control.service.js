@@ -5,30 +5,40 @@
         .module('app')
         .service('characterControl', characterControl);
 
-    characterControl.$inject = ['keyboardService'];
+    characterControl.$inject = ['keyboard', 'On', '$http'];
 
-    function characterControl(keyboardService) {
-        var moveCharacterOn;
+    function characterControl(keyboard, On, $http) {
+        var self = this;
+        var keyHandlers = {};
+        var keymap;
 
-        keyboardService.addHandler('W', function (key, evt) {
-            moveCharacterOn(0, -1);
-        });
+        this.on = new On();
 
-        keyboardService.addHandler('A', function (key, evt) {
-            moveCharacterOn(-1, 0);
-        });
+        this.init = init;
 
-        keyboardService.addHandler('S', function (key, evt) {
-            moveCharacterOn(0, 1);
-        });
+        // TODO сделать возможность смены клавиш. Для этого понадобится сохранять листенеры для их удаления.
 
-        keyboardService.addHandler('D', function (key, evt) {
-            moveCharacterOn(1, 0);
-        });
+        /////////////////////////////////////////////////
 
-        this.moveHandler = function (handler) {
-            moveCharacterOn = handler;
-        };
+        function init() {
+
+            return $http.get('app/vars.json').then(function (result) {
+                keymap = result.data.keymap;
+                _.forEach(keymap, function (item) {
+                    keyHandlers[item.key] = addHandler(item.key, item.event, item.params);
+                });
+                console.log(keymap);
+                console.log(keyHandlers);
+            });
+
+        }
+
+        function addHandler(key, event, params) {
+            return keyboard.on.event(key, function (key, evt) {
+                self.on.emit(event, params, key, evt);
+            });
+        }
+
     }
 
 })();
