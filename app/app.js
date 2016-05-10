@@ -7,12 +7,12 @@ angular.module('app', []);
         .module('app')
         .run(appRun);
 
-    appRun.$inject = ['$rootScope', '$http', 'keyboardService', 'mapService', 'viewportService'];
+    appRun.$inject = ['$rootScope', '$http', 'keyboard', 'mapService', 'viewportService'];
 
-    function appRun($rootScope, $http, keyboardService, mapService, viewportService) {
+    function appRun($rootScope, $http, keyboard, mapService, viewportService) {
         //console.log($rootScope);
 
-        keyboardService.init();
+        keyboard.init();
         mapService.init();
         viewportService.init();
 
