@@ -5,15 +5,14 @@
         .module('app')
         .factory('On', on);
 
-    on.$inject = [];
+    on.$inject = ['HappenSet'];
 
-    function on() {
+    function on(HappenSet) {
 
-        var classOn = On;
-        classOn.prototype.event = eventMethod;
-        classOn.prototype.emit = emit;
+        On.prototype.event = happen;
+        On.prototype.emit = emit;
 
-        return classOn;
+        return On;
 
         /////////////////////////////////////////////
 
@@ -21,24 +20,20 @@
          * @constructor
          */
         function On() {
+            this.on = this;
             /**
-             * @type {Object}
+             * @type {HappenSet}
              */
-            this.listeners = {};
+            this.happenSet = new HappenSet();
         }
 
         /**
-         * @param {string} nameEvent
-         * @param {function} listener
-         * @returns {eventMethod}
+         * @param {string} happenName
+         * @param {function|Listener} handler
+         * @returns {Listener}
          */
-        function eventMethod(nameEvent, listener) {
-            if (!this.listeners[nameEvent]) {
-                this.listeners[nameEvent] = [];
-            }
-
-            this.listeners[nameEvent].push(listener);
-            return this;
+        function happen(happenName, handler) {
+            return this.happenSet.add(happenName, handler);
         }
 
         /**
@@ -46,14 +41,10 @@
          * @returns {emit}
          */
         function emit(nameEvent) {
-            var params = arguments;
-            if (this.listeners[nameEvent]) {
-                _.forEach(this.listeners[nameEvent], function forEachListeners(item) {
-                    setTimeout(function applyListener() {
-                        item.apply(this, params);
-                    }, 1);
-                });
-            }
+            var happen = this.happenSet.get(nameEvent);
+
+            happen.update(arguments);
+
             return this;
         }
     }
