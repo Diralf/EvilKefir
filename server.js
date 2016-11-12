@@ -1,5 +1,5 @@
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
-var port      = process.env.OPENSHIFT_NODEJS_PORT || 3000;
+var port      = process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3000;
 
 
 var http = require("http");
@@ -17,6 +17,7 @@ var express = require('express');
 var app = express();
 
 app.set('env', 'production');
+app.set('ip', ipaddress)
 app.set('port', port );
 app.use(express.static(process.env.OPENSHIFT_REPO_DIR || path.join(__dirname)));
 
