@@ -10,8 +10,8 @@ app.service('fans', ['npc', 'characterSprite', 'game', 'dialogs', 'message', 'np
                     dirCount: 1,
                     width: 26,
                     height: 12,
-                    centerX: 0,
-                    centerY: 0,
+                    centerX: 2,
+                    centerY: 5,
                     speed: 0.2
                 }
             }, {
@@ -21,11 +21,11 @@ app.service('fans', ['npc', 'characterSprite', 'game', 'dialogs', 'message', 'np
                     dirCount: 1,
                     width: 26,
                     height: 13,
-                    centerX: 0,
-                    centerY: 0,
+                    centerX: 2,
+                    centerY: 5,
                     speed: 0
                 }
-            }, new rect.Rect(0, 0, 26, 12)
+            }, new rect.Rect(0, 0, 26, 6)
         ), layer);
 
         this.weaponDeath = game.weapons.knife;

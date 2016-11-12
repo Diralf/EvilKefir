@@ -1,4 +1,4 @@
-app.value('dialogs', {
+app.value('dialogs_ru', {
     start: {
         text: 'Хм, странные сны.',
         next: {
@@ -130,5 +130,19 @@ app.value('dialogs', {
                 text: "Конец."
             }
         }
+    },
+
+    weapons: {
+        fist: "кулак",
+        stick: "палка",
+        knife: "нож",
+        rose: "роза"
+    },
+
+    actions: {
+        move: "идти",
+        attack: "атаковать",
+        look: "осмотреть",
+        talk: "говорить"
     }
 });
