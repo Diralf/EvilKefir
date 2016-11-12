@@ -1,4 +1,4 @@
-app.service('game',['$q', 'message', function ($q, message) {
+app.service('game',['$q', 'message', 'dialogs', function ($q, message, dialogs) {
     this.loadMap = function (callback) {
 
     };
@@ -13,19 +13,19 @@ app.service('game',['$q', 'message', function ($q, message) {
 
     this.weapons = {
         hand: {
-            title: 'кулак',
+            title: dialogs.weapons.fist,
             damage: 1
         },
         plank: {
-            title: 'палка',
+            title: dialogs.weapons.stick,
             damage: 2
         },
         knife: {
-            title: 'нож',
+            title: dialogs.weapons.knife,
             damage: 3
         },
         rose: {
-            title: 'роза',
+            title: dialogs.weapons.rose,
             damage: 4
         }
     };
@@ -49,19 +49,19 @@ app.service('game',['$q', 'message', function ($q, message) {
 
     this.actions = {
         move: {
-            title: 'Идти',
+            title: dialogs.actions.move,
             message: message.MOVE
         },
         attack: {
-            title: 'Атаковать',
+            title: dialogs.actions.attack,
             message: message.ATTACK
         },
         look: {
-            title: 'Осмотреть',
+            title: dialogs.actions.look,
             message: message.LOOK
         },
         talk: {
-            title: 'Говорить',
+            title: dialogs.actions.talk,
             message: message.TALK
         }
     };

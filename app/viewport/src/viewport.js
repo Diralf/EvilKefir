@@ -62,7 +62,7 @@ app.controller("viewport", [
     var fox3 = new fox.Fox(320, 59, mapService.currentLevel.layers[0]);
     var fox4 = new fox.Fox(294, 74, mapService.currentLevel.layers[0]);
     var hor = new horse.Horse(328, 21, mapService.currentLevel.layers[0]);
-    var fns = new fans.Fans(388, 54, mapService.currentLevel.layers[0]);
+    var fns = new fans.Fans(388, 60, mapService.currentLevel.layers[0]);
     var kef = new kefir.Kefir(40, 64, mapService.currentLevel.layers[0]);
 
     mapService.currentLevel.layers[0].add(player);
