@@ -11,6 +11,9 @@ var player = mongoose.Schema({
 var PlayerEnter = mongoose.model('PlayerEnter', player);
 var PlayerExit = mongoose.model('PlayerExit', player);
 
+router.get('/isdesk', function (req, res) {
+    console.log(req.device.type);
+});
 
 router.route('/game/0').post(function (req, res) {
     var player = new PlayerEnter({
