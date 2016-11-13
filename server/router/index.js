@@ -13,6 +13,8 @@ var PlayerExit = mongoose.model('PlayerExit', player);
 
 router.get('/isdesk', function (req, res) {
     console.log(req.device.type);
+
+    res.json(req.device.type);
 });
 
 router.route('/game/0').post(function (req, res) {

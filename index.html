@@ -44,8 +44,8 @@
                 </div>
             </div>
 
-            <div ng-if="isNotDesktop" class="sorry">
-                <span>Sorry bro it's only for PC Master race</span>
+            <div ng-if="isNotDesktop!==null && isNotDesktop" class="sorry">
+                <span ng-bind="deviceMessage"></span>
                 <img src="tubeman.jpg">
             </div>
 
