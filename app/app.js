@@ -11,6 +11,10 @@ app.run(['$rootScope', '$http', 'keyboardService', 'mapService', 'viewportServic
     //mapLoader.load();
     var onEnter = function () {
         //console.log('start game send request');
+        $http.get('/isdesk').then(function (res) {
+            $rootScope.isNotDesktop = !response.device.isDesktop;
+        });
+
         $http.post('/game/0', {checkpoint: "cehck enter"}).then(function (response) {
 
         });

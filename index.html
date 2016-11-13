@@ -13,7 +13,8 @@
     <body ng-app="app" >
 
         <div class="interface">
-            <div ng-controller="viewport" class="viewport">
+
+            <div ng-controller="viewport" class="viewport" ng-if="!isNotDesktop">
                 <div class="button-bar">
                     <div ng-repeat="button in buttons"
                          class="button"
@@ -42,6 +43,12 @@
                     <div ng-if="dialog.show" class="dialog" ng-bind="dialog.item.text"></div>
                 </div>
             </div>
+
+            <div ng-if="isNotDesktop" class="sorry">
+                <span>Sorry bro it's only for PC Master race</span>
+                <img src="tubeman.jpg">
+            </div>
+
             <a href="https://vk.com/eastareagames" class="footer-text">Contact: Our VK</a>
 
         </div>
