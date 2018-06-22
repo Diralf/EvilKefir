@@ -2,8 +2,9 @@ var fs = require("mz/fs");
 
 module.exports = async function loadFile(fileName) {
     try {
-        let file = await fs.open(fileName, 'r');
-        let stats = await fs.stat(fileName);
+        //let file = await fs.open(fileName, 'r');
+        //let stats = await fs.stat(fileName);
+        let [file, stats] = await Promise.all([fs.open(fileName, 'r'), fs.stat(fileName)]);
         let buffer = new Buffer(stats.size);
 
         await fs.read(file, buffer, 0, buffer.length, null);
