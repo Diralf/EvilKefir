@@ -43,10 +43,9 @@ router.route('/game/1').post(function (req, res) {
     res.end();
 });
 
-router.route('/sprite').post(function (req, res) {
-    fileloader("assets/" + req.body.fileName, function (data) {
-        res.end(data);
-    });
+router.route('/sprite').post((req, res) => {
+    fileloader("assets/" + req.body.fileName)
+        .then(data => {res.end(data)});
 });
 
 module.exports = router;
