@@ -19,6 +19,7 @@
     "multer": "^1.4.4"
   },
   "devDependencies": {
+    "glob-parent": "^5.1.2",
     "gulp": "^4.0.2",
     "gulp-concat": "^2.6.0",
     "gulp-uglify": "^3.0.2",
